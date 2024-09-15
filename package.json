@@ -7,10 +7,14 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "lint:check": "biome lint ./src",
-    "format:check": "biome format ./src",
-    "lint:fix": "biome format --write ./src && biome lint --apply ./src",
-    "type:check": "bun run tsc --noEmit --skipLibCheck"
+    "lint": "biome lint ./src",
+    "format": "biome format ./src",
+    "check": "biome check ./src",
+    "lint:fix": "biome lint --apply ./src",
+    "format:fix": "biome format --write ./src",
+    "check:fix": "biome check --apply ./src",
+    "type-check": "bun run tsc --noEmit --skipLibCheck",
+    "pre-commit": "bun run format && bun run lint && bun run type-check"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -25,6 +29,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "globals": "^15.9.0",
+    "lefthook": "^1.7.15",
     "typescript": "^5.5.3",
     "vite": "^5.4.1"
   }
