@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "lint:check": "biome lint ./src",
     "format:check": "biome format ./src",
-    "lint:fix": "biome format --write ./src && biome lint --apply ./src"
+    "lint:fix": "biome format --write ./src && biome lint --apply ./src",
+    "type:check": "bun run tsc --noEmit --skipLibCheck"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
