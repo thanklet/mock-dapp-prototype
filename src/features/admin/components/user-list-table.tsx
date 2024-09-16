@@ -87,7 +87,7 @@ export const UserListTable = () => {
           <Box display="flex" gap="16px">
             <Avatar src={row.original.staff.image} alt="staff" />
             <Box>
-              <Typography color="text.primary" fontSize="15px">
+              <Typography color="primary" fontSize="15px" fontWeight="bold">
                 {row.original.staff.name}
               </Typography>
               <Typography color="text.secondary" fontSize="13px">
