@@ -23,6 +23,7 @@
       line-height: 1.8462;
       text-align: start;
       block-size: 56px;
+      text-transform: none;
       &:not(:first-of-type):not(:last-of-type) {
         padding-block: 0.5rem;
         padding-inline: 1rem;
