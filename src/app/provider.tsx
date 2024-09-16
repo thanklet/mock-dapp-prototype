@@ -18,6 +18,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
         main: "#FF416C",
       },
     },
+    cssVariables: true,
   });
 
   return (

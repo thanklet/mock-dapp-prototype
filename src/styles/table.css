@@ -14,7 +14,7 @@
   thead {
     text-transform: uppercase;
     color: var(--mui-palette-text-primary);
-    border-block-start: 1px solid var(--border-color);
+    border-block-end: 1px solid var(--mui-palette-divider);
 
     th {
       font-weight: 500;
@@ -73,7 +73,7 @@
     }
 
     tr:not(:last-child) {
-      border-block-end: 1px solid var(--border-color);
+      border-block-end: 1px solid var(--mui-palette-divider);
     }
     tr {
       border-block-start: 1px solid var(--border-color);

@@ -1,6 +1,13 @@
 import "@/styles/table.css";
 import { useMemo } from "react";
 import { IconUpload } from "@tabler/icons-react";
+import {
+  createColumnHelper,
+  flexRender,
+  useReactTable,
+  getCoreRowModel,
+} from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 import { Box } from "@mui/material";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -14,14 +21,6 @@ import staff2Url from "@/assets/dummy/2.png";
 import staff3Url from "@/assets/dummy/3.png";
 import wishlistUrl from "@/assets/wishlist.png";
 import hospitalityUrl from "@/assets/hospitality.png";
-
-import {
-  createColumnHelper,
-  flexRender,
-  useReactTable,
-  getCoreRowModel,
-} from "@tanstack/react-table";
-import type { ColumnDef } from "@tanstack/react-table";
 
 type UsersType = {
   id: number;
