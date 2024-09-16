@@ -3,12 +3,13 @@ import { useState } from "react";
 import viteLogo from "/vite.svg";
 import reactLogo from "../../../assets/react.svg";
 import { Button } from "@mui/material";
+import { AdminLayout } from "../../../components/layouts/admin-layout";
 
 export const Users = () => {
   const [count, setCount] = useState(0);
 
   return (
-    <>
+    <AdminLayout>
       <div>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
@@ -32,6 +33,6 @@ export const Users = () => {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
-    </>
+    </AdminLayout>
   );
 };
