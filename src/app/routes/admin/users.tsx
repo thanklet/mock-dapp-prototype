@@ -9,7 +9,7 @@ export const Users = () => {
   const [count, setCount] = useState(0);
 
   return (
-    <AdminLayout>
+    <AdminLayout title="ユーザー一覧">
       <div>
         <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
           <img src={viteLogo} className="logo" alt="Vite logo" />
