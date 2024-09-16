@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 import "@/styles/table.css";
-import Card from "@mui/material/Card";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Checkbox from "@mui/material/Checkbox";
+
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Typography } from "@/components/ui/typography";
+import { Checkbox } from "@/components/ui/form/checkbox";
 import MenuItem from "@mui/material/MenuItem";
 import { Box } from "@mui/material";
 
-import classnames from "classnames";
 import {
   createColumnHelper,
   flexRender,
@@ -21,7 +21,6 @@ type UsersType = {
   userName: string;
 };
 
-// Column Definitions
 const columnHelper = createColumnHelper<UsersType>();
 
 export const UserListTable = () => {
