@@ -1,6 +1,6 @@
 import "@/styles/table.css";
 import { useMemo } from "react";
-import { IconUpload } from "@tabler/icons-react";
+import { IconUpload, IconDotsVertical } from "@tabler/icons-react";
 import {
   createColumnHelper,
   flexRender,
@@ -126,6 +126,10 @@ export const UserListTable = () => {
           </Box>
         ),
       }),
+      {
+        id: "dots",
+        cell: () => <IconDotsVertical size={16} />,
+      },
     ],
     [],
   );
