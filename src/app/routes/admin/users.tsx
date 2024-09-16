@@ -1,10 +1,10 @@
 import "./App.css";
 import { useState } from "react";
 import viteLogo from "/vite.svg";
-import reactLogo from "./assets/react.svg";
+import reactLogo from "../../../assets/react.svg";
 import { Button } from "@mui/material";
 
-function App() {
+export const Users = () => {
   const [count, setCount] = useState(0);
 
   return (
@@ -34,6 +34,4 @@ function App() {
       </p>
     </>
   );
-}
-
-export default App;
+};
