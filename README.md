@@ -7,7 +7,7 @@ Bunをinstall
 ### [lefthook](https://github.com/Arkweid/lefthook)
 homebrewでinstall
 ```bash
-brew install lefthook
+brew install lefthook 
 ```
 
 ## インストール
