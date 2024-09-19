@@ -1,6 +1,6 @@
-import { Outlet } from "react-router-dom";
-import { Suspense } from "react";
 import { AdminLayout } from "@/components/layouts/admin-layout";
+import { Suspense } from "react";
+import { Outlet } from "react-router-dom";
 
 export const AdminRoot = () => {
   return (

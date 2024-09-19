@@ -1,8 +1,8 @@
-import { forwardRef, useState } from "react";
 import type { SelectProps as MuiSelectProps } from "@mui/material";
 import { Select as MuiSelect } from "@mui/material";
 import { MenuItem } from "@mui/material";
 import type { MenuItemProps, SelectChangeEvent } from "@mui/material";
+import { forwardRef, useState } from "react";
 
 type SelectProps = MuiSelectProps & {
   items: MenuItemProps[];

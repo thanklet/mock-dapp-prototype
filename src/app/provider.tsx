@@ -1,6 +1,6 @@
-import { HelmetProvider } from "react-helmet-async";
 import { ThemeProvider, createTheme } from "@mui/material";
 import type { ReactNode } from "react";
+import { HelmetProvider } from "react-helmet-async";
 
 type AppProviderProps = {
   children: ReactNode;

@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
-import { Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
+import { Box } from "@mui/material";
+import type { ReactNode } from "react";
 
 type AdminLayoutProps = {
   children: ReactNode;

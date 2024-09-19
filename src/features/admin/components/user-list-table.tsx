@@ -1,26 +1,26 @@
 import "@/styles/table.css";
-import { useMemo } from "react";
-import { IconUpload, IconDotsVertical } from "@tabler/icons-react";
-import {
-  createColumnHelper,
-  flexRender,
-  useReactTable,
-  getCoreRowModel,
-} from "@tanstack/react-table";
-import type { ColumnDef } from "@tanstack/react-table";
-import { Box } from "@mui/material";
-import { Card } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Typography } from "@/components/ui/typography";
-import { Checkbox } from "@/components/ui/form/checkbox";
-import { TextField } from "@/components/ui/form/text-field";
-import { Select } from "@/components/ui/form/select";
-import { Avatar } from "@/components/ui/avatar";
 import staff1Url from "@/assets/dummy/1.png";
 import staff2Url from "@/assets/dummy/2.png";
 import staff3Url from "@/assets/dummy/3.png";
-import wishlistUrl from "@/assets/wishlist.png";
 import hospitalityUrl from "@/assets/hospitality.png";
+import wishlistUrl from "@/assets/wishlist.png";
+import { Avatar } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/form/checkbox";
+import { Select } from "@/components/ui/form/select";
+import { TextField } from "@/components/ui/form/text-field";
+import { Typography } from "@/components/ui/typography";
+import { Box } from "@mui/material";
+import { IconDotsVertical, IconUpload } from "@tabler/icons-react";
+import {
+  createColumnHelper,
+  flexRender,
+  getCoreRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
+import { useMemo } from "react";
 
 type UsersType = {
   id: number;
