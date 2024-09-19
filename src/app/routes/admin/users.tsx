@@ -1,10 +1,11 @@
-import { AdminLayout } from "@/components/layouts/admin-layout";
 import { UserListTable } from "@/features/admin/components/user-list-table";
+import { Head } from "@/components/seo/head";
 
 export const Users = () => {
   return (
-    <AdminLayout title="ユーザー一覧">
+    <>
+      <Head title="ユーザー一覧" />
       <UserListTable />
-    </AdminLayout>
+    </>
   );
 };
