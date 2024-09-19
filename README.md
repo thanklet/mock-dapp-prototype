@@ -14,7 +14,6 @@ brew install lefthook
 ルートディレクトリで以下のコマンドを実行
 ```bash
 bun install
-lefthook install
 ```
 
 ## ローカル開発環境を起動
