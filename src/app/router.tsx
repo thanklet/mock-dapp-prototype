@@ -8,8 +8,15 @@ const router = createBrowserRouter([
       {
         path: "users",
         lazy: async () => {
-          const { Users } = await import("./routes/admin/users");
-          return { Component: Users };
+          const { UsersRoute } = await import("./routes/admin/users/users");
+          return { Component: UsersRoute };
+        },
+      },
+      {
+        path: "users/:userId",
+        lazy: async () => {
+          const { UserRoute } = await import("./routes/admin/users/user");
+          return { Component: UserRoute };
         },
       },
     ],
