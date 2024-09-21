@@ -1,4 +1,4 @@
-import type { CardProps, CardContentProps } from "@mui/material";
+import type { CardContentProps, CardProps } from "@mui/material";
 import { Card as MuiCard, CardContent as MuiCardContent } from "@mui/material";
 import { forwardRef } from "react";
 

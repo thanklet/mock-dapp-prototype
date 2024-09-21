@@ -1,7 +1,7 @@
+import { Button } from "@/components/ui/button";
+import { Typography } from "@/components/ui/typography";
 import { Box } from "@mui/material";
 import { Stack } from "@mui/material";
-import { Typography } from "@/components/ui/typography";
-import { Button } from "@/components/ui/button";
 import { useParams } from "react-router-dom";
 import { UserDetails } from "./user-details";
 

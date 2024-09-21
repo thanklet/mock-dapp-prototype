@@ -1,12 +1,12 @@
+import staff1Url from "@/assets/dummy/1.png";
+import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Chip } from "@/components/ui/chip";
 import { Divider } from "@/components/ui/divider";
 import { Typography } from "@/components/ui/typography";
 import { Avatar } from "@mui/material";
-import { Button } from "@/components/ui/button";
-import staff1Url from "@/assets/dummy/1.png";
+import { IconCurrencyDollar, IconHeart } from "@tabler/icons-react";
 import { useParams } from "react-router-dom";
-import { IconHeart, IconCurrencyDollar } from "@tabler/icons-react";
 
 // Vars
 const userData = {
