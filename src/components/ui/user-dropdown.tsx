@@ -89,7 +89,7 @@ export const UserDropdown = ({ user }: UserDropdownProps) => {
               >
                 <MenuList>
                   <div
-                    className="flex items-center plb-2 pli-6 gap-2"
+                    className="flex items-center py-2 px-6 gap-2"
                     tabIndex={-1}
                   >
                     <Avatar alt={user.name} src={user.image} />
@@ -101,7 +101,7 @@ export const UserDropdown = ({ user }: UserDropdownProps) => {
                     </div>
                   </div>
                   <Divider className="mlb-1" />
-                  <div className="flex items-center plb-2 pli-3">
+                  <div className="flex items-center py-2 px-6">
                     <Button
                       fullWidth
                       variant="contained"
