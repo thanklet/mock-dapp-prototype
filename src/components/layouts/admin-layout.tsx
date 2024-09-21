@@ -21,7 +21,6 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
         flexDirection="column"
         gap="24px"
       >
-        {/* TODO: 検索バーの挙動が未確定なので仮に作っておく */}
         <Box
           display="flex"
           alignItems="center"
