@@ -12,8 +12,8 @@ import { Add, Remove } from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
 import { useState } from "react";
 
+// 定数
 const THANKS = 3;
-
 const EMOJI_DATA = [
   {
     value: "happy",
@@ -26,7 +26,6 @@ const EMOJI_DATA = [
     label: "Helpful",
   },
 ];
-
 const BUTTON_DATA = [
   {
     value: "1",
@@ -44,37 +43,27 @@ const BUTTON_DATA = [
     isDisabled: false,
   },
 ];
+
+type Emoji = {
+  value: string;
+  url: string;
+};
+
+type ThanksButton = {
+  value: string;
+  isSelected: boolean;
+  isDisabled: boolean;
+};
+
 export const Send = () => {
-  const [selectedEmoji, setSelectedEmoji] = useState<{
-    value: string;
-    url: string;
-  } | null>(null);
-  const [thanksButtons, setThanksButtons] = useState<
-    {
-      value: string;
-      isSelected: boolean;
-      isDisabled: boolean;
-    }[]
-  >(
+  const [selectedEmoji, setSelectedEmoji] = useState<Emoji | null>(null);
+  const [thanksButtons, setThanksButtons] = useState<ThanksButton[]>(
     BUTTON_DATA.map((button) => ({
       ...button,
       isDisabled: button.value > THANKS.toString(),
     })),
   );
-
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const open = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
-
+  const [sliderValue, setSliderValue] = useState(0);
   const [isSent, setIsSent] = useState(false);
 
   const handleSelectEmoji = (emoji: { value: string; url: string }) => {
@@ -91,15 +80,23 @@ export const Send = () => {
     );
   };
 
+  const handleSliderChange = (_event: Event, newValue: number | number[]) => {
+    setSliderValue(newValue as number);
+  };
+
   const handleSendThanks = () => {
     setIsSent(true);
   };
 
-  const [sliderValue, setSliderValue] = useState(0);
-
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    setSliderValue(newValue as number);
+  // popover
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const handleOpenPopover = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
   };
+  const handleClosePopover = () => {
+    setAnchorEl(null);
+  };
+  const open = Boolean(anchorEl);
 
   return (
     <Stack
@@ -125,6 +122,7 @@ export const Send = () => {
           John
         </Typography>
       </Stack>
+
       <Card>
         <CardContent sx={{ padding: "0" }}>
           <Stack
@@ -201,18 +199,19 @@ export const Send = () => {
                       </Button>
                     ))}
                   </Stack>
+
                   <button
                     type="button"
                     className="text-right font-bold"
-                    onClick={handleClick}
+                    onClick={handleOpenPopover}
                   >
                     more
                   </button>
                   <Popover
-                    id={id}
+                    id={"slider-popover"}
                     open={open}
                     anchorEl={anchorEl}
-                    onClose={handleClose}
+                    onClose={handleClosePopover}
                     anchorOrigin={{
                       vertical: "bottom",
                       horizontal: "center",
