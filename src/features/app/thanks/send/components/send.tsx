@@ -1,12 +1,14 @@
 import staff1Url from "@/assets/dummy/1.png";
 import emojiHappyUrl from "@/assets/emoji/happy.svg";
 import emojiHelpfulUrl from "@/assets/emoji/helpful.svg";
+import sentUrl from "@/assets/sent.svg";
 import { Avatar } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/form/slider";
 import { Popover } from "@/components/ui/popover";
 import { Typography } from "@/components/ui/typography";
+import { Add, Remove } from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
 import { useState } from "react";
 
@@ -160,7 +162,7 @@ export const Send = () => {
                   </Box>
                 )}
 
-                <Stack spacing={"10px"}>
+                <Stack spacing={"5px"}>
                   <Stack direction={"row"} spacing={"15px"}>
                     {thanksButtons.map((button) => (
                       <Button
@@ -190,7 +192,7 @@ export const Send = () => {
                   </Stack>
                   <button
                     type="button"
-                    className="text-right"
+                    className="text-right font-bold"
                     onClick={handleClick}
                   >
                     more
@@ -205,9 +207,24 @@ export const Send = () => {
                       horizontal: "center",
                     }}
                   >
-                    <Box padding={"20px"}>
-                      <Typography>{sliderValue}THX</Typography>
-                      <Box width={"300px"}>
+                    <Box padding={"10px 20px"} width={"300px"}>
+                      <Typography color="text.secondary">
+                        <Box
+                          component={"span"}
+                          fontSize={"40px"}
+                          fontWeight={"bold"}
+                          mr={"5px"}
+                        >
+                          {sliderValue}
+                        </Box>
+                        THX
+                      </Typography>
+                      <Stack
+                        direction={"row"}
+                        spacing={"10px"}
+                        alignItems={"center"}
+                      >
+                        <Remove color="success" sx={{ fontSize: "30px" }} />
                         <Slider
                           value={sliderValue}
                           onChange={handleSliderChange}
@@ -215,7 +232,9 @@ export const Send = () => {
                           max={300}
                           color="success"
                         />
-                      </Box>
+
+                        <Add color="success" sx={{ fontSize: "30px" }} />
+                      </Stack>
                     </Box>
                   </Popover>
                 </Stack>
@@ -238,7 +257,23 @@ export const Send = () => {
                 </Stack>
               </>
             ) : (
-              <Typography>Thanks sent!</Typography>
+              <Stack
+                alignItems={"center"}
+                paddingTop={"50px"}
+                paddingBottom={"30px"}
+              >
+                <Stack alignItems={"center"} width={"150px"}>
+                  <img src={sentUrl} alt="thanks sent" />
+                </Stack>
+                <Typography
+                  color="secondary.main"
+                  fontSize={"40px"}
+                  fontWeight={"bold"}
+                  textAlign={"center"}
+                >
+                  Thanks sent!
+                </Typography>
+              </Stack>
             )}
           </Stack>
         </CardContent>
