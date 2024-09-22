@@ -18,6 +18,12 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       background: {
         default: "#F8F7FA",
       },
+      success: {
+        main: "#1ADB00",
+      },
+      error: {
+        main: "#E90000",
+      },
     },
     components: {
       MuiButton: {

@@ -5,6 +5,7 @@ import { Typography } from "@/components/ui/typography";
 import { CallMade, CallReceived } from "@mui/icons-material";
 import { Box, List, ListItem, Stack } from "@mui/material";
 import { useParams } from "react-router-dom";
+import { IconHeartCheck } from "@tabler/icons-react";
 
 export const Dashboard = () => {
   const { userId } = useParams();
@@ -46,7 +47,7 @@ export const Dashboard = () => {
 
   return (
     <Stack spacing={"30px"}>
-      <Box p={"30px"} px={"20px"}>
+      <Box pt={"30px"} px={"20px"}>
         <Box
           sx={{
             background:
@@ -92,6 +93,42 @@ export const Dashboard = () => {
           </Stack>
         </Box>
       </Box>
+
+      {/* TODO: Thanks受け取りの履歴があれば表示 */}
+      <Stack px={"20px"} spacing={"5px"} alignItems={"center"}>
+        <Typography
+          variant="body1"
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          gap={"10px"}
+        >
+          <Box component={"span"} color={"success.main"}>
+            <IconHeartCheck />
+          </Box>
+          You have received a Thank You!
+        </Typography>
+        <Box width={"150px"}>
+          <img src={emojiHappyUrl} alt="emoji" />
+        </Box>
+        <Typography
+          variant="body1"
+          ml={"auto"}
+          fontSize={"22px"}
+          color="text.secondary"
+        >
+          <Box
+            component={"span"}
+            mr={"5px"}
+            fontSize={"40px"}
+            fontWeight={"bold"}
+          >
+            {THANKS}
+          </Box>
+          THX
+        </Typography>
+      </Stack>
+
       <Box>
         <Typography
           variant="h2"
@@ -135,9 +172,11 @@ export const Dashboard = () => {
               </Stack>
               <Box>
                 {item.type === "receive" ? (
-                  <CallReceived sx={{ color: "#1ADB00", fontSize: "50px" }} />
+                  <CallReceived
+                    sx={{ color: "success.main", fontSize: "50px" }}
+                  />
                 ) : (
-                  <CallMade sx={{ color: "#E90000", fontSize: "50px" }} />
+                  <CallMade sx={{ color: "error.main", fontSize: "50px" }} />
                 )}
                 <Typography
                   variant="body1"
