@@ -4,8 +4,8 @@ import { LinkButton } from "@/components/ui/link-button";
 import { Typography } from "@/components/ui/typography";
 import { CallMade, CallReceived } from "@mui/icons-material";
 import { Box, List, ListItem, Stack } from "@mui/material";
-import { useParams } from "react-router-dom";
 import { IconHeartCheck } from "@tabler/icons-react";
+import { useParams } from "react-router-dom";
 
 export const Dashboard = () => {
   const { userId } = useParams();
@@ -13,7 +13,7 @@ export const Dashboard = () => {
   const buttonData = [
     {
       label: "Thanks",
-      to: `/app/${userId}/location`,
+      to: `/app/${userId}/thanks/location`,
       isClickable: true,
     },
     {

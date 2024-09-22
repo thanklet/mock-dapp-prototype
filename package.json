@@ -10,7 +10,7 @@
     "check": "biome check ./src",
     "check:fix": "biome check --write ./src",
     "type-check": "bun run tsc --noEmit --skipLibCheck",
-    "pre-commit": "bun run check:fix && bun run type-check",
+    "pre-commit": "bun run check && bun run type-check",
     "postinstall": "lefthook install"
   },
   "dependencies": {
