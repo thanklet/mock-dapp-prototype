@@ -1,27 +1,45 @@
+import staff1Url from "@/assets/dummy/1.png";
+import staff2Url from "@/assets/dummy/2.png";
+import { Avatar } from "@/components/ui/avatar";
+import { Typography } from "@/components/ui/typography";
 import { Wrapper } from "@googlemaps/react-wrapper";
-import { Box } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+
+const GOOGLE_MAP_API_KEY = import.meta.env.VITE_GOOGLE_MAP_API_KEY as string;
+
+const DEFAULT = {
+  CENTER: {
+    lat: 35.63093,
+    lng: 139.7032,
+  } as google.maps.LatLngLiteral,
+  ZOOM: 16,
+} as const;
+
+const VIEW_STYLE = {
+  width: "100%",
+  height: "calc(100svh - 44px)",
+};
+const USERS = [
+  {
+    id: 1,
+    name: "John",
+    image: staff1Url,
+  },
+  {
+    id: 2,
+    name: "Nancy",
+    image: staff2Url,
+  },
+];
 
 export const Location = () => {
-  const GOOGLE_MAP_API_KEY = "AIzaSyDC7TO_ezKF-CJY7hswgS8XxJm-1x-bTBo";
-  const DEFAULT = {
-    CENTER: {
-      lat: 35.63304,
-      lng: 139.70058,
-    } as google.maps.LatLngLiteral,
-    ZOOM: 16,
-  } as const;
-
-  const VIEW_STYLE = {
-    width: "100%",
-    height: "calc(100vh - 24px)",
-  };
+  const { userId } = useParams();
 
   const [mapElement, setMapElement] = useState<HTMLDivElement | null>(null);
   const [map, setMap] = useState<google.maps.Map>();
-  const [marker, setMarker] = useState<google.maps.Marker | undefined>(
-    undefined,
-  );
 
   const refCallback = useCallback((node: HTMLDivElement) => {
     if (node !== null) {
@@ -30,7 +48,7 @@ export const Location = () => {
   }, []);
 
   useEffect(() => {
-    const initMap = async () => {
+    const initMap = () => {
       if (mapElement && !map) {
         const option = {
           center: DEFAULT.CENTER,
@@ -39,32 +57,78 @@ export const Location = () => {
         const googleMap = new window.google.maps.Map(mapElement, option);
         setMap(googleMap);
 
-        // カスタムピンのアイコンを設定
-        const customIcon = {
-          url: "https://placehold.jp/150x150.png", // カスタムアイコンのURL
-          scaledSize: new window.google.maps.Size(50, 50), // サイズ
-        };
+        const markers = [
+          {
+            position: {
+              lat: 35.63146,
+              lng: 139.70384,
+            },
+            icon: {
+              url: staff1Url,
+              scaledSize: new window.google.maps.Size(50, 50),
+            },
+          },
+          {
+            position: {
+              lat: 35.63275,
+              lng: 139.70042,
+            },
+            icon: {
+              url: staff2Url,
+              scaledSize: new window.google.maps.Size(50, 50),
+            },
+          },
+        ];
 
-        const customMarker = new window.google.maps.Marker({
-          position: DEFAULT.CENTER,
-          map: googleMap,
-          icon: customIcon,
-        });
-        setMarker(customMarker);
+        for (const marker of markers) {
+          new window.google.maps.Marker({
+            position: marker.position,
+            map: googleMap,
+            icon: marker.icon,
+          });
+        }
       }
     };
     initMap();
-  }, [mapElement, map, DEFAULT.CENTER, DEFAULT.ZOOM]);
+  }, [mapElement, map]);
 
   return (
-    <Box>
-      <Wrapper
-        apiKey={GOOGLE_MAP_API_KEY}
-        version="beta"
-        libraries={["marker"]}
+    <Box sx={{ position: "relative" }}>
+      <Box>
+        <Wrapper
+          apiKey={GOOGLE_MAP_API_KEY}
+          version="beta"
+          libraries={["marker"]}
+        >
+          <div style={VIEW_STYLE} ref={refCallback} />
+        </Wrapper>
+      </Box>
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          backgroundColor: "white",
+          maxHeight: "200px",
+          overflow: "auto",
+          padding: "30px 20px",
+          borderTopLeftRadius: "20px",
+          borderTopRightRadius: "20px",
+          boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
+        }}
       >
-        <div style={VIEW_STYLE} ref={refCallback} />
-      </Wrapper>
+        <Stack direction="row" flexWrap="wrap" gap={"20px"}>
+          {USERS.map((user) => (
+            <Link to={`app/${userId}/thanks/send/${user.id}`} key={user.id}>
+              <Avatar src={user.image} sx={{ width: 70, height: 70 }} />
+              <Typography width={"100%"} textAlign="center">
+                {user.name}
+              </Typography>
+            </Link>
+          ))}
+        </Stack>
+      </Box>
     </Box>
   );
 };
