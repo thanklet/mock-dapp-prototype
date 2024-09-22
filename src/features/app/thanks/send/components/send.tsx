@@ -12,6 +12,8 @@ import { Add, Remove } from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
 import { useState } from "react";
 
+const THANKS = 3;
+
 const EMOJI_DATA = [
   {
     value: "happy",
@@ -47,14 +49,18 @@ export const Send = () => {
     value: string;
     url: string;
   } | null>(null);
-  const [thanksButtons, setThanksButtons] =
-    useState<
-      {
-        value: string;
-        isSelected: boolean;
-        isDisabled: boolean;
-      }[]
-    >(BUTTON_DATA);
+  const [thanksButtons, setThanksButtons] = useState<
+    {
+      value: string;
+      isSelected: boolean;
+      isDisabled: boolean;
+    }[]
+  >(
+    BUTTON_DATA.map((button) => ({
+      ...button,
+      isDisabled: button.value > THANKS.toString(),
+    })),
+  );
 
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
@@ -167,7 +173,11 @@ export const Send = () => {
                     {thanksButtons.map((button) => (
                       <Button
                         key={button.value}
-                        variant={button.isSelected ? "contained" : "outlined"}
+                        variant={
+                          button.isSelected || button.isDisabled
+                            ? "contained"
+                            : "outlined"
+                        }
                         color="secondary"
                         sx={{
                           display: "flex",
@@ -176,6 +186,7 @@ export const Send = () => {
                           fontWeight: "bold",
                         }}
                         onClick={() => handleSelectThanksButton(button.value)}
+                        disabled={button.isDisabled}
                       >
                         <Box
                           component={"span"}
@@ -229,7 +240,7 @@ export const Send = () => {
                           value={sliderValue}
                           onChange={handleSliderChange}
                           min={0}
-                          max={300}
+                          max={THANKS}
                           color="success"
                         />
 
