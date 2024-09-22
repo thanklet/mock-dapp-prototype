@@ -35,17 +35,6 @@ const USERS = [
   },
 ];
 
-function createCircleMarker(imageUrl: string) {
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50">
-      <circle cx="25" cy="25" r="20" fill="white" stroke="#000000" stroke-width="2"/>
-      <image href="${imageUrl}" x="5" y="5" width="40" height="40" clip-path="circle(20px at center)"/>
-    </svg>
-  `;
-
-  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
-}
-
 export const Location = () => {
   const { userId } = useParams();
 
