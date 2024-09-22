@@ -5,8 +5,7 @@ import { Typography } from "@/components/ui/typography";
 import { Wrapper } from "@googlemaps/react-wrapper";
 import { Box, Stack } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 // TODO: Google Map API Keyは作成してもらう
 const GOOGLE_MAP_API_KEY = import.meta.env.VITE_GOOGLE_MAP_API_KEY as string;
@@ -35,6 +34,17 @@ const USERS = [
     image: staff2Url,
   },
 ];
+
+function createCircleMarker(imageUrl: string) {
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50">
+      <circle cx="25" cy="25" r="20" fill="white" stroke="#000000" stroke-width="2"/>
+      <image href="${imageUrl}" x="5" y="5" width="40" height="40" clip-path="circle(20px at center)"/>
+    </svg>
+  `;
+
+  return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
+}
 
 export const Location = () => {
   const { userId } = useParams();
