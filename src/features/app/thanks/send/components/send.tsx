@@ -247,6 +247,11 @@ export const Send = () => {
                   <Button
                     variant="contained"
                     onClick={handleSendThanks}
+                    disabled={
+                      !selectedEmoji ||
+                      (!thanksButtons.some((button) => button.isSelected) &&
+                        sliderValue === 0)
+                    }
                     sx={{
                       fontSize: "20px",
                       fontWeight: "bold",
