@@ -14,17 +14,17 @@ export const Dashboard = () => {
     {
       label: "Thanks",
       to: `/app/${userId}/thanks/location`,
-      isClickable: true,
+      disabled: false,
     },
     {
       label: "Swap",
       to: `/app/${userId}/swap`,
-      disabled: false,
+      disabled: true,
     },
     {
       label: "Staking",
       to: `/app/${userId}/staking`,
-      disabled: false,
+      disabled: true,
     },
   ];
 
