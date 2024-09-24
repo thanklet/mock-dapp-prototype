@@ -11,11 +11,9 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     palette: {
       primary: {
         main: "#7367F0",
-        light: "#8F85F3",
-        dark: "#675DD8",
       },
       secondary: {
-        main: "#FF416C",
+        main: "#F400A2",
       },
     },
     cssVariables: true,

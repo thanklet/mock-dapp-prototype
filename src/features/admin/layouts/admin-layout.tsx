@@ -1,7 +1,7 @@
-import SearchIcon from "@mui/icons-material/Search";
+import staff1Url from "@/assets/dummy/1.png";
+import { UserDropdown } from "@/components/ui/user-dropdown";
 import { Box } from "@mui/material";
 import type { ReactNode } from "react";
-
 type AdminLayoutProps = {
   children: ReactNode;
 };
@@ -21,7 +21,6 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
         flexDirection="column"
         gap="24px"
       >
-        {/* TODO: 検索バーの挙動が未確定なので仮に作っておく */}
         <Box
           display="flex"
           alignItems="center"
@@ -35,8 +34,15 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
             cursor: "pointer",
           }}
         >
-          <SearchIcon fontSize="small" />
-          Search ⌘K
+          <Box ml="auto">
+            <UserDropdown
+              user={{
+                name: "John Doe",
+                email: "john.doe@example.com",
+                image: staff1Url,
+              }}
+            />
+          </Box>
         </Box>
         <Box>{children}</Box>
       </Box>

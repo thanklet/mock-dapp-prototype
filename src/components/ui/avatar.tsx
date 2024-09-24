@@ -1,6 +1,7 @@
 import { Avatar as MuiAvatar } from "@mui/material";
 import type { AvatarProps } from "@mui/material";
+import { forwardRef } from "react";
 
-export const Avatar = (props: AvatarProps) => {
-  return <MuiAvatar {...props} />;
-};
+export const Avatar = forwardRef<HTMLDivElement, AvatarProps>((props, ref) => {
+  return <MuiAvatar {...props} ref={ref} />;
+});
