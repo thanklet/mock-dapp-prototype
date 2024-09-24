@@ -15,6 +15,24 @@ export const AppProvider = ({ children }: AppProviderProps) => {
       secondary: {
         main: "#F400A2",
       },
+      background: {
+        default: "#F8F7FA",
+      },
+      success: {
+        main: "#1ADB00",
+      },
+      error: {
+        main: "#E90000",
+      },
+    },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            textTransform: "none",
+          },
+        },
+      },
     },
     cssVariables: true,
   });
