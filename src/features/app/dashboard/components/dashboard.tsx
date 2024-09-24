@@ -4,8 +4,8 @@ import { LinkButton } from "@/components/ui/link-button";
 import { Typography } from "@/components/ui/typography";
 import { CallMade, CallReceived } from "@mui/icons-material";
 import { Box, List, ListItem, Stack } from "@mui/material";
-import { useParams } from "react-router-dom";
 import { IconHeartCheck } from "@tabler/icons-react";
+import { useParams } from "react-router-dom";
 
 export const Dashboard = () => {
   const { userId } = useParams();
@@ -14,17 +14,17 @@ export const Dashboard = () => {
     {
       label: "Thanks",
       to: `/app/${userId}/location`,
-      isClickable: true,
+      disabled: false,
     },
     {
       label: "Swap",
       to: `/app/${userId}/swap`,
-      isClickable: false,
+      disabled: false,
     },
     {
       label: "Staking",
       to: `/app/${userId}/staking`,
-      isClickable: false,
+      disabled: false,
     },
   ];
 
@@ -84,7 +84,7 @@ export const Dashboard = () => {
                   background: "white",
                   color: "black",
                   borderRadius: "20px",
-                  pointerEvents: item.isClickable ? "auto" : "none",
+                  pointerEvents: item.disabled ? "none" : "auto",
                 }}
               >
                 {item.label}
@@ -171,19 +171,26 @@ export const Dashboard = () => {
                 </Typography>
               </Stack>
               <Box>
-                {item.type === "receive" ? (
-                  <CallReceived
-                    sx={{ color: "success.main", fontSize: "50px" }}
-                  />
-                ) : (
-                  <CallMade sx={{ color: "error.main", fontSize: "50px" }} />
-                )}
+                {
+                  {
+                    receive: (
+                      <CallReceived
+                        sx={{ color: "success.main", fontSize: "50px" }}
+                      />
+                    ),
+                    send: (
+                      <CallMade
+                        sx={{ color: "error.main", fontSize: "50px" }}
+                      />
+                    ),
+                  }[item.type]
+                }
                 <Typography
                   variant="body1"
                   fontSize={"16px"}
                   fontWeight={"bold"}
                 >
-                  {item.type === "receive" ? "receive" : "send"}
+                  {item.type}
                 </Typography>
               </Box>
               <Typography
