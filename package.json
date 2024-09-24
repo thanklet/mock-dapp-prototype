@@ -16,9 +16,15 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.1.0",
     "@mui/material": "^6.1.0",
+    "@tabler/icons-react": "^3.17.0",
+    "@tanstack/react-table": "^8.20.5",
+    "classnames": "^2.5.1",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "react-helmet-async": "^2.0.5",
+    "react-router-dom": "^6.26.2"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.0",
@@ -28,6 +34,7 @@
     "globals": "^15.9.0",
     "lefthook": "^1.7.15",
     "typescript": "^5.5.3",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "vite-tsconfig-paths": "^5.0.1"
   }
 }
