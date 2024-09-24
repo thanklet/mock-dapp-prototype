@@ -14,7 +14,7 @@ const DEFAULT = {
   CENTER: {
     lat: 35.63093,
     lng: 139.7032,
-  } as google.maps.LatLngLiteral,
+  },
   ZOOM: 16,
 } as const;
 
