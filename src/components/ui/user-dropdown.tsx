@@ -35,7 +35,7 @@ export const UserDropdown = ({ user }: UserDropdownProps) => {
   const anchorRef = useRef<HTMLDivElement>(null);
 
   const handleDropdownOpen = () => {
-    !open ? setOpen(true) : setOpen(false);
+    setOpen(true);
   };
 
   const handleDropdownClose = (
