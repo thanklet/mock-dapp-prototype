@@ -1,4 +1,3 @@
-import "@/styles/table.css";
 import staff1Url from "@/assets/dummy/1.png";
 import staff2Url from "@/assets/dummy/2.png";
 import staff3Url from "@/assets/dummy/3.png";
@@ -11,6 +10,7 @@ import { Checkbox } from "@/components/ui/form/checkbox";
 import { Select } from "@/components/ui/form/select";
 import { TextField } from "@/components/ui/form/text-field";
 import { Typography } from "@/components/ui/typography";
+import styles from "@/styles/table.module.css";
 import { Box } from "@mui/material";
 import { IconDotsVertical, IconUpload } from "@tabler/icons-react";
 import {
@@ -194,7 +194,7 @@ export const TransactionTable = () => {
           </Box>
         </Box>
 
-        <table className="table">
+        <table className={styles.table}>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
