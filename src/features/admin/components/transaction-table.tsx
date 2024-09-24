@@ -1,4 +1,4 @@
-import "@/styles/table.css";
+import styles from "@/styles/table.module.css";
 import staff1Url from "@/assets/dummy/1.png";
 import staff2Url from "@/assets/dummy/2.png";
 import staff3Url from "@/assets/dummy/3.png";
@@ -194,7 +194,7 @@ export const TransactionTable = () => {
           </Box>
         </Box>
 
-        <table className="table">
+        <table className={styles.table}>
           <thead>
             {table.getHeaderGroups().map((headerGroup) => (
               <tr key={headerGroup.id}>
