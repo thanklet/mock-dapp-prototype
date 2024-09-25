@@ -50,7 +50,9 @@ export const Send = () => {
   };
 
   const handleChangeSlider = (_event: Event, newValue: number | number[]) => {
-    setSliderValue(newValue as number);
+    if (typeof newValue === "number") {
+      setSliderValue(newValue);
+    }
   };
 
   const handleSendThanks = () => {
