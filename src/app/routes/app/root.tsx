@@ -1,4 +1,4 @@
-import { AppLayout } from "@/components/layouts/app-layout";
+import { AppLayout } from "@/features/app/layouts/app-layout";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 

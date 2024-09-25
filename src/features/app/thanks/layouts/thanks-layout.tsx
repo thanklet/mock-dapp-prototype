@@ -2,18 +2,15 @@ import { ArrowBackIos } from "@mui/icons-material";
 import { Stack } from "@mui/material";
 import { Typography } from "@mui/material";
 import type { ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 type ThanksLayoutProps = {
-  backTo: string;
   label: string;
   children: ReactNode;
 };
 
-export const ThanksLayout = ({
-  backTo,
-  label,
-  children,
-}: ThanksLayoutProps) => {
+export const ThanksLayout = ({ label, children }: ThanksLayoutProps) => {
+  const navigate = useNavigate();
   return (
     <>
       <Stack
@@ -24,9 +21,9 @@ export const ThanksLayout = ({
           boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Link to={backTo} style={{ lineHeight: 1 }}>
+        <button onClick={() => navigate(-1)} type="button">
           <ArrowBackIos sx={{ fontSize: "16px" }} />
-        </Link>
+        </button>
         <Typography
           sx={{
             fontSize: "16px",

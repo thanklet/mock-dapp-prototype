@@ -1,4 +1,4 @@
-import { AdminLayout } from "@/components/layouts/admin-layout";
+import { AdminLayout } from "@/features/admin/layouts/admin-layout";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 

@@ -14,17 +14,17 @@ export const Dashboard = () => {
     {
       label: "Thanks",
       to: `/app/${userId}/thanks/location`,
-      isClickable: true,
+      disabled: false,
     },
     {
       label: "Swap",
       to: `/app/${userId}/swap`,
-      isClickable: false,
+      disabled: true,
     },
     {
       label: "Staking",
       to: `/app/${userId}/staking`,
-      isClickable: false,
+      disabled: true,
     },
   ];
 
@@ -84,7 +84,7 @@ export const Dashboard = () => {
                   background: "white",
                   color: "black",
                   borderRadius: "20px",
-                  pointerEvents: item.isClickable ? "auto" : "none",
+                  pointerEvents: item.disabled ? "none" : "auto",
                 }}
               >
                 {item.label}
@@ -171,19 +171,26 @@ export const Dashboard = () => {
                 </Typography>
               </Stack>
               <Box>
-                {item.type === "receive" ? (
-                  <CallReceived
-                    sx={{ color: "success.main", fontSize: "50px" }}
-                  />
-                ) : (
-                  <CallMade sx={{ color: "error.main", fontSize: "50px" }} />
-                )}
+                {
+                  {
+                    receive: (
+                      <CallReceived
+                        sx={{ color: "success.main", fontSize: "50px" }}
+                      />
+                    ),
+                    send: (
+                      <CallMade
+                        sx={{ color: "error.main", fontSize: "50px" }}
+                      />
+                    ),
+                  }[item.type]
+                }
                 <Typography
                   variant="body1"
                   fontSize={"16px"}
                   fontWeight={"bold"}
                 >
-                  {item.type === "receive" ? "receive" : "send"}
+                  {item.type}
                 </Typography>
               </Box>
               <Typography
