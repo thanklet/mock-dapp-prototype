@@ -13,7 +13,8 @@ import { Box, Stack } from "@mui/material";
 import { useState } from "react";
 
 // 定数
-const THANKS = 3;
+const USER_THANKS = "3";
+const THANKS_BUTTON_VALUES = ["1", "2", "5"];
 const EMOJI_DATA = [
   {
     value: "happy",
@@ -26,42 +27,16 @@ const EMOJI_DATA = [
     label: "Helpful",
   },
 ];
-const BUTTON_DATA = [
-  {
-    value: "1",
-    isSelected: false,
-    isDisabled: false,
-  },
-  {
-    value: "2",
-    isSelected: false,
-    isDisabled: false,
-  },
-  {
-    value: "5",
-    isSelected: false,
-    isDisabled: false,
-  },
-];
 
 type Emoji = {
   value: string;
   url: string;
 };
 
-type ThanksButton = {
-  value: string;
-  isSelected: boolean;
-  isDisabled: boolean;
-};
-
 export const Send = () => {
   const [selectedEmoji, setSelectedEmoji] = useState<Emoji>(EMOJI_DATA[0]);
-  const [thanksButtons, setThanksButtons] = useState<ThanksButton[]>(
-    BUTTON_DATA.map((button) => ({
-      ...button,
-      isDisabled: button.value > THANKS.toString(),
-    })),
+  const [currentThanksValue, setCurrentThanksValue] = useState<string | null>(
+    null,
   );
   const [sliderValue, setSliderValue] = useState(0);
   const [isSent, setIsSent] = useState(false);
@@ -70,17 +45,11 @@ export const Send = () => {
     setSelectedEmoji(emoji);
   };
 
-  const handleSelectThanksButton = (value: string) => {
-    setThanksButtons((prev) =>
-      prev.map((button) =>
-        button.value === value
-          ? { ...button, isSelected: true }
-          : { ...button, isSelected: false },
-      ),
-    );
+  const handleSelectThanks = (value: string) => {
+    setCurrentThanksValue(value);
   };
 
-  const handleSliderChange = (_event: Event, newValue: number | number[]) => {
+  const handleChangeSlider = (_event: Event, newValue: number | number[]) => {
     setSliderValue(newValue as number);
   };
 
@@ -166,11 +135,11 @@ export const Send = () => {
 
                 <Stack spacing={"5px"}>
                   <Stack direction={"row"} spacing={"15px"}>
-                    {thanksButtons.map((button) => (
+                    {THANKS_BUTTON_VALUES.map((value) => (
                       <Button
-                        key={button.value}
+                        key={value}
                         variant={
-                          button.isSelected || button.isDisabled
+                          currentThanksValue === value
                             ? "contained"
                             : "outlined"
                         }
@@ -181,15 +150,15 @@ export const Send = () => {
                           fontSize: "16px",
                           fontWeight: "bold",
                         }}
-                        onClick={() => handleSelectThanksButton(button.value)}
-                        disabled={button.isDisabled}
+                        onClick={() => handleSelectThanks(value)}
+                        disabled={Number(value) > Number(USER_THANKS)}
                       >
                         <Box
                           component={"span"}
                           fontSize={"28px"}
                           lineHeight={"1"}
                         >
-                          {button.value}
+                          {value}
                         </Box>
                         <Box component={"span"} paddingTop={"5px"}>
                           THX
@@ -235,9 +204,9 @@ export const Send = () => {
                         <Remove color="success" sx={{ fontSize: "30px" }} />
                         <Slider
                           value={sliderValue}
-                          onChange={handleSliderChange}
+                          onChange={handleChangeSlider}
                           min={0}
-                          max={THANKS}
+                          max={Number(USER_THANKS)}
                           color="success"
                         />
 
@@ -255,10 +224,7 @@ export const Send = () => {
                   <Button
                     variant="contained"
                     onClick={handleSendThanks}
-                    disabled={
-                      !thanksButtons.some((button) => button.isSelected) &&
-                      sliderValue === 0
-                    }
+                    disabled={currentThanksValue === null && sliderValue === 0}
                     sx={{
                       fontSize: "20px",
                       fontWeight: "bold",
