@@ -53,6 +53,7 @@ export const Location = () => {
         const option = {
           center: DEFAULT.CENTER,
           zoom: DEFAULT.ZOOM,
+          mapId: "location",
         };
         const googleMap = new window.google.maps.Map(mapElement, option);
         setMap(googleMap);
@@ -63,28 +64,27 @@ export const Location = () => {
               lat: 35.63146,
               lng: 139.70384,
             },
-            icon: {
-              url: staff1Url,
-              scaledSize: new window.google.maps.Size(50, 50),
-            },
+            src: staff1Url,
           },
           {
             position: {
               lat: 35.63275,
               lng: 139.70042,
             },
-            icon: {
-              url: staff2Url,
-              scaledSize: new window.google.maps.Size(50, 50),
-            },
+            src: staff2Url,
           },
         ];
 
         for (const marker of markers) {
-          new window.google.maps.Marker({
+          const markerElement = document.createElement("img");
+          markerElement.src = marker.src;
+          markerElement.style.width = "50px";
+          markerElement.style.height = "50px";
+          markerElement.style.borderRadius = "50%";
+          new window.google.maps.marker.AdvancedMarkerElement({
             position: marker.position,
             map: googleMap,
-            icon: marker.icon,
+            content: markerElement,
           });
         }
       }
