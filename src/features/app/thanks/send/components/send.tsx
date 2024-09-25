@@ -56,7 +56,7 @@ type ThanksButton = {
 };
 
 export const Send = () => {
-  const [selectedEmoji, setSelectedEmoji] = useState<Emoji | null>(null);
+  const [selectedEmoji, setSelectedEmoji] = useState<Emoji>(EMOJI_DATA[0]);
   const [thanksButtons, setThanksButtons] = useState<ThanksButton[]>(
     BUTTON_DATA.map((button) => ({
       ...button,
@@ -153,18 +153,16 @@ export const Send = () => {
           <Stack alignItems={"center"} padding={"20px 30px"}>
             {!isSent ? (
               <>
-                {selectedEmoji && (
-                  <Box
-                    width={"120px"}
-                    height={"120px"}
-                    display={"flex"}
-                    justifyContent={"center"}
-                    alignItems={"center"}
-                    marginBottom={"20px"}
-                  >
-                    <img src={selectedEmoji.url} alt="selected emoji" />
-                  </Box>
-                )}
+                <Box
+                  width={"120px"}
+                  height={"120px"}
+                  display={"flex"}
+                  justifyContent={"center"}
+                  alignItems={"center"}
+                  marginBottom={"20px"}
+                >
+                  <img src={selectedEmoji.url} alt="selected emoji" />
+                </Box>
 
                 <Stack spacing={"5px"}>
                   <Stack direction={"row"} spacing={"15px"}>
@@ -258,9 +256,8 @@ export const Send = () => {
                     variant="contained"
                     onClick={handleSendThanks}
                     disabled={
-                      !selectedEmoji ||
-                      (!thanksButtons.some((button) => button.isSelected) &&
-                        sliderValue === 0)
+                      !thanksButtons.some((button) => button.isSelected) &&
+                      sliderValue === 0
                     }
                     sx={{
                       fontSize: "20px",
