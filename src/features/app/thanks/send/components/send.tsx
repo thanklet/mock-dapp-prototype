@@ -47,11 +47,13 @@ export const Send = () => {
 
   const handleSelectThanks = (value: string) => {
     setCurrentThanksValue(value);
+    setSliderValue(0);
   };
 
   const handleChangeSlider = (_event: Event, newValue: number | number[]) => {
     if (typeof newValue === "number") {
       setSliderValue(newValue);
+      setCurrentThanksValue(null);
     }
   };
 
@@ -194,7 +196,7 @@ export const Send = () => {
                           fontWeight={"bold"}
                           mr={"5px"}
                         >
-                          {sliderValue}
+                          {USER_THANKS}
                         </Box>
                         THX
                       </Typography>
@@ -209,6 +211,8 @@ export const Send = () => {
                           onChange={handleChangeSlider}
                           min={0}
                           max={Number(USER_THANKS)}
+                          step={1}
+                          valueLabelDisplay="auto"
                           color="success"
                         />
 
@@ -243,7 +247,7 @@ export const Send = () => {
                 paddingBottom={"30px"}
               >
                 <Stack alignItems={"center"} width={"150px"}>
-                  <img src={sentUrl} alt="thanks sent" />
+                  <img src={sentUrl} alt="" />
                 </Stack>
                 <Typography
                   color="secondary.main"
