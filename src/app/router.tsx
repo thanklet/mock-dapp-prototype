@@ -34,6 +34,15 @@ const router = createBrowserRouter([
           return { Component: DashboardRoute };
         },
       },
+      {
+        path: ":userId/thanks/location",
+        lazy: async () => {
+          const { LocationRoute } = await import(
+            "./routes/app/thanks/location"
+          );
+          return { Component: LocationRoute };
+        },
+      },
     ],
   },
 ]);

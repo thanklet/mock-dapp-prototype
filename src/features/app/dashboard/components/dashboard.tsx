@@ -13,18 +13,18 @@ export const Dashboard = () => {
   const buttonData = [
     {
       label: "Thanks",
-      to: `/app/${userId}/location`,
+      to: `/app/${userId}/thanks/location`,
       disabled: false,
     },
     {
       label: "Swap",
       to: `/app/${userId}/swap`,
-      disabled: false,
+      disabled: true,
     },
     {
       label: "Staking",
       to: `/app/${userId}/staking`,
-      disabled: false,
+      disabled: true,
     },
   ];
 
