@@ -1,6 +1,6 @@
 import { createCollectionRef, createDocRef, db } from "@/lib/firebase";
 import type { DocRequestParams } from "@/types/api.ts";
-import { FieldPath, getDoc, getDocs, query, where } from "firebase/firestore";
+import { getDoc, getDocs, updateDoc } from "firebase/firestore";
 import type { User } from "./types";
 
 const getUser = async ({ documentId }: DocRequestParams) => {
@@ -13,4 +13,12 @@ const getUsers = async () => {
   return await getDocs(collectionRef);
 };
 
-export { getUser, getUsers };
+const updateUser = async ({
+  documentId,
+  user,
+}: { documentId: string; user: Partial<User> }) => {
+  const docRef = createDocRef<User>(db, "users", documentId);
+  return await updateDoc(docRef, user);
+};
+
+export { getUser, getUsers, updateUser };

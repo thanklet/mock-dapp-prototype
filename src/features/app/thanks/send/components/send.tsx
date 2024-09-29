@@ -10,10 +10,12 @@ import { Popover } from "@/components/ui/popover";
 import { Typography } from "@/components/ui/typography";
 import { Add, Remove } from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
+import { Timestamp } from "firebase/firestore";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useGetUser, useSendThanks } from "../api";
 
 // 定数
-const USER_THANKS = "3";
 const THANKS_BUTTON_VALUES = ["1", "2", "5"];
 const EMOJI_DATA = [
   {
@@ -34,6 +36,7 @@ type Emoji = {
 };
 
 export const Send = () => {
+  const { userId, receiveUserId } = useParams();
   const [selectedEmoji, setSelectedEmoji] = useState<Emoji>(EMOJI_DATA[0]);
   const [currentThanksValue, setCurrentThanksValue] = useState<string | null>(
     null,
@@ -57,8 +60,31 @@ export const Send = () => {
     }
   };
 
-  const handleSendThanks = () => {
+  const { data: user } = useGetUser({ documentId: userId ?? "" });
+  const { data: receiveUser } = useGetUser({ documentId: receiveUserId ?? "" });
+  const userThanks = user.data()?.thanks ?? 0;
+
+  const onSuccessSendThanks = () => {
     setIsSent(true);
+  };
+
+  const { mutate: sendThanks } = useSendThanks(onSuccessSendThanks);
+
+  const handleSendThanks = async () => {
+    const thanks = Number(currentThanksValue ?? sliderValue);
+    const sendUserThanks = userThanks;
+    const receiveUserThanks = receiveUser.data()?.thanks ?? 0;
+    await sendThanks({
+      transactionHistory: {
+        emoji: selectedEmoji.value,
+        send_user_id: userId ?? "",
+        receive_user_id: receiveUserId ?? "",
+        thanks: thanks,
+        created_at: Timestamp.now(),
+      },
+      sendUserThanks: sendUserThanks - thanks,
+      receiveUserThanks: receiveUserThanks + thanks,
+    });
   };
 
   // popover
@@ -92,7 +118,7 @@ export const Send = () => {
           }}
         />
         <Typography variant="h2" fontSize={"26px"}>
-          John
+          {user.data()?.name}
         </Typography>
       </Stack>
 
@@ -155,7 +181,7 @@ export const Send = () => {
                           fontWeight: "bold",
                         }}
                         onClick={() => handleSelectThanks(value)}
-                        disabled={Number(value) > Number(USER_THANKS)}
+                        disabled={Number(value) > userThanks}
                       >
                         <Box
                           component={"span"}
@@ -196,7 +222,7 @@ export const Send = () => {
                           fontWeight={"bold"}
                           mr={"5px"}
                         >
-                          {USER_THANKS}
+                          {userThanks}
                         </Box>
                         THX
                       </Typography>
@@ -210,7 +236,7 @@ export const Send = () => {
                           value={sliderValue}
                           onChange={handleChangeSlider}
                           min={0}
-                          max={Number(USER_THANKS)}
+                          max={userThanks}
                           step={1}
                           valueLabelDisplay="auto"
                           color="success"

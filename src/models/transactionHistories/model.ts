@@ -1,5 +1,5 @@
 import { createCollectionRef, db } from "@/lib/firebase";
-import { getDocs, query, where } from "firebase/firestore";
+import { addDoc, getDocs, query, where } from "firebase/firestore";
 import type {
   GetUserTransactionHistoriesParams,
   TransactionHistory,
@@ -27,4 +27,14 @@ const getUserTransactionHistories = async ({
   };
 };
 
-export { getUserTransactionHistories };
+const createTransactionHistory = async (
+  transactionHistory: TransactionHistory,
+) => {
+  const collectionRef = createCollectionRef<TransactionHistory>(
+    db,
+    "transaction_histories",
+  );
+  return await addDoc(collectionRef, transactionHistory);
+};
+
+export { createTransactionHistory, getUserTransactionHistories };

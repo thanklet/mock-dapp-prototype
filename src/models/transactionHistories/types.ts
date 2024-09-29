@@ -12,4 +12,4 @@ type GetUserTransactionHistoriesParams = {
   userId: string;
 };
 
-export type { TransactionHistory, GetUserTransactionHistoriesParams };
+export type { GetUserTransactionHistoriesParams, TransactionHistory };
