@@ -6,7 +6,7 @@ import { Wrapper } from "@googlemaps/react-wrapper";
 import { Box, Stack } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useGetLocation } from "../api";
+import { useGetUsers } from "../api";
 
 const GOOGLE_MAP_API_KEY = import.meta.env.VITE_GOOGLE_MAP_API_KEY as string;
 
@@ -22,9 +22,6 @@ const VIEW_STYLE = {
   width: "100%",
   height: "calc(100svh - 44px)",
 };
-
-// モック用のダミー画像
-const IMAGE_URLS = [staff1Url, staff2Url];
 
 // モック用のダミー位置
 const POSITIONS = [
@@ -49,13 +46,13 @@ export const Location = () => {
     }
   }, []);
 
-  const { data: allUsers } = useGetLocation();
+  const { data: allUsers } = useGetUsers();
   const users = allUsers.docs
-    .map((doc, index) => ({
+    .map((doc) => ({
       ...doc.data(),
       id: doc.id,
-      // NOTE: モック用のダミー画像を使用
-      image_path: IMAGE_URLS[index - 1],
+      // TODO: プロトタイプではユーザーが二人しかいないので、こうしているが本来はimage_pathをそのまま使うだけで表示させたい
+      image_path: doc.data().image_path === "staff1" ? staff1Url : staff2Url,
     }))
     .filter((user) => user.id !== userId);
 

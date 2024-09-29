@@ -1,4 +1,5 @@
 import staff1Url from "@/assets/dummy/1.png";
+import staff2Url from "@/assets/dummy/2.png";
 import emojiHappyUrl from "@/assets/emoji/happy.svg";
 import emojiHelpfulUrl from "@/assets/emoji/helpful.svg";
 import sentUrl from "@/assets/sent.svg";
@@ -60,9 +61,9 @@ export const Send = () => {
     }
   };
 
-  const { data: user } = useGetUser({ documentId: userId ?? "" });
+  const { data: sendUser } = useGetUser({ documentId: userId ?? "" });
   const { data: receiveUser } = useGetUser({ documentId: receiveUserId ?? "" });
-  const userThanks = user.data()?.thanks ?? 0;
+  const sendUserThanks = sendUser.data()?.thanks ?? 0;
 
   const onSuccessSendThanks = () => {
     setIsSent(true);
@@ -72,7 +73,6 @@ export const Send = () => {
 
   const handleSendThanks = async () => {
     const thanks = Number(currentThanksValue ?? sliderValue);
-    const sendUserThanks = userThanks;
     const receiveUserThanks = receiveUser.data()?.thanks ?? 0;
     await sendThanks({
       transactionHistory: {
@@ -108,8 +108,11 @@ export const Send = () => {
     >
       <Stack alignItems="center" gap={"10px"}>
         <Avatar
-          alt="staff1"
-          src={staff1Url}
+          alt={receiveUser.data()?.name}
+          src={
+            // TODO: プロトタイプではユーザーが二人しかいないので、こうしているが本来はimage_pathをそのまま使うだけで表示させたい
+            receiveUser.data()?.image_path === "staff1" ? staff1Url : staff2Url
+          }
           sx={{
             width: 100,
             height: 100,
@@ -118,7 +121,7 @@ export const Send = () => {
           }}
         />
         <Typography variant="h2" fontSize={"26px"}>
-          {user.data()?.name}
+          {receiveUser.data()?.name}
         </Typography>
       </Stack>
 
@@ -181,7 +184,7 @@ export const Send = () => {
                           fontWeight: "bold",
                         }}
                         onClick={() => handleSelectThanks(value)}
-                        disabled={Number(value) > userThanks}
+                        disabled={Number(value) > sendUserThanks}
                       >
                         <Box
                           component={"span"}
@@ -222,7 +225,7 @@ export const Send = () => {
                           fontWeight={"bold"}
                           mr={"5px"}
                         >
-                          {userThanks}
+                          {sendUserThanks}
                         </Box>
                         THX
                       </Typography>
@@ -236,7 +239,7 @@ export const Send = () => {
                           value={sliderValue}
                           onChange={handleChangeSlider}
                           min={0}
-                          max={userThanks}
+                          max={sendUserThanks}
                           step={1}
                           valueLabelDisplay="auto"
                           color="success"
