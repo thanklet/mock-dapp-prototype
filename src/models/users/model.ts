@@ -1,6 +1,6 @@
-import { createDocRef, db } from "@/lib/firebase";
+import { createCollectionRef, createDocRef, db } from "@/lib/firebase";
 import type { DocRequestParams } from "@/types/api.ts";
-import { getDoc } from "firebase/firestore";
+import { FieldPath, getDoc, getDocs, query, where } from "firebase/firestore";
 import type { User } from "./types";
 
 const getUser = async ({ documentId }: DocRequestParams) => {
@@ -8,4 +8,9 @@ const getUser = async ({ documentId }: DocRequestParams) => {
   return await getDoc(docRef);
 };
 
-export { getUser };
+const getUsers = async () => {
+  const collectionRef = createCollectionRef<User>(db, "users");
+  return await getDocs(collectionRef);
+};
+
+export { getUser, getUsers };
