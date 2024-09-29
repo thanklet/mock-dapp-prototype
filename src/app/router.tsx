@@ -43,6 +43,13 @@ const router = createBrowserRouter([
           return { Component: LocationRoute };
         },
       },
+      {
+        path: ":userId/thanks/send/:receiveUserId",
+        lazy: async () => {
+          const { SendRoute } = await import("./routes/app/thanks/send");
+          return { Component: SendRoute };
+        },
+      },
     ],
   },
 ]);
