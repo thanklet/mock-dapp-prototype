@@ -1,4 +1,7 @@
+import { queryClient } from "@/lib/query";
 import { ThemeProvider, createTheme } from "@mui/material";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { ReactNode } from "react";
 import { HelmetProvider } from "react-helmet-async";
 
@@ -39,7 +42,15 @@ export const AppProvider = ({ children }: AppProviderProps) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <HelmetProvider>{children}</HelmetProvider>
+      <HelmetProvider>
+        <QueryClientProvider client={queryClient}>
+          {children}
+          <ReactQueryDevtools
+            initialIsOpen={false}
+            buttonPosition="bottom-left"
+          />
+        </QueryClientProvider>
+      </HelmetProvider>
     </ThemeProvider>
   );
 };
