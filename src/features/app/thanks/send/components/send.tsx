@@ -11,6 +11,7 @@ import { Popover } from "@/components/ui/popover";
 import { Typography } from "@/components/ui/typography";
 import { Add, Remove } from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
+import { useQueryClient } from "@tanstack/react-query";
 import { Timestamp } from "firebase/firestore";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -65,8 +66,10 @@ export const Send = () => {
   const { data: receiveUser } = useGetUser({ documentId: receiveUserId ?? "" });
   const sendUserThanks = sendUser.data()?.thanks ?? 0;
 
+  const queryClient = useQueryClient();
   const onSuccessSendThanks = () => {
     setIsSent(true);
+    queryClient.invalidateQueries({ queryKey: ["transaction_histories"] });
   };
 
   const { mutate: sendThanks } = useSendThanks(onSuccessSendThanks);
