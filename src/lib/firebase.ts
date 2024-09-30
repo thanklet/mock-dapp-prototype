@@ -33,7 +33,7 @@ const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const storage = getStorage(app);
 const auth = getAuth(app);
-const funcions = getFunctions(app);
+const functions = getFunctions(app);
 
 /**
  * converter
@@ -80,7 +80,7 @@ export {
   db,
   storage,
   auth,
-  funcions,
+  functions,
   createFirestoreDataConverter,
   createDocRef,
   createCollectionRef,
