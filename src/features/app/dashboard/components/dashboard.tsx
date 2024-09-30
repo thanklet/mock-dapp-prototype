@@ -42,21 +42,16 @@ export const Dashboard = () => {
 
   const thanks = user.data.data()?.thanks ?? 0;
 
-  const sendHistories = transactionHistories.data.sendHistories.docs;
-  const receiveHistories = transactionHistories.data.receiveHistories.docs;
-  const histories = [...sendHistories, ...receiveHistories]
-    .sort((a, b) => {
-      const timeA = a.data().created_at.seconds;
-      const timeB = b.data().created_at.seconds;
-      return timeB - timeA;
-    })
-    .map((x) => ({
-      id: x.id,
-      date: dayjs(x.data().created_at.toDate()).format("YYYY-MM-DD"),
-      type: x.data().send_user_id === userId ? "send" : "receive",
-      thanks: x.data().thanks,
-      emoji: x.data().emoji,
-    }));
+  const histories = transactionHistories.data.docs.map((x) => ({
+    id: x.id,
+    date: dayjs(x.data().created_at.toDate()).format("YYYY-MM-DD"),
+    type: x.data().send_user_id === userId ? "send" : "receive",
+    thanks: x.data().thanks,
+    emoji: x.data().emoji,
+  }));
+  const latestReceiveHistory = transactionHistories.data.docs.find(
+    (x) => x.data().receive_user_id === userId,
+  );
 
   return (
     <Stack spacing={"30px"}>
@@ -107,7 +102,9 @@ export const Dashboard = () => {
         </Box>
       </Box>
 
-      {receiveHistories[0] && <LatestReceive {...receiveHistories[0].data()} />}
+      {latestReceiveHistory && (
+        <LatestReceive {...latestReceiveHistory.data()} />
+      )}
 
       {histories.length > 0 && (
         <Box>

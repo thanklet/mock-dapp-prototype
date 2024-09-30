@@ -1,5 +1,5 @@
 import { createCollectionRef, db } from "@/lib/firebase";
-import { addDoc, getDocs, query, where } from "firebase/firestore";
+import { addDoc, getDocs, or, orderBy, query, where } from "firebase/firestore";
 import type {
   GetUserTransactionHistoriesParams,
   TransactionHistory,
@@ -12,19 +12,15 @@ const getUserTransactionHistories = async ({
     db,
     "transaction_histories",
   );
-  const sendQuery = query(collectionRef, where("send_user_id", "==", userId));
-  const receiveQuery = query(
+  const q = query(
     collectionRef,
-    where("receive_user_id", "==", userId),
+    or(
+      where("send_user_id", "==", userId),
+      where("receive_user_id", "==", userId),
+    ),
+    orderBy("created_at", "desc"),
   );
-  const [sendQuerySnapshot, receiveQuerySnapshot] = await Promise.all([
-    getDocs(sendQuery),
-    getDocs(receiveQuery),
-  ]);
-  return {
-    sendHistories: sendQuerySnapshot,
-    receiveHistories: receiveQuerySnapshot,
-  };
+  return await getDocs(q);
 };
 
 const createTransactionHistory = async (
