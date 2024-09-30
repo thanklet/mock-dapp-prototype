@@ -120,7 +120,11 @@ export const Location = () => {
       >
         <Stack direction="row" flexWrap="wrap" gap={"20px"}>
           {USERS.map((user) => (
-            <Link to={`app/${userId}/thanks/send/${user.id}`} key={user.id}>
+            <Link
+              to={`/app/${userId}/thanks/send/${user.id}`}
+              key={user.id}
+              style={{ textDecoration: "none" }}
+            >
               <Avatar src={user.image} sx={{ width: 70, height: 70 }} />
               <Typography width={"100%"} textAlign="center">
                 {user.name}

@@ -34,11 +34,11 @@ export const UserDropdown = ({ user }: UserDropdownProps) => {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef<HTMLDivElement>(null);
 
-  const handleDropdownOpen = () => {
+  const handleOpenDropdown = () => {
     setOpen(true);
   };
 
-  const handleDropdownClose = (
+  const handleCloseDropdown = (
     event?: MouseEvent<HTMLLIElement> | (MouseEvent | TouchEvent),
   ) => {
     if (anchorRef.current?.contains(event?.target as HTMLElement)) {
@@ -53,7 +53,7 @@ export const UserDropdown = ({ user }: UserDropdownProps) => {
       <Badge
         ref={anchorRef}
         overlap="circular"
-        badgeContent={<BadgeContentSpan onClick={handleDropdownOpen} />}
+        badgeContent={<BadgeContentSpan onClick={handleOpenDropdown} />}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         className="mis-2"
       >
@@ -61,7 +61,7 @@ export const UserDropdown = ({ user }: UserDropdownProps) => {
           ref={anchorRef}
           alt={user.name}
           src={user.image}
-          onClick={handleDropdownOpen}
+          onClick={handleOpenDropdown}
           className="cursor-pointer bs-[38px] is-[38px]"
         />
       </Badge>
@@ -84,7 +84,7 @@ export const UserDropdown = ({ user }: UserDropdownProps) => {
             <Paper className="bordered shadow-lg">
               <ClickAwayListener
                 onClickAway={(e) =>
-                  handleDropdownClose(e as MouseEvent | TouchEvent)
+                  handleCloseDropdown(e as MouseEvent | TouchEvent)
                 }
               >
                 <MenuList>
