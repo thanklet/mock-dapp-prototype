@@ -9,7 +9,7 @@ export const useGetDashboard = (params: DocRequestParams) => {
   return useSuspenseQueries({
     queries: [
       {
-        queryKey: ["user", getUserParams],
+        queryKey: [`user_${getUserParams.documentId}`, getUserParams],
         queryFn: () => getUser(getUserParams),
       },
       {
