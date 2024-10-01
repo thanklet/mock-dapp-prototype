@@ -6,8 +6,8 @@ import { Wrapper } from "@googlemaps/react-wrapper";
 import { Box, Stack } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useGetUsers } from "../api";
 
-// TODO: Google Map API Keyは作成してもらう
 const GOOGLE_MAP_API_KEY = import.meta.env.VITE_GOOGLE_MAP_API_KEY as string;
 
 const DEFAULT = {
@@ -22,22 +22,21 @@ const VIEW_STYLE = {
   width: "100%",
   height: "calc(100svh - 44px)",
 };
-const USERS = [
+
+// モック用のダミー位置
+const POSITIONS = [
   {
-    id: 1,
-    name: "John",
-    image: staff1Url,
+    lat: 35.63146,
+    lng: 139.70384,
   },
   {
-    id: 2,
-    name: "Nancy",
-    image: staff2Url,
+    lat: 35.63275,
+    lng: 139.70042,
   },
 ];
 
 export const Location = () => {
   const { userId } = useParams();
-
   const [mapElement, setMapElement] = useState<HTMLDivElement | null>(null);
   const [map, setMap] = useState<google.maps.Map>();
 
@@ -47,9 +46,19 @@ export const Location = () => {
     }
   }, []);
 
+  const { data: allUsers } = useGetUsers();
+  const users = allUsers.docs
+    .map((doc) => ({
+      ...doc.data(),
+      id: doc.id,
+      // TODO: プロトタイプではユーザーが二人しかいないので、こうしているが本来はimage_pathをそのまま使うだけで表示させたい
+      image_path: doc.data().image_path === "staff1" ? staff1Url : staff2Url,
+    }))
+    .filter((user) => user.id !== userId);
+
   useEffect(() => {
     const initMap = () => {
-      if (mapElement && !map) {
+      if (mapElement && !map && users.length > 0) {
         const option = {
           center: DEFAULT.CENTER,
           zoom: DEFAULT.ZOOM,
@@ -58,22 +67,10 @@ export const Location = () => {
         const googleMap = new window.google.maps.Map(mapElement, option);
         setMap(googleMap);
 
-        const markers = [
-          {
-            position: {
-              lat: 35.63146,
-              lng: 139.70384,
-            },
-            src: staff1Url,
-          },
-          {
-            position: {
-              lat: 35.63275,
-              lng: 139.70042,
-            },
-            src: staff2Url,
-          },
-        ];
+        const markers = users.map((user, index) => ({
+          position: POSITIONS[index],
+          src: user.image_path,
+        }));
 
         for (const marker of markers) {
           const markerElement = document.createElement("img");
@@ -90,7 +87,7 @@ export const Location = () => {
       }
     };
     initMap();
-  }, [mapElement, map]);
+  }, [mapElement, map, users]);
 
   return (
     <Box sx={{ position: "relative" }}>
@@ -119,13 +116,13 @@ export const Location = () => {
         }}
       >
         <Stack direction="row" flexWrap="wrap" gap={"20px"}>
-          {USERS.map((user) => (
+          {users.map((user) => (
             <Link
               to={`/app/${userId}/thanks/send/${user.id}`}
               key={user.id}
               style={{ textDecoration: "none" }}
             >
-              <Avatar src={user.image} sx={{ width: 70, height: 70 }} />
+              <Avatar src={user.image_path} sx={{ width: 70, height: 70 }} />
               <Typography width={"100%"} textAlign="center">
                 {user.name}
               </Typography>

@@ -1,5 +1,5 @@
 import type { Timestamp } from "firebase/firestore";
-
+import type { Transaction } from "firebase/firestore";
 type TransactionHistory = {
   created_at: Timestamp;
   emoji: string;
@@ -12,4 +12,13 @@ type GetUserTransactionHistoriesParams = {
   userId: string;
 };
 
-export type { TransactionHistory, GetUserTransactionHistoriesParams };
+type CreateTransactionHistoryParams = {
+  transactionHistory: TransactionHistory;
+  transaction?: Transaction;
+};
+
+export type {
+  CreateTransactionHistoryParams,
+  GetUserTransactionHistoriesParams,
+  TransactionHistory,
+};

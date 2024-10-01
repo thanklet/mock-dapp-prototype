@@ -1,4 +1,5 @@
 import staff1Url from "@/assets/dummy/1.png";
+import staff2Url from "@/assets/dummy/2.png";
 import emojiHappyUrl from "@/assets/emoji/happy.svg";
 import emojiHelpfulUrl from "@/assets/emoji/helpful.svg";
 import sentUrl from "@/assets/sent.svg";
@@ -10,10 +11,13 @@ import { Popover } from "@/components/ui/popover";
 import { Typography } from "@/components/ui/typography";
 import { Add, Remove } from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
+import { useQueryClient } from "@tanstack/react-query";
+import { Timestamp } from "firebase/firestore";
 import { useState } from "react";
+import { useParams } from "react-router-dom";
+import { useGetUser, useSendThanks } from "../api";
 
 // 定数
-const USER_THANKS = "3";
 const THANKS_BUTTON_VALUES = ["1", "2", "5"];
 const EMOJI_DATA = [
   {
@@ -34,6 +38,7 @@ type Emoji = {
 };
 
 export const Send = () => {
+  const { userId, receiveUserId } = useParams();
   const [selectedEmoji, setSelectedEmoji] = useState<Emoji>(EMOJI_DATA[0]);
   const [currentThanksValue, setCurrentThanksValue] = useState<string | null>(
     null,
@@ -57,8 +62,32 @@ export const Send = () => {
     }
   };
 
-  const handleSendThanks = () => {
+  const { data: sendUser } = useGetUser({ documentId: userId ?? "" });
+  const { data: receiveUser } = useGetUser({ documentId: receiveUserId ?? "" });
+  const sendUserThanks = sendUser.data()?.thanks ?? 0;
+
+  const queryClient = useQueryClient();
+  const onSuccessSendThanks = () => {
     setIsSent(true);
+    queryClient.invalidateQueries({ queryKey: ["transaction_histories"] });
+  };
+
+  const { mutate: sendThanks } = useSendThanks(onSuccessSendThanks);
+
+  const handleSendThanks = async () => {
+    const thanks = Number(currentThanksValue ?? sliderValue);
+    const receiveUserThanks = receiveUser.data()?.thanks ?? 0;
+    await sendThanks({
+      transactionHistory: {
+        emoji: selectedEmoji.value,
+        send_user_id: userId ?? "",
+        receive_user_id: receiveUserId ?? "",
+        thanks: thanks,
+        created_at: Timestamp.now(),
+      },
+      sendUserThanks: sendUserThanks - thanks,
+      receiveUserThanks: receiveUserThanks + thanks,
+    });
   };
 
   // popover
@@ -82,8 +111,11 @@ export const Send = () => {
     >
       <Stack alignItems="center" gap={"10px"}>
         <Avatar
-          alt="staff1"
-          src={staff1Url}
+          alt={receiveUser.data()?.name}
+          src={
+            // TODO: プロトタイプではユーザーが二人しかいないので、こうしているが本来はimage_pathをそのまま使うだけで表示させたい
+            receiveUser.data()?.image_path === "staff1" ? staff1Url : staff2Url
+          }
           sx={{
             width: 100,
             height: 100,
@@ -92,7 +124,7 @@ export const Send = () => {
           }}
         />
         <Typography variant="h2" fontSize={"26px"}>
-          John
+          {receiveUser.data()?.name}
         </Typography>
       </Stack>
 
@@ -155,7 +187,7 @@ export const Send = () => {
                           fontWeight: "bold",
                         }}
                         onClick={() => handleSelectThanks(value)}
-                        disabled={Number(value) > Number(USER_THANKS)}
+                        disabled={Number(value) > sendUserThanks}
                       >
                         <Box
                           component={"span"}
@@ -196,7 +228,7 @@ export const Send = () => {
                           fontWeight={"bold"}
                           mr={"5px"}
                         >
-                          {USER_THANKS}
+                          {sendUserThanks}
                         </Box>
                         THX
                       </Typography>
@@ -210,7 +242,7 @@ export const Send = () => {
                           value={sliderValue}
                           onChange={handleChangeSlider}
                           min={0}
-                          max={Number(USER_THANKS)}
+                          max={sendUserThanks}
                           step={1}
                           valueLabelDisplay="auto"
                           color="success"

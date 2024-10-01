@@ -1,6 +1,15 @@
 import { createCollectionRef, db } from "@/lib/firebase";
-import { getDocs, or, orderBy, query, where } from "firebase/firestore";
+import {
+  addDoc,
+  doc,
+  getDocs,
+  or,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import type {
+  CreateTransactionHistoryParams,
   GetUserTransactionHistoriesParams,
   TransactionHistory,
 } from "./types";
@@ -23,4 +32,20 @@ const getUserTransactionHistories = async ({
   return await getDocs(q);
 };
 
-export { getUserTransactionHistories };
+const createTransactionHistory = async ({
+  transactionHistory,
+  transaction,
+}: CreateTransactionHistoryParams) => {
+  const collectionRef = createCollectionRef<TransactionHistory>(
+    db,
+    "transaction_histories",
+  );
+  if (transaction) {
+    const docRef = doc(collectionRef);
+    return await transaction.set(docRef, transactionHistory);
+  }
+
+  return await addDoc(collectionRef, transactionHistory);
+};
+
+export { createTransactionHistory, getUserTransactionHistories };
