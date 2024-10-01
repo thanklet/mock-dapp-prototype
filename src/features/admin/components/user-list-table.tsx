@@ -21,6 +21,7 @@ import {
 } from "@tanstack/react-table";
 import type { ColumnDef } from "@tanstack/react-table";
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 
 type UsersType = {
   id: number;
@@ -84,17 +85,19 @@ export const UserListTable = () => {
       columnHelper.accessor("staff", {
         header: "Staff",
         cell: ({ row }) => (
-          <Box display="flex" gap="16px">
-            <Avatar src={row.original.staff.image} alt="staff" />
-            <Box>
-              <Typography color="primary" fontSize="15px" fontWeight="bold">
-                {row.original.staff.name}
-              </Typography>
-              <Typography color="text.secondary" fontSize="13px">
-                {row.original.staff.email}
-              </Typography>
+          <Link to={`/admin/users/${row.index + 1}`}>
+            <Box display="flex" gap="16px">
+              <Avatar src={row.original.staff.image} alt="staff" />
+              <Box>
+                <Typography color="primary" fontSize="15px" fontWeight="bold">
+                  {row.original.staff.name}
+                </Typography>
+                <Typography color="text.secondary" fontSize="13px">
+                  {row.original.staff.email}
+                </Typography>
+              </Box>
             </Box>
-          </Box>
+          </Link>
         ),
       }),
       columnHelper.accessor("thanks", {
