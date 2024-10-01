@@ -44,7 +44,7 @@ export const useSendThanks = (onSuccess: () => void) => {
 
 export const useGetUser = (params: DocRequestParams) => {
   return useSuspenseQuery({
-    queryKey: [`user_${params.documentId}`, params],
+    queryKey: ["users", params],
     queryFn: () => getUser(params),
   });
 };
