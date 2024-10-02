@@ -3,3 +3,4 @@ pre-commit:
     check:
       glob: "*.{ts,tsx}"
       run: "bun run pre-commit"
+      stage_fixed: true
