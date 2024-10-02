@@ -278,9 +278,9 @@ export const Send = () => {
                 paddingTop={"50px"}
                 paddingBottom={"30px"}
               >
-                <Stack alignItems={"center"} width={"150px"}>
+                <Box alignItems={"center"} width={"150px"}>
                   <img src={sentUrl} alt="" />
-                </Stack>
+                </Box>
                 <Typography
                   color="secondary.main"
                   fontSize={"40px"}
@@ -289,6 +289,16 @@ export const Send = () => {
                 >
                   Thanks sent!
                 </Typography>
+                <Box mt={4}>
+                  <Button
+                    variant={"outlined"}
+                    size={"large"}
+                    color="secondary"
+                    href={`/app/${userId}/dashboard`}
+                  >
+                    dashboard
+                  </Button>
+                </Box>
               </Stack>
             )}
           </Stack>
