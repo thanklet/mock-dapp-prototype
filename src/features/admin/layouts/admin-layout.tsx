@@ -10,6 +10,7 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <Box
       sx={{
+        minHeight: "100vh",
         backgroundColor: "background.default",
       }}
     >
