@@ -64,6 +64,13 @@ const router = createBrowserRouter([
           return { Component: LoginRoute };
         },
       },
+      {
+        path: "sign-up",
+        lazy: async () => {
+          const { SignUpRoute } = await import("./routes/auth/sign-up/sign-up");
+          return { Component: SignUpRoute };
+        },
+      },
     ],
   },
 ]);
