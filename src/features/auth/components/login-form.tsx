@@ -5,8 +5,6 @@ import { TextField } from "@/components/ui/form/text-field";
 import { getUserCredential } from "@/models/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormControlLabel } from "@mui/material";
-import type { UserCredential } from "firebase/auth";
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useGetUser } from "../api";
@@ -25,32 +23,33 @@ export const LoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
   const navigate = useNavigate();
-  const [userCredential, setUserCredential] = useState<UserCredential | null>(
-    null,
-  );
-  const { data: user, isLoading } = useGetUser(
-    userCredential ? { documentId: userCredential.user.uid } : null,
-  );
+  const { mutate, isPending } = useGetUser();
 
   const handleFormSubmit = async (fieldValues: LoginSchema) => {
     try {
       const credential = await getUserCredential(fieldValues);
-      setUserCredential(credential);
       if (!credential) {
         alert("Invalid email or password");
 
         return;
       }
+
+      mutate(
+        { documentId: credential.user.uid },
+        {
+          onSuccess: (user) => {
+            if (user.exists()) {
+              navigate(`/app/${user.id}/dashboard`);
+            } else {
+              alert("No found user");
+            }
+          },
+        },
+      );
     } catch (error) {
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    if (user?.exists()) {
-      navigate(`/app/${user.id}/dashboard`);
-    }
-  }, [user, navigate]);
 
   return (
     <form
@@ -77,7 +76,7 @@ export const LoginForm = () => {
 
       <FormControlLabel control={<Checkbox />} label="Remember Me" />
 
-      <Button type="submit" variant="contained" disabled={isLoading}>
+      <Button type="submit" variant="contained" disabled={isPending}>
         Sign in
       </Button>
     </form>
