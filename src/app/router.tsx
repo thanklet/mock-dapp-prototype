@@ -1,6 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { AdminRoot } from "./routes/admin/root";
 import { AppRoot } from "./routes/app/root";
+import { AuthRoot } from "./routes/auth/root";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,19 @@ const router = createBrowserRouter([
         lazy: async () => {
           const { SendRoute } = await import("./routes/app/thanks/send");
           return { Component: SendRoute };
+        },
+      },
+    ],
+  },
+  {
+    path: "/auth",
+    element: <AuthRoot />,
+    children: [
+      {
+        path: "login",
+        lazy: async () => {
+          const { LoginRoute } = await import("./routes/auth/login/login");
+          return { Component: LoginRoute };
         },
       },
     ],
