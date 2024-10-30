@@ -1,11 +1,13 @@
 import staff1Url from "@/assets/dummy/1.png";
 import staff2Url from "@/assets/dummy/2.png";
 import { Avatar } from "@/components/ui/avatar";
+import { Link } from "@/components/ui/link";
 import { Typography } from "@/components/ui/typography";
+import { Path } from "@/utils/path";
 import { Wrapper } from "@googlemaps/react-wrapper";
 import { Box, Stack } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetUsers } from "../api";
 
 const GOOGLE_MAP_API_KEY = import.meta.env.VITE_GOOGLE_MAP_API_KEY as string;
@@ -39,6 +41,7 @@ export const Location = () => {
   const { userId } = useParams();
   const [mapElement, setMapElement] = useState<HTMLDivElement | null>(null);
   const [map, setMap] = useState<google.maps.Map>();
+  const path = new Path();
 
   const refCallback = useCallback((node: HTMLDivElement) => {
     if (node !== null) {
@@ -118,7 +121,7 @@ export const Location = () => {
         <Stack direction="row" flexWrap="wrap" gap={"20px"}>
           {users.map((user) => (
             <Link
-              to={`/app/${userId}/thanks/send/${user.id}`}
+              to={path.get().app.userId.thanks.send(userId, user.id)}
               key={user.id}
               style={{ textDecoration: "none" }}
             >
