@@ -17,6 +17,7 @@
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@googlemaps/react-wrapper": "^1.1.42",
+    "@hookform/resolvers": "^3.9.0",
     "@mui/icons-material": "^6.1.0",
     "@mui/material": "^6.1.0",
     "@tabler/icons-react": "^3.17.0",
@@ -29,7 +30,9 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-helmet-async": "^2.0.5",
-    "react-router-dom": "^6.26.2"
+    "react-hook-form": "^7.53.1",
+    "react-router-dom": "^6.26.2",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.0",
