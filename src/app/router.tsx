@@ -1,75 +1,88 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import { RedirectProvider } from "./providers/redirect-provider";
 import { AdminRoot } from "./routes/admin/root";
 import { AppRoot } from "./routes/app/root";
 import { AuthRoot } from "./routes/auth/root";
 
 const router = createBrowserRouter([
   {
-    path: "/admin",
-    element: <AdminRoot />,
+    path: "/",
+    element: (
+      <RedirectProvider>
+        <Outlet />
+      </RedirectProvider>
+    ),
     children: [
       {
-        path: "users",
-        lazy: async () => {
-          const { UsersRoute } = await import("./routes/admin/users/users");
-          return { Component: UsersRoute };
-        },
+        path: "/admin",
+        element: <AdminRoot />,
+        children: [
+          {
+            path: "users",
+            lazy: async () => {
+              const { UsersRoute } = await import("./routes/admin/users/users");
+              return { Component: UsersRoute };
+            },
+          },
+          {
+            path: "users/:userId",
+            lazy: async () => {
+              const { UserRoute } = await import("./routes/admin/users/user");
+              return { Component: UserRoute };
+            },
+          },
+        ],
       },
       {
-        path: "users/:userId",
-        lazy: async () => {
-          const { UserRoute } = await import("./routes/admin/users/user");
-          return { Component: UserRoute };
-        },
-      },
-    ],
-  },
-  {
-    path: "/app",
-    element: <AppRoot />,
-    children: [
-      {
-        path: ":userId/dashboard",
-        lazy: async () => {
-          const { DashboardRoute } = await import("./routes/app/dashboard");
-          return { Component: DashboardRoute };
-        },
-      },
-      {
-        path: ":userId/thanks/location",
-        lazy: async () => {
-          const { LocationRoute } = await import(
-            "./routes/app/thanks/location"
-          );
-          return { Component: LocationRoute };
-        },
-      },
-      {
-        path: ":userId/thanks/send/:receiveUserId",
-        lazy: async () => {
-          const { SendRoute } = await import("./routes/app/thanks/send");
-          return { Component: SendRoute };
-        },
-      },
-    ],
-  },
-  {
-    path: "/auth",
-    element: <AuthRoot />,
-    children: [
-      {
-        path: "login",
-        lazy: async () => {
-          const { LoginRoute } = await import("./routes/auth/login/login");
-          return { Component: LoginRoute };
-        },
+        path: "/app",
+        element: <AppRoot />,
+        children: [
+          {
+            path: ":userId/dashboard",
+            lazy: async () => {
+              const { DashboardRoute } = await import("./routes/app/dashboard");
+              return { Component: DashboardRoute };
+            },
+          },
+          {
+            path: ":userId/thanks/location",
+            lazy: async () => {
+              const { LocationRoute } = await import(
+                "./routes/app/thanks/location"
+              );
+              return { Component: LocationRoute };
+            },
+          },
+          {
+            path: ":userId/thanks/send/:receiveUserId",
+            lazy: async () => {
+              const { SendRoute } = await import("./routes/app/thanks/send");
+              return { Component: SendRoute };
+            },
+          },
+        ],
       },
       {
-        path: "sign-up",
-        lazy: async () => {
-          const { SignUpRoute } = await import("./routes/auth/sign-up/sign-up");
-          return { Component: SignUpRoute };
-        },
+        path: "/auth",
+        element: <AuthRoot />,
+        children: [
+          {
+            path: "login",
+            lazy: async () => {
+              const { LoginRoute } = await import("./routes/auth/login/login");
+              return { Component: LoginRoute };
+            },
+          },
+          {
+            path: "sign-up",
+            lazy: async () => {
+              const { SignUpRoute } = await import(
+                "./routes/auth/sign-up/sign-up"
+              );
+              return { Component: SignUpRoute };
+            },
+          },
+        ],
       },
     ],
   },
