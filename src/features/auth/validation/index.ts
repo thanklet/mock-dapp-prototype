@@ -8,6 +8,14 @@ const loginSchema = z.object({
   password: z.string().min(8, "Please enter at least 8 characters"),
 });
 
-type LoginSchema = z.infer<typeof loginSchema>;
+const signUpSchema = z
+  .object({
+    username: z.string().min(1, { message: "This field is required" }),
+    termsAndConditions: z.boolean(),
+  })
+  .merge(loginSchema);
 
-export { loginSchema, type LoginSchema };
+type LoginSchema = z.infer<typeof loginSchema>;
+type SignUpSchema = z.infer<typeof signUpSchema>;
+
+export { loginSchema, signUpSchema, type LoginSchema, type SignUpSchema };
