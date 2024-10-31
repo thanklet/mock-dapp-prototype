@@ -4,6 +4,7 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { ReactNode } from "react";
 import { HelmetProvider } from "react-helmet-async";
+import { AuthProvider } from "./auth-provider";
 
 type AppProviderProps = {
   children: ReactNode;
@@ -44,7 +45,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     <ThemeProvider theme={theme}>
       <HelmetProvider>
         <QueryClientProvider client={queryClient}>
-          {children}
+          <AuthProvider>{children}</AuthProvider>
           <ReactQueryDevtools
             initialIsOpen={false}
             buttonPosition="bottom-left"

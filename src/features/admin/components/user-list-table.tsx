@@ -11,6 +11,7 @@ import { Select } from "@/components/ui/form/select";
 import { TextField } from "@/components/ui/form/text-field";
 import { Typography } from "@/components/ui/typography";
 import styles from "@/styles/table.module.css";
+import { path } from "@/utils/path";
 import { Box } from "@mui/material";
 import { IconDotsVertical, IconUpload } from "@tabler/icons-react";
 import {
@@ -85,7 +86,7 @@ export const UserListTable = () => {
       columnHelper.accessor("staff", {
         header: "Staff",
         cell: ({ row }) => (
-          <Link to={`/admin/users/${row.index + 1}`}>
+          <Link to={path.get().admin.users.userId((row.index + 1).toString())}>
             <Box display="flex" gap="16px">
               <Avatar src={row.original.staff.image} alt="staff" />
               <Box>

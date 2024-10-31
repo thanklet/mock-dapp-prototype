@@ -2,6 +2,7 @@ import { LinkButton } from "@/components/ui/link-button";
 import { Typography } from "@/components/ui/typography";
 import { useGetDashboard } from "@/features/app/dashboard/api";
 import type { TransactionHistory } from "@/models/transactionHistories";
+import { path } from "@/utils/path";
 import { CallMade, CallReceived } from "@mui/icons-material";
 import { Box, List, ListItem, Stack } from "@mui/material";
 import { IconHeartCheck } from "@tabler/icons-react";
@@ -25,17 +26,17 @@ export const Dashboard = () => {
   const buttonData = [
     {
       label: "Thanks",
-      to: `/app/${userId}/thanks/location`,
+      to: path.get().app.userId.thanks.location(userId),
       disabled: false,
     },
     {
       label: "Swap",
-      to: `/app/${userId}/swap`,
+      to: path.get().app.userId.swap(userId),
       disabled: true,
     },
     {
       label: "Staking",
-      to: `/app/${userId}/staking`,
+      to: path.get().app.userId.staking(userId),
       disabled: true,
     },
   ];
