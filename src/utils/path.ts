@@ -1,4 +1,4 @@
-export class Path {
+class Path {
   get = () => ({
     home: "/",
     admin: {
@@ -38,3 +38,5 @@ export class Path {
     return pathname.endsWith("/") ? pathname.slice(0, -1) : pathname;
   };
 }
+
+export const path = new Path();

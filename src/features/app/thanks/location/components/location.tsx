@@ -3,7 +3,7 @@ import staff2Url from "@/assets/dummy/2.png";
 import { Avatar } from "@/components/ui/avatar";
 import { Link } from "@/components/ui/link";
 import { Typography } from "@/components/ui/typography";
-import { Path } from "@/utils/path";
+import { path } from "@/utils/path";
 import { Wrapper } from "@googlemaps/react-wrapper";
 import { Box, Stack } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
@@ -41,7 +41,6 @@ export const Location = () => {
   const { userId } = useParams();
   const [mapElement, setMapElement] = useState<HTMLDivElement | null>(null);
   const [map, setMap] = useState<google.maps.Map>();
-  const path = new Path();
 
   const refCallback = useCallback((node: HTMLDivElement) => {
     if (node !== null) {
