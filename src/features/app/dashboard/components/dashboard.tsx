@@ -2,7 +2,7 @@ import { LinkButton } from "@/components/ui/link-button";
 import { Typography } from "@/components/ui/typography";
 import { useGetDashboard } from "@/features/app/dashboard/api";
 import type { TransactionHistory } from "@/models/transactionHistories";
-import { Path } from "@/utils/path";
+import { path } from "@/utils/path";
 import { CallMade, CallReceived } from "@mui/icons-material";
 import { Box, List, ListItem, Stack } from "@mui/material";
 import { IconHeartCheck } from "@tabler/icons-react";
@@ -16,7 +16,6 @@ const getEmoji = (fileName: string): string => {
 
 export const Dashboard = () => {
   const { userId } = useParams();
-  const path = new Path();
 
   const [user, transactionHistories] = useGetDashboard({
     documentId: userId ?? "",
