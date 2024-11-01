@@ -23,6 +23,11 @@ class Path {
         },
       },
     },
+    profile: {
+      top: "/profile",
+      edit: "/profile/edit",
+      qr: "/profile/qr",
+    },
     auth: {
       top: "/auth",
       login: "/auth/login",
