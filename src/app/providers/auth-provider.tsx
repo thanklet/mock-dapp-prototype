@@ -8,10 +8,10 @@ import {
   useState,
 } from "react";
 
-interface AuthContextType {
+type AuthContextType = {
   user: User | null;
   isLoading: boolean;
-}
+};
 
 type Props = PropsWithChildren;
 
