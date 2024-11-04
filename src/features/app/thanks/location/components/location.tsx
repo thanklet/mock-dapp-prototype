@@ -25,17 +25,17 @@ const VIEW_STYLE = {
   height: "calc(100svh - 44px)",
 };
 
-// モック用のダミー位置
-const POSITIONS = [
-  {
-    lat: 35.63146,
-    lng: 139.70384,
-  },
-  {
-    lat: 35.63275,
-    lng: 139.70042,
-  },
-];
+const createRandomPosition = () => {
+  // 中央からランダムに位置を設定
+  const RANDOM_RANGE = 0.005;
+  const isPlus = Math.random() > 0.5;
+  const randomOffset = () => (isPlus ? 1 : -1) * Math.random() * RANDOM_RANGE;
+
+  return {
+    lat: DEFAULT.CENTER.lat + randomOffset(),
+    lng: DEFAULT.CENTER.lng + randomOffset(),
+  };
+};
 
 export const Location = () => {
   const { userId } = useParams();
@@ -50,11 +50,11 @@ export const Location = () => {
 
   const { data: allUsers } = useGetUsers();
   const users = allUsers.docs
-    .map((doc) => ({
+    .map((doc, index) => ({
       ...doc.data(),
       id: doc.id,
-      // TODO: プロトタイプではユーザーが二人しかいないので、こうしているが本来はimage_pathをそのまま使うだけで表示させたい
-      image_path: doc.data().image_path === "staff1" ? staff1Url : staff2Url,
+      // TODO: プロトタイプではimage_pathは仮なので、交互にダミー画像を表示させている
+      image_path: index % 2 === 0 ? staff1Url : staff2Url,
     }))
     .filter((user) => user.id !== userId);
 
@@ -69,8 +69,8 @@ export const Location = () => {
         const googleMap = new window.google.maps.Map(mapElement, option);
         setMap(googleMap);
 
-        const markers = users.map((user, index) => ({
-          position: POSITIONS[index],
+        const markers = users.map((user) => ({
+          position: createRandomPosition(),
           src: user.image_path,
         }));
 
