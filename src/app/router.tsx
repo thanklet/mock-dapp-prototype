@@ -54,6 +54,15 @@ const router = createBrowserRouter([
             },
           },
           {
+            path: ":userId/thanks/search",
+            lazy: async () => {
+              const { SearchRoute } = await import(
+                "./routes/app/thanks/search"
+              );
+              return { Component: SearchRoute };
+            },
+          },
+          {
             path: ":userId/thanks/send/:receiveUserId",
             lazy: async () => {
               const { SendRoute } = await import("./routes/app/thanks/send");
