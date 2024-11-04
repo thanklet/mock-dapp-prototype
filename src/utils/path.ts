@@ -16,6 +16,8 @@ class Path {
         thanks: {
           location: (userId: string | undefined) =>
             `/app/${userId}/thanks/location`,
+          search: (userId: string | undefined) =>
+            `/app/${userId}/thanks/search`,
           send: (
             userId: string | undefined,
             receiveUserId: string | undefined,
