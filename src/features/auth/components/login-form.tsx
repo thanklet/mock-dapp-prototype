@@ -55,6 +55,7 @@ export const LoginForm = () => {
     <form
       className="flex flex-col gap-y-3 max-w-[375px] w-full"
       onSubmit={handleSubmit(handleFormSubmit)}
+      noValidate
     >
       <TextField
         required
