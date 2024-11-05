@@ -14,7 +14,7 @@ export const RedirectProvider = ({ children }: Props) => {
     path.compares(path.get().auth.login, pathname) ||
     path.compares(path.get().auth.signUp, pathname);
 
-  if (isLoading || !user) {
+  if (isLoading) {
     return null;
   }
 
@@ -23,6 +23,9 @@ export const RedirectProvider = ({ children }: Props) => {
   }
   if (user && isAuthPath) {
     return <Navigate to={path.get().app.userId.dashboard(user.uid)} />;
+  }
+  if (!user) {
+    return children;
   }
 
   return <UserProvider user={user}>{children}</UserProvider>;
