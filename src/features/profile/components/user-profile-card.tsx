@@ -25,41 +25,42 @@ export const UserProfileCard = () => {
       <img
         src={profileBannerUrl}
         alt=""
-        className="h-1/2 object-cover"
+        className="absolute inset-0 h-1/2 object-cover"
         aria-hidden
       />
-      <CardContent className="flex flex-col items-center gap-y-5">
-        <Link
-          to={path.get().profile.qr}
-          className="absolute top-4 left-4 hover:opacity-80"
-        >
-          <QrCode
-            fontSize="large"
-            className="text-white"
-            aria-label="Link to QR Code"
-          />
-        </Link>
-        <Link
-          to={path.get().profile.edit}
-          className="flex gap-x-2 items-center absolute top-6 right-4 px-2 py-1 hover:opacity-80"
-        >
-          <Edit
-            aria-labelledby="edit"
-            fontSize="small"
-            className="text-white"
-          />
-          <div id="edit" className="text-white hover:cursor-pointer">
-            Edit
-          </div>
-        </Link>
-        <div className="flex flex-col gap-y-3 items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[20%]">
-          <div className="flex flex-col items-center gap-y-5 border-[5px]  border-white rounded bg-white w-fit">
+      <CardContent className="h-full w-full">
+        <div className="flex justify-between">
+          <Link to={path.get().profile.qr} className="z-10 hover:opacity-80">
+            <QrCode
+              fontSize="large"
+              className="text-white"
+              aria-label="Link to QR Code"
+            />
+          </Link>
+          <Link
+            to={path.get().profile.edit}
+            className="z-10 flex gap-x-2 items-center px-2 py-1 hover:opacity-80"
+          >
+            <Edit
+              aria-labelledby="edit"
+              fontSize="small"
+              className="text-white"
+            />
+            <div id="edit" className="text-white hover:cursor-pointer">
+              Edit
+            </div>
+          </Link>
+        </div>
+        <div className="h-full flex flex-col items-center justify-center gap-y-5 translate-y-8">
+          <div className="flex flex-col items-center gap-y-3">
             <Avatar
               alt="staff1"
               src={staff1Url}
               sx={{
                 width: 120,
                 height: 120,
+                borderWidth: "5px",
+                borderColor: "white",
               }}
               variant="rounded"
             />
