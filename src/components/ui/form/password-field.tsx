@@ -12,6 +12,7 @@ export const PasswordField = forwardRef<HTMLInputElement, TextFieldProps>(
         {...props}
         ref={ref}
         type={shouldShowPassword ? "text" : "password"}
+        placeholder="············"
         endAdornment={
           <InputAdornment position="end">
             <IconButton onClick={() => setShouldShowPassword((prev) => !prev)}>
