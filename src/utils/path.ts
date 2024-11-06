@@ -9,18 +9,13 @@ class Path {
       },
     },
     app: {
-      userId: {
-        dashboard: (userId: string | undefined) => `/app/${userId}/dashboard`,
-        staking: (userId: string | undefined) => `/app/${userId}/staking`,
-        swap: (userId: string | undefined) => `/app/${userId}/swap`,
-        thanks: {
-          location: (userId: string | undefined) =>
-            `/app/${userId}/thanks/location`,
-          send: (
-            userId: string | undefined,
-            receiveUserId: string | undefined,
-          ) => `/app/${userId}/thanks/send/${receiveUserId}`,
-        },
+      dashboard: () => "/app/dashboard",
+      staking: () => "/app/staking",
+      swap: () => "/app/swap",
+      thanks: {
+        location: () => "/app/thanks/location",
+        send: (receiveUserId: string | undefined) =>
+          `/app/thanks/send/${receiveUserId}`,
       },
     },
     profile: {
