@@ -22,7 +22,7 @@ export const RedirectProvider = ({ children }: Props) => {
     return <Navigate to={path.get().auth.login} replace={true} />;
   }
   if (user && isAuthPath) {
-    return <Navigate to={path.get().app.userId.dashboard(user.uid)} />;
+    return <Navigate to={path.get().app.dashboard()} />;
   }
   if (!user) {
     return children;

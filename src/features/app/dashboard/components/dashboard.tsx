@@ -1,3 +1,4 @@
+import { useUser } from "@/app/providers/user-provider";
 import { LinkButton } from "@/components/ui/link-button";
 import { Typography } from "@/components/ui/typography";
 import { useGetDashboard } from "@/features/app/dashboard/api";
@@ -7,7 +8,6 @@ import { CallMade, CallReceived } from "@mui/icons-material";
 import { Box, List, ListItem, Stack } from "@mui/material";
 import { IconHeartCheck } from "@tabler/icons-react";
 import dayjs from "dayjs";
-import { useParams } from "react-router-dom";
 
 const getEmoji = (fileName: string): string => {
   return new URL(`../../../../assets/emoji/${fileName}.svg`, import.meta.url)
@@ -15,10 +15,11 @@ const getEmoji = (fileName: string): string => {
 };
 
 export const Dashboard = () => {
-  const { userId } = useParams();
+  const { user } = useUser();
+  const userId = user.uid;
 
-  const [user, transactionHistories] = useGetDashboard({
-    documentId: userId ?? "",
+  const [userData, transactionHistories] = useGetDashboard({
+    documentId: userId,
   });
   // NOTE: モックなのでユーザー存在しない場合の処理は省略
   // user.data.exists()
@@ -26,22 +27,22 @@ export const Dashboard = () => {
   const buttonData = [
     {
       label: "Thanks",
-      to: path.get().app.userId.thanks.location(userId),
+      to: path.get().app.thanks.location(),
       disabled: false,
     },
     {
       label: "Swap",
-      to: path.get().app.userId.swap(userId),
+      to: path.get().app.swap(),
       disabled: true,
     },
     {
       label: "Staking",
-      to: path.get().app.userId.staking(userId),
+      to: path.get().app.staking(),
       disabled: true,
     },
   ];
 
-  const thanks = user.data.data()?.thanks ?? 0;
+  const thanks = userData.data.data()?.thanks ?? 0;
 
   const histories = transactionHistories.data.docs.map((x) => ({
     id: x.id,

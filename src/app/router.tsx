@@ -39,14 +39,14 @@ const router = createBrowserRouter([
         element: <AppRoot />,
         children: [
           {
-            path: ":userId/dashboard",
+            path: "dashboard",
             lazy: async () => {
               const { DashboardRoute } = await import("./routes/app/dashboard");
               return { Component: DashboardRoute };
             },
           },
           {
-            path: ":userId/thanks/location",
+            path: "thanks/location",
             lazy: async () => {
               const { LocationRoute } = await import(
                 "./routes/app/thanks/location"
@@ -55,7 +55,7 @@ const router = createBrowserRouter([
             },
           },
           {
-            path: ":userId/thanks/send/:receiveUserId",
+            path: "thanks/send/:receiveUserId",
             lazy: async () => {
               const { SendRoute } = await import("./routes/app/thanks/send");
               return { Component: SendRoute };

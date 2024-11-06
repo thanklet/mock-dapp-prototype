@@ -1,5 +1,4 @@
-import staff1Url from "@/assets/dummy/1.png";
-import staff2Url from "@/assets/dummy/2.png";
+import { useUser } from "@/app/providers/user-provider.tsx";
 import emojiHappyUrl from "@/assets/emoji/happy.svg";
 import emojiHelpfulUrl from "@/assets/emoji/helpful.svg";
 import sentUrl from "@/assets/sent.svg";
@@ -9,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Slider } from "@/components/ui/form/slider";
 import { Popover } from "@/components/ui/popover";
 import { Typography } from "@/components/ui/typography";
+import { path } from "@/utils/path.ts";
 import { Add, Remove } from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
 import { useQueryClient } from "@tanstack/react-query";
@@ -38,7 +38,10 @@ type Emoji = {
 };
 
 export const Send = () => {
-  const { userId, receiveUserId } = useParams();
+  const { receiveUserId } = useParams();
+  const { user } = useUser();
+  const userId = user.uid;
+
   const [selectedEmoji, setSelectedEmoji] = useState<Emoji>(EMOJI_DATA[0]);
   const [currentThanksValue, setCurrentThanksValue] = useState<string | null>(
     null,
@@ -62,7 +65,7 @@ export const Send = () => {
     }
   };
 
-  const { data: sendUser } = useGetUser({ documentId: userId ?? "" });
+  const { data: sendUser } = useGetUser({ documentId: userId });
   const { data: receiveUser } = useGetUser({ documentId: receiveUserId ?? "" });
   const sendUserThanks = sendUser.data()?.thanks ?? 0;
 
@@ -80,7 +83,7 @@ export const Send = () => {
     await sendThanks({
       transactionHistory: {
         emoji: selectedEmoji.value,
-        send_user_id: userId ?? "",
+        send_user_id: userId,
         receive_user_id: receiveUserId ?? "",
         thanks: thanks,
         created_at: Timestamp.now(),
@@ -112,10 +115,7 @@ export const Send = () => {
       <Stack alignItems="center" gap={"10px"}>
         <Avatar
           alt={receiveUser.data()?.name}
-          src={
-            // TODO: プロトタイプではユーザーが二人しかいないので、こうしているが本来はimage_pathをそのまま使うだけで表示させたい
-            receiveUser.data()?.image_path === "staff1" ? staff1Url : staff2Url
-          }
+          src={receiveUser.data()?.image_path}
           sx={{
             width: 100,
             height: 100,
@@ -294,7 +294,7 @@ export const Send = () => {
                     variant={"outlined"}
                     size={"large"}
                     color="secondary"
-                    href={`/app/${userId}/dashboard`}
+                    href={path.get().app.dashboard()}
                   >
                     dashboard
                   </Button>
