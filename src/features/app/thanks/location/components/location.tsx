@@ -1,5 +1,4 @@
 import { useUser } from "@/app/providers/user-provider.tsx";
-import staff1Url from "@/assets/dummy/1.png";
 import { Avatar } from "@/components/ui/avatar";
 import { Link } from "@/components/ui/link";
 import { Typography } from "@/components/ui/typography";
@@ -53,8 +52,7 @@ export const Location = () => {
     .map((doc) => ({
       ...doc.data(),
       id: doc.id,
-      // TODO: プロトタイプではアバター編集機能がないので固定表示
-      image_path: staff1Url,
+      image_path: doc.data().image_path,
     }))
     .filter((user) => user.id !== userId);
 

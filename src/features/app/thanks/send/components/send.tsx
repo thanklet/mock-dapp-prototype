@@ -1,6 +1,4 @@
 import { useUser } from "@/app/providers/user-provider.tsx";
-import staff1Url from "@/assets/dummy/1.png";
-import staff2Url from "@/assets/dummy/2.png";
 import emojiHappyUrl from "@/assets/emoji/happy.svg";
 import emojiHelpfulUrl from "@/assets/emoji/helpful.svg";
 import sentUrl from "@/assets/sent.svg";
@@ -117,10 +115,7 @@ export const Send = () => {
       <Stack alignItems="center" gap={"10px"}>
         <Avatar
           alt={receiveUser.data()?.name}
-          src={
-            // TODO: プロトタイプではユーザーが二人しかいないので、こうしているが本来はimage_pathをそのまま使うだけで表示させたい
-            receiveUser.data()?.image_path === "staff1" ? staff1Url : staff2Url
-          }
+          src={receiveUser.data()?.image_path}
           sx={{
             width: 100,
             height: 100,
