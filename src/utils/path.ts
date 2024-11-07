@@ -17,6 +17,7 @@ class Path {
         send: (receiveUserId: string | undefined) =>
           `/app/thanks/send/${receiveUserId}`,
       },
+      wallet: () => "/app/wallet",
     },
     profile: {
       top: "/profile",
