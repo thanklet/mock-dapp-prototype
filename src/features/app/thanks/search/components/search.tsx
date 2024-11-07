@@ -1,5 +1,4 @@
-import staff1Url from "@/assets/dummy/1.png";
-import staff2Url from "@/assets/dummy/2.png";
+import { useUser } from "@/app/providers/user-provider.tsx";
 import { Avatar } from "@/components/ui/avatar";
 import { TextField } from "@/components/ui/form/text-field";
 import { Typography } from "@/components/ui/typography";
@@ -7,20 +6,19 @@ import { path } from "@/utils/path";
 import { Box } from "@mui/material";
 import { Stack } from "@mui/material";
 import { useState } from "react";
-import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useGetUsers } from "../api";
 
 export const Search = () => {
-  const { userId } = useParams();
+  const { user } = useUser();
+  const userId = user.uid;
 
   const { data: allUsers } = useGetUsers();
   const users = allUsers.docs
-    .map((doc, index) => ({
+    .map((doc) => ({
       ...doc.data(),
       id: doc.id,
-      // TODO: プロトタイプではimage_pathは仮なので、交互にダミー画像を表示させている
-      image_path: index % 2 === 0 ? staff1Url : staff2Url,
+      image_path: doc.data().image_path,
     }))
     .filter((user) => user.id !== userId);
 
@@ -59,10 +57,7 @@ export const Search = () => {
             Customers
           </Typography>
           {filteredUsers.map((user) => (
-            <Link
-              to={path.get().app.userId.thanks.send(userId, user.id)}
-              key={user.id}
-            >
+            <Link to={path.get().app.thanks.send(user.id)} key={user.id}>
               <Stack
                 direction="row"
                 alignItems="center"

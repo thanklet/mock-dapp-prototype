@@ -120,10 +120,16 @@ export const Location = () => {
             <Link
               to={path.get().app.thanks.send(x.id)}
               key={x.id}
-              style={{ textDecoration: "none" }}
+              className="text-decoration-none w-20"
             >
-              <Avatar src={x.image_path} sx={{ width: 70, height: 70 }} />
-              <Typography width={"100%"} textAlign="center">
+              <Avatar src={x.image_path} sx={{ width: 80, height: 80 }} />
+              <Typography
+                width={"100%"}
+                textAlign="center"
+                sx={{
+                  wordBreak: "break-word",
+                }}
+              >
                 {x.name}
               </Typography>
             </Link>
