@@ -24,7 +24,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     return (
       <FormControl error={error} disabled={disabled}>
         <FormLabel>
-          <span>{label}</span>
+          <span className="text-[13px]">{label}</span>
           <OutlinedInput
             ref={ref}
             fullWidth
@@ -34,6 +34,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               "& .MuiOutlinedInput-input:-webkit-autofill": {
                 boxShadow: "none",
                 backgroundColor: "white",
+                caretColor: "black",
                 "-webkit-text-fill-color": "black",
               },
               "& .MuiOutlineInput-input:webkit-text-fill-color": {},

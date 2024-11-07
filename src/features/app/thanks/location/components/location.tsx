@@ -1,5 +1,4 @@
-import staff1Url from "@/assets/dummy/1.png";
-import staff2Url from "@/assets/dummy/2.png";
+import { useUser } from "@/app/providers/user-provider.tsx";
 import { Avatar } from "@/components/ui/avatar";
 import { Link } from "@/components/ui/link";
 import { Typography } from "@/components/ui/typography";
@@ -7,7 +6,6 @@ import { path } from "@/utils/path";
 import { Wrapper } from "@googlemaps/react-wrapper";
 import { Box, Stack } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { useGetUsers } from "../api";
 
 const GOOGLE_MAP_API_KEY = import.meta.env.VITE_GOOGLE_MAP_API_KEY as string;
@@ -38,7 +36,8 @@ const createRandomPosition = () => {
 };
 
 export const Location = () => {
-  const { userId } = useParams();
+  const { user } = useUser();
+  const userId = user.uid;
   const [mapElement, setMapElement] = useState<HTMLDivElement | null>(null);
   const [map, setMap] = useState<google.maps.Map>();
 
@@ -50,11 +49,10 @@ export const Location = () => {
 
   const { data: allUsers } = useGetUsers();
   const users = allUsers.docs
-    .map((doc, index) => ({
+    .map((doc) => ({
       ...doc.data(),
       id: doc.id,
-      // TODO: プロトタイプではimage_pathは仮なので、交互にダミー画像を表示させている
-      image_path: index % 2 === 0 ? staff1Url : staff2Url,
+      image_path: doc.data().image_path,
     }))
     .filter((user) => user.id !== userId);
 
@@ -118,15 +116,15 @@ export const Location = () => {
         }}
       >
         <Stack direction="row" flexWrap="wrap" gap={"20px"}>
-          {users.map((user) => (
+          {users.map((x) => (
             <Link
-              to={path.get().app.userId.thanks.send(userId, user.id)}
-              key={user.id}
+              to={path.get().app.thanks.send(x.id)}
+              key={x.id}
               style={{ textDecoration: "none" }}
             >
-              <Avatar src={user.image_path} sx={{ width: 70, height: 70 }} />
+              <Avatar src={x.image_path} sx={{ width: 70, height: 70 }} />
               <Typography width={"100%"} textAlign="center">
-                {user.name}
+                {x.name}
               </Typography>
             </Link>
           ))}

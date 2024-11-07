@@ -3,6 +3,7 @@ import { path } from "@/utils/path";
 import type { PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import { UserProvider } from "./user-provider";
 
 type Props = PropsWithChildren;
 
@@ -21,8 +22,11 @@ export const RedirectProvider = ({ children }: Props) => {
     return <Navigate to={path.get().auth.login} replace={true} />;
   }
   if (user && isAuthPath) {
-    return <Navigate to={path.get().app.userId.dashboard(user.uid)} />;
+    return <Navigate to={path.get().app.dashboard()} />;
+  }
+  if (!user) {
+    return children;
   }
 
-  return children;
+  return <UserProvider user={user}>{children}</UserProvider>;
 };
