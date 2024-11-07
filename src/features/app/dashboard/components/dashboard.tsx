@@ -64,7 +64,7 @@ export const Dashboard = () => {
           </Link>
           <LinkButton
             key="Wallet"
-            to={path.get().app.wallet()}
+            to={path.get().app.wallet}
             variant="contained"
             sx={{
               background: "white",
@@ -104,7 +104,7 @@ export const Dashboard = () => {
         >
           <LinkButton
             key="Thanks"
-            to={path.get().app.thanks.location()}
+            to={path.get().app.thanks.location}
             variant="contained"
             sx={{
               background: "white",

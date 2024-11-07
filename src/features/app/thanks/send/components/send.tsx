@@ -294,7 +294,7 @@ export const Send = () => {
                     variant={"outlined"}
                     size={"large"}
                     color="secondary"
-                    href={path.get().app.dashboard()}
+                    href={path.get().app.dashboard}
                   >
                     dashboard
                   </Button>
