@@ -1,5 +1,4 @@
 import { useUser } from "@/app/providers/user-provider.tsx";
-import staff1Url from "@/assets/dummy/1.png";
 import emojiHappyUrl from "@/assets/emoji/happy.svg";
 import emojiHelpfulUrl from "@/assets/emoji/helpful.svg";
 import sentUrl from "@/assets/sent.svg";
