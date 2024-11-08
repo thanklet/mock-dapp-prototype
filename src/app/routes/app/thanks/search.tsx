@@ -7,9 +7,9 @@ export const SearchRoute = () => {
   const tabs = [
     {
       label: "Map",
-      to: path.get().app.thanks.location(),
+      to: path.get().app.thanks.location,
     },
-    { label: "Search", to: path.get().app.thanks.search() },
+    { label: "Search", to: path.get().app.thanks.search },
   ];
   return (
     <>
