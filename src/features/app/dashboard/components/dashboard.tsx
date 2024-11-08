@@ -10,6 +10,7 @@ import { CallMade, CallReceived } from "@mui/icons-material";
 import { Avatar, Box, List, ListItem, Stack } from "@mui/material";
 import { IconHeartCheck } from "@tabler/icons-react";
 import dayjs from "dayjs";
+import { ThanksCard } from "../../components/ThanksCard";
 
 const getEmoji = (fileName: string): string => {
   return new URL(`../../../../assets/emoji/${fileName}.svg`, import.meta.url)
@@ -43,82 +44,43 @@ export const Dashboard = () => {
 
   return (
     <Stack spacing={"30px"}>
-      <Box
-        sx={{
-          background:
-            "linear-gradient(138.43deg, #B673F1 13.63%, #EF19DD 84.38%)",
-          borderRadius: "8px",
-          padding: "20px 40px 30px",
-          maxWidth: "500px",
-        }}
-      >
-        <Stack direction={"row"} justifyContent={"space-between"} gap={"20px"}>
-          <Link to={path.get().profile.top}>
-            <Avatar
-              src={user?.image_path}
+      <ThanksCard
+        backgroundColor="purple"
+        header={
+          <Stack
+            direction={"row"}
+            justifyContent={"space-between"}
+            gap={"20px"}
+          >
+            <Link to={path.get().profile.top}>
+              <Avatar
+                src={user?.image_path}
+                sx={{
+                  height: "48px",
+                  width: "48px",
+                }}
+              />
+            </Link>
+            <LinkButton
+              key="Wallet"
+              to={path.get().app.wallet}
+              variant="contained"
               sx={{
-                height: "48px",
-                width: "48px",
+                background: "white",
+                color: "black",
+                borderRadius: "20px",
+                pointerEvents: "auto",
+                marginBlock: "auto",
+                paddingInline: "24px",
               }}
-            />
-          </Link>
-          <LinkButton
-            key="Wallet"
-            to={path.get().app.wallet}
-            variant="contained"
-            sx={{
-              background: "white",
-              color: "black",
-              borderRadius: "20px",
-              pointerEvents: "auto",
-              marginBlock: "auto",
-              paddingInline: "24px",
-            }}
-          >
-            Wallet
-          </LinkButton>
-        </Stack>
-        <Typography variant="h1" color={"white"} textAlign={"right"}>
-          <Box
-            component={"span"}
-            fontSize={"80px"}
-            mr={"10px"}
-            fontWeight={"bold"}
-          >
-            {thanks}
-          </Box>
-          <Box
-            component={"span"}
-            fontSize={"40px"}
-            fontWeight={500}
-            letterSpacing={"1px"}
-          >
-            THX
-          </Box>
-        </Typography>
-        <Stack
-          direction={"row"}
-          justifyContent={"center"}
-          gap={"20px"}
-          mt={"30px"}
-        >
-          <LinkButton
-            key="Thanks"
-            to={path.get().app.thanks.location}
-            variant="contained"
-            sx={{
-              background: "white",
-              color: "black",
-              borderRadius: "20px",
-              pointerEvents: "auto",
-              paddingInline: "24px",
-            }}
-          >
-            Thanks
-          </LinkButton>
-        </Stack>
-      </Box>
-
+            >
+              Wallet
+            </LinkButton>
+          </Stack>
+        }
+        thanks={thanks}
+        linkButtons={[{ label: "Thanks", to: path.get().app.thanks.location }]}
+      />
       {latestReceiveHistory && (
         <LatestReceive {...latestReceiveHistory.data()} />
       )}
