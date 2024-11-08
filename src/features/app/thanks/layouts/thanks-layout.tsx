@@ -1,9 +1,10 @@
 import { LinkTabs } from "@/components/ui/link-tabs";
+import { path } from "@/utils/path";
 import { ArrowBackIos } from "@mui/icons-material";
 import { Stack } from "@mui/material";
 import { Typography } from "@mui/material";
 import type { ComponentProps, ReactNode } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type ThanksLayoutProps = {
   label: string;
@@ -16,8 +17,6 @@ export const ThanksLayout = ({
   children,
   linkTabsProps,
 }: ThanksLayoutProps) => {
-  const navigate = useNavigate();
-
   return (
     <>
       <Stack
@@ -28,9 +27,9 @@ export const ThanksLayout = ({
         }}
       >
         <Stack direction="row" alignItems="center">
-          <button onClick={() => navigate(-1)} type="button">
+          <Link to={path.get().app.dashboard}>
             <ArrowBackIos sx={{ fontSize: "16px" }} />
-          </button>
+          </Link>
           <Typography
             sx={{
               fontSize: "16px",
