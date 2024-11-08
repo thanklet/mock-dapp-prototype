@@ -23,17 +23,17 @@ const VIEW_STYLE = {
   height: "calc(100svh - 44px)",
 };
 
-// モック用のダミー位置
-const POSITIONS = [
-  {
-    lat: 35.63146,
-    lng: 139.70384,
-  },
-  {
-    lat: 35.63275,
-    lng: 139.70042,
-  },
-];
+const createRandomPosition = () => {
+  // 中央からランダムに位置を設定
+  const RANDOM_RANGE = 0.005;
+  const isPlus = Math.random() > 0.5;
+  const randomOffset = () => (isPlus ? 1 : -1) * Math.random() * RANDOM_RANGE;
+
+  return {
+    lat: DEFAULT.CENTER.lat + randomOffset(),
+    lng: DEFAULT.CENTER.lng + randomOffset(),
+  };
+};
 
 export const Location = () => {
   const { user } = useUser();
@@ -67,8 +67,8 @@ export const Location = () => {
         const googleMap = new window.google.maps.Map(mapElement, option);
         setMap(googleMap);
 
-        const markers = users.map((user, index) => ({
-          position: POSITIONS[index],
+        const markers = users.map((user) => ({
+          position: createRandomPosition(),
           src: user.image_path,
         }));
 
@@ -109,21 +109,27 @@ export const Location = () => {
           backgroundColor: "white",
           maxHeight: "200px",
           overflow: "auto",
-          padding: "30px 20px",
+          padding: "30px",
           borderTopLeftRadius: "20px",
           borderTopRightRadius: "20px",
           boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Stack direction="row" flexWrap="wrap" gap={"20px"}>
+        <Stack direction="row" flexWrap="wrap" gap={"24px"}>
           {users.map((x) => (
             <Link
               to={path.get().app.thanks.send(x.id)}
               key={x.id}
-              style={{ textDecoration: "none" }}
+              className="text-decoration-none w-20"
             >
-              <Avatar src={x.image_path} sx={{ width: 70, height: 70 }} />
-              <Typography width={"100%"} textAlign="center">
+              <Avatar src={x.image_path} sx={{ width: 80, height: 80 }} />
+              <Typography
+                width={"100%"}
+                textAlign="center"
+                sx={{
+                  wordBreak: "break-word",
+                }}
+              >
                 {x.name}
               </Typography>
             </Link>

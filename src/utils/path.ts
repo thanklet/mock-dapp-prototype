@@ -14,6 +14,7 @@ class Path {
       swap: "/app/swap",
       thanks: {
         location: "/app/thanks/location",
+        search: "/app/thanks/search",
         send: (receiveUserId: string | undefined) =>
           `/app/thanks/send/${receiveUserId}`,
       },
