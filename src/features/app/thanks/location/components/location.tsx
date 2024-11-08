@@ -109,13 +109,13 @@ export const Location = () => {
           backgroundColor: "white",
           maxHeight: "200px",
           overflow: "auto",
-          padding: "30px 20px",
+          padding: "30px",
           borderTopLeftRadius: "20px",
           borderTopRightRadius: "20px",
           boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Stack direction="row" flexWrap="wrap" gap={"20px"}>
+        <Stack direction="row" flexWrap="wrap" gap={"24px"}>
           {users.map((x) => (
             <Link
               to={path.get().app.thanks.send(x.id)}
