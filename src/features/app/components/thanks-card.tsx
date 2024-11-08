@@ -4,7 +4,7 @@ import { Box, Stack } from "@mui/material";
 import type { ReactNode } from "react";
 
 type Color = "blue" | "green" | "purple";
-type Props = {
+type ThanksCardProps = {
   backgroundColor: Color;
   header: ReactNode;
   thanks: number;
@@ -37,7 +37,7 @@ export const ThanksCard = ({
   header,
   thanks,
   linkButtons,
-}: Props) => {
+}: ThanksCardProps) => {
   return (
     <Box
       sx={{

@@ -10,7 +10,7 @@ import { CallMade, CallReceived } from "@mui/icons-material";
 import { Avatar, Box, List, ListItem, Stack } from "@mui/material";
 import { IconHeartCheck } from "@tabler/icons-react";
 import dayjs from "dayjs";
-import { ThanksCard } from "../../components/ThanksCard";
+import { ThanksCard } from "../../components/thanks-card";
 
 const getEmoji = (fileName: string): string => {
   return new URL(`../../../../assets/emoji/${fileName}.svg`, import.meta.url)
@@ -43,7 +43,7 @@ export const Dashboard = () => {
   );
 
   return (
-    <Stack spacing={"30px"}>
+    <Stack spacing={"30px"} width={"100%"}>
       <ThanksCard
         backgroundColor="purple"
         header={
