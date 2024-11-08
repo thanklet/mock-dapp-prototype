@@ -9,15 +9,16 @@ class Path {
       },
     },
     app: {
-      dashboard: () => "/app/dashboard",
-      staking: () => "/app/staking",
-      swap: () => "/app/swap",
+      dashboard: "/app/dashboard",
+      staking: "/app/staking",
+      swap: "/app/swap",
       thanks: {
-        location: () => "/app/thanks/location",
-        search: () => "/app/thanks/search",
+        location: "/app/thanks/location",
+        search: "/app/thanks/search",
         send: (receiveUserId: string | undefined) =>
           `/app/thanks/send/${receiveUserId}`,
       },
+      wallet: "/app/wallet",
     },
     profile: {
       top: "/profile",
