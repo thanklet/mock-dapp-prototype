@@ -61,6 +61,36 @@ const router = createBrowserRouter([
               return { Component: SendRoute };
             },
           },
+          {
+            path: "wallet",
+            children: [
+              {
+                path: "transfer",
+                lazy: async () => {
+                  const { TransferRoute } = await import(
+                    "./routes/app/wallet/transfer"
+                  );
+                  return { Component: TransferRoute };
+                },
+              },
+              {
+                path: "staking",
+                lazy: async () => {
+                  const { StakingRoute } = await import(
+                    "./routes/app/wallet/staking"
+                  );
+                  return { Component: StakingRoute };
+                },
+              },
+              {
+                path: "buy",
+                lazy: async () => {
+                  const { BuyRoute } = await import("./routes/app/wallet/buy");
+                  return { Component: BuyRoute };
+                },
+              },
+            ],
+          },
         ],
       },
       {

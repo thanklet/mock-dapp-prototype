@@ -17,7 +17,11 @@ class Path {
         send: (receiveUserId: string | undefined) =>
           `/app/thanks/send/${receiveUserId}`,
       },
-      wallet: "/app/wallet",
+      wallet: {
+        transfer: "/app/wallet/transfer",
+        staking: "/app/wallet/staking",
+        buy: "/app/wallet/buy",
+      },
     },
     profile: {
       top: "/profile",
