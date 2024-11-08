@@ -56,21 +56,28 @@ export const Search = () => {
           >
             Customers
           </Typography>
-          {filteredUsers.map((user) => (
-            <Link to={path.get().app.thanks.send(user.id)} key={user.id}>
-              <Stack
-                direction="row"
-                alignItems="center"
-                gap={3}
-                py={2}
-                borderTop={1}
-                borderColor="divider"
-              >
-                <Avatar src={user.image_path} sx={{ width: 50, height: 50 }} />
-                <Typography>{user.name}</Typography>
-              </Stack>
-            </Link>
-          ))}
+          {filteredUsers.length > 0 ? (
+            filteredUsers.map((user) => (
+              <Link to={path.get().app.thanks.send(user.id)} key={user.id}>
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  gap={3}
+                  py={2}
+                  borderTop={1}
+                  borderColor="divider"
+                >
+                  <Avatar
+                    src={user.image_path}
+                    sx={{ width: 50, height: 50 }}
+                  />
+                  <Typography>{user.name}</Typography>
+                </Stack>
+              </Link>
+            ))
+          ) : (
+            <Typography>No users found</Typography>
+          )}
         </Stack>
       </Stack>
     </Box>
