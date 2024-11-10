@@ -112,6 +112,15 @@ const router = createBrowserRouter([
                   return { Component: DigitalGiftRoute };
                 },
               },
+              {
+                path: "exchange/token",
+                lazy: async () => {
+                  const { TokenRoute } = await import(
+                    "./routes/app/crypto-wallet/exchange/token"
+                  );
+                  return { Component: TokenRoute };
+                },
+              },
             ],
           },
         ],
