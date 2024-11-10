@@ -1,5 +1,6 @@
 import { useUser } from "@/app/providers/user-provider";
 import { Button } from "@/components/ui/button";
+import { Pulldown } from "@/components/ui/form/pulldown";
 import { TextField } from "@/components/ui/form/text-field";
 import { LinkTabs } from "@/components/ui/link-tabs";
 import { useGetUser } from "@/features/profile/api";
@@ -7,6 +8,7 @@ import { path } from "@/utils/path";
 import { Box, Stack } from "@mui/material";
 import type { FormEvent } from "react";
 import { ThanksCard } from "../../../components/thanks-card";
+import { REGION_OPTIONS } from "../../constants";
 import { CardHeader } from "../card-header";
 
 export const DigitalGift = () => {
@@ -66,14 +68,13 @@ export const DigitalGift = () => {
           />
         </Box>
 
-        <form onSubmit={handleFormSubmit} className="flex flex-col gap-y-8">
-          <div>
-            <TextField
-              label="Estimated price"
-              placeholder="SOL 0.00000000"
-              disabled
-            />
-          </div>
+        <form onSubmit={handleFormSubmit} className="flex flex-col gap-y-4">
+          <Pulldown label="Select region" items={REGION_OPTIONS} />
+          <TextField
+            label="Estimated price"
+            placeholder="SOL 0.00000000"
+            disabled
+          />
           <div className="flex justify-center">
             <Button
               type="submit"
