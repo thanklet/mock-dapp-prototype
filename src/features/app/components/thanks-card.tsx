@@ -4,14 +4,15 @@ import { Box, Stack } from "@mui/material";
 import type { ReactNode } from "react";
 
 type Color = "blue" | "green" | "purple";
-type Props = {
+type ThanksCardProps = {
   backgroundColor: Color;
-  header: ReactNode;
   thanks: number;
   linkButtons: {
     label: string;
     to: string;
+    isCurrentPage?: boolean;
   }[];
+  header?: ReactNode;
 };
 
 const getBackgroundColor = (color: Color) => {
@@ -37,7 +38,7 @@ export const ThanksCard = ({
   header,
   thanks,
   linkButtons,
-}: Props) => {
+}: ThanksCardProps) => {
   return (
     <Box
       sx={{
@@ -45,6 +46,11 @@ export const ThanksCard = ({
         borderRadius: "8px",
         padding: "20px 40px 30px",
         maxWidth: "500px",
+        minHeight: "280px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "end",
+        width: "100%",
       }}
     >
       {header}
@@ -54,6 +60,7 @@ export const ThanksCard = ({
           fontSize={"80px"}
           mr={"10px"}
           fontWeight={"bold"}
+          letterSpacing={"2px"}
         >
           {thanks}
         </Box>
@@ -72,17 +79,18 @@ export const ThanksCard = ({
         gap={"20px"}
         mt={"30px"}
       >
-        {linkButtons.map(({ label, to }) => (
+        {linkButtons.map(({ label, to, isCurrentPage }) => (
           <LinkButton
             key="Thanks"
             to={to}
-            variant="contained"
+            variant="outlined"
             sx={{
               background: "white",
               color: "black",
               borderRadius: "20px",
               pointerEvents: "auto",
               paddingInline: "24px",
+              border: isCurrentPage ? "2px solid primary" : "none",
             }}
           >
             {label}
