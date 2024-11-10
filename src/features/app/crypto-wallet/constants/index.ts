@@ -1,3 +1,8 @@
+import amazon from "@/assets/amazon.png";
+import apple from "@/assets/apple.svg";
+import google from "@/assets/google.svg";
+import paypal from "@/assets/paypal.svg";
+
 const REGION_OPTIONS = [
   { children: "Japan(JP)", value: "JP" },
   { children: "United States(US)", value: "US" },
@@ -18,4 +23,11 @@ const VALUE_OPTIONS = [
   { children: "KRW", value: "KRW" },
 ];
 
-export { REGION_OPTIONS, VALUE_OPTIONS };
+const DIGITAL_GIFT_OPTIONS = [
+  { value: "amazon", image: amazon },
+  { value: "paypal", image: paypal },
+  { value: "apple", image: apple },
+  { value: "google", image: google },
+];
+
+export { REGION_OPTIONS, VALUE_OPTIONS, DIGITAL_GIFT_OPTIONS };

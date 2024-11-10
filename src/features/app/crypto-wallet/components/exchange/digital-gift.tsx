@@ -1,5 +1,6 @@
 import { useUser } from "@/app/providers/user-provider";
 import { Button } from "@/components/ui/button";
+import { ImageRadioGroup } from "@/components/ui/form/image-radio-group";
 import { Pulldown } from "@/components/ui/form/pulldown";
 import { TextField } from "@/components/ui/form/text-field";
 import { TextFieldPulldown } from "@/components/ui/form/text-field-pulldown";
@@ -9,7 +10,11 @@ import { path } from "@/utils/path";
 import { Box, Stack } from "@mui/material";
 import type { FormEvent } from "react";
 import { ThanksCard } from "../../../components/thanks-card";
-import { REGION_OPTIONS, VALUE_OPTIONS } from "../../constants";
+import {
+  DIGITAL_GIFT_OPTIONS,
+  REGION_OPTIONS,
+  VALUE_OPTIONS,
+} from "../../constants";
 import { CardHeader } from "../card-header";
 
 export const DigitalGift = () => {
@@ -70,6 +75,7 @@ export const DigitalGift = () => {
         </Box>
 
         <form onSubmit={handleFormSubmit} className="flex flex-col gap-y-4">
+          <ImageRadioGroup items={DIGITAL_GIFT_OPTIONS} />
           <Pulldown label="Select region" items={REGION_OPTIONS} />
           <TextFieldPulldown
             label="Select value"
