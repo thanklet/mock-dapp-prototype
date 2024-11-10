@@ -6,6 +6,7 @@ import { path } from "@/utils/path";
 import { Stack } from "@mui/material";
 import type { FormEvent } from "react";
 import { ThanksCard } from "../../../components/thanks-card";
+import { CardHeader } from "../card-header";
 
 export const DigitalGift = () => {
   const { user: authorizedUser } = useUser();
@@ -45,6 +46,7 @@ export const DigitalGift = () => {
               isCurrentPage: true,
             },
           ]}
+          header={<CardHeader />}
         />
 
         <form onSubmit={handleFormSubmit} className="flex flex-col gap-y-8">
