@@ -1,5 +1,5 @@
+import { WalletLayout } from "@/features/app/layouts/wallet-layout";
 import { Staking } from "@/features/app/wallet/components/staking";
-import { WalletLayout } from "@/features/app/wallet/layouts/wallet-layout";
 
 export const StakingRoute = () => {
   return (

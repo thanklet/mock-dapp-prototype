@@ -23,6 +23,15 @@ class Path {
         staking: "/app/wallet/staking",
         buy: "/app/wallet/buy",
       },
+      cryptoWallet: {
+        transfer: "/app/crypto-wallet/transfer",
+        swap: "/app/crypto-wallet/swap",
+        exchange: {
+          digitalGift: "/app/crypto-wallet/exchange/digital-gift",
+          token: "/app/crypto-wallet/exchange/token",
+          complete: "/app/crypto-wallet/exchange/complete",
+        },
+      },
     },
     profile: {
       top: "/profile",

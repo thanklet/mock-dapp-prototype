@@ -100,6 +100,20 @@ const router = createBrowserRouter([
               },
             ],
           },
+          {
+            path: "crypto-wallet",
+            children: [
+              {
+                path: "exchange/digital-gift",
+                lazy: async () => {
+                  const { DigitalGiftRoute } = await import(
+                    "./routes/app/crypto-wallet/exchange/digital-gift"
+                  );
+                  return { Component: DigitalGiftRoute };
+                },
+              },
+            ],
+          },
         ],
       },
       {
