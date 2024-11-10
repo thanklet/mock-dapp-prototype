@@ -121,6 +121,15 @@ const router = createBrowserRouter([
                   return { Component: TokenRoute };
                 },
               },
+              {
+                path: "exchange/complete",
+                lazy: async () => {
+                  const { CompleteRoute } = await import(
+                    "./routes/app/crypto-wallet/exchange/complete"
+                  );
+                  return { Component: CompleteRoute };
+                },
+              },
             ],
           },
         ],
