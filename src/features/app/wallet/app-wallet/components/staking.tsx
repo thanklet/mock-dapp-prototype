@@ -27,8 +27,9 @@ export const Staking = () => {
       display={"flex"}
       flexDirection={"column"}
       alignItems={"center"}
+      maxWidth={"500px"}
     >
-      <div className="flex flex-col gap-y-16 w-fit">
+      <div className="flex flex-col gap-y-16 w-full">
         <ThanksCard
           backgroundColor="green"
           thanks={thanks}
