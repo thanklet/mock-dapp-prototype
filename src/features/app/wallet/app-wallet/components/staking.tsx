@@ -1,11 +1,12 @@
 import { useUser } from "@/app/providers/user-provider";
+import tokenLogoUrl from "@/assets/token-logo.svg";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/form/checkbox";
 import { FormControlLabel } from "@/components/ui/form/form-control-label";
 import { TextField } from "@/components/ui/form/text-field";
 import { useGetUser } from "@/features/profile/api";
 import { path } from "@/utils/path";
-import { Stack } from "@mui/material";
+import { InputAdornment, Stack } from "@mui/material";
 import type { FormEvent } from "react";
 import { ThanksCard } from "../../../components/thanks-card";
 
@@ -45,7 +46,15 @@ export const Staking = () => {
         />
 
         <form onSubmit={handleFormSubmit}>
-          <TextField label="Spend" placeholder="100" />
+          <TextField
+            label="Spend"
+            placeholder="100"
+            endAdornment={
+              <InputAdornment position="end">
+                <img src={tokenLogoUrl} alt="" height={24} width={24} />
+              </InputAdornment>
+            }
+          />
           <dl className="text-[hsla(0,0%,0%,0.48)] mt-2 mb-4 flex gap-x-2">
             <dt className="after:content-[':']">amount</dt>
             <dd>{thanks}thx</dd>

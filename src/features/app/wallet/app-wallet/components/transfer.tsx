@@ -1,10 +1,11 @@
 import { useUser } from "@/app/providers/user-provider";
+import tokenLogoUrl from "@/assets/token-logo.svg";
 import { Button } from "@/components/ui/button";
 import { TextField } from "@/components/ui/form/text-field";
 import { LinkTabs } from "@/components/ui/link-tabs";
 import { useGetUser } from "@/features/profile/api";
 import { path } from "@/utils/path";
-import { Box, Stack } from "@mui/material";
+import { Box, InputAdornment, Stack } from "@mui/material";
 import type { FormEvent } from "react";
 import { ThanksCard } from "../../../components/thanks-card";
 import { WALLET_MAP, WALLET_OPTIONS } from "../../constants";
@@ -73,7 +74,15 @@ export const Transfer = () => {
             <div className="font-semibold mb-1">
               {`${WALLET_OPTIONS.find((option) => option.value === WALLET_MAP.APP_WALLET)?.label} > ${WALLET_OPTIONS.find((option) => option.value === WALLET_MAP.CRYPTO_WALLET)?.label}`}
             </div>
-            <TextField className="w-full" placeholder="100" />
+            <TextField
+              className="w-full"
+              placeholder="100"
+              endAdornment={
+                <InputAdornment position="end">
+                  <img src={tokenLogoUrl} alt="" height={24} width={24} />
+                </InputAdornment>
+              }
+            />
           </div>
           <div className="flex justify-center">
             <Button
