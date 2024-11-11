@@ -4,7 +4,7 @@ import { TextField } from "@/components/ui/form/text-field";
 import { LinkTabs } from "@/components/ui/link-tabs";
 import { useGetUser } from "@/features/profile/api";
 import { path } from "@/utils/path";
-import { Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import type { FormEvent } from "react";
 import { ThanksCard } from "../../../components/thanks-card";
 import { WALLET_MAP, WALLET_OPTIONS } from "../../constants";
@@ -43,7 +43,7 @@ export const Transfer = () => {
       flexDirection={"column"}
       alignItems={"center"}
     >
-      <div className="flex flex-col max-w-[500px] w-full">
+      <div className="flex flex-col gap-y-4 max-w-[500px] w-full">
         <ThanksCard
           backgroundColor="green"
           thanks={thanks}
@@ -61,7 +61,9 @@ export const Transfer = () => {
           ]}
         />
 
-        <LinkTabs tabs={tabs} value={tabs.at(0)?.to} />
+        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <LinkTabs tabs={tabs} value={tabs.at(0)?.to} />
+        </Box>
 
         <form
           onSubmit={handleFormSubmit}
