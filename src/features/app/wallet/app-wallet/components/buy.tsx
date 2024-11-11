@@ -3,7 +3,7 @@ import { LinkButton } from "@/components/ui/link-button";
 import { useGetUser } from "@/features/profile/api";
 import { path } from "@/utils/path";
 import { Box, Stack } from "@mui/material";
-import { ThanksCard } from "../../components/thanks-card";
+import { ThanksCard } from "../../../components/thanks-card";
 
 export const Buy = () => {
   const { user: authorizedUser } = useUser();
@@ -25,9 +25,13 @@ export const Buy = () => {
         backgroundColor="green"
         thanks={thanks}
         linkButtons={[
-          { label: "Transfer", to: path.get().app.wallet.transfer },
-          { label: "Staking", to: path.get().app.wallet.staking },
-          { label: "Buy", to: path.get().app.wallet.buy, isCurrentPage: true },
+          { label: "Transfer", to: path.get().app.wallet.appWallet.transfer },
+          { label: "Staking", to: path.get().app.wallet.appWallet.staking },
+          {
+            label: "Buy",
+            to: path.get().app.wallet.appWallet.buy,
+            isCurrentPage: true,
+          },
         ]}
       />
 

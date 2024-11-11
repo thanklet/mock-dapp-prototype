@@ -20,6 +20,9 @@ export const LinkTabs = forwardRef<HTMLDivElement, LinkTabsProps>(
             to={tab.to}
             label={tab.label}
             value={tab.to}
+            sx={{
+              textTransform: "none",
+            }}
           />
         ))}
       </Tabs>
