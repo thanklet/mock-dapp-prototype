@@ -1,9 +1,9 @@
 import { Head } from "@/components/seo/head";
 import { ThanksLayout } from "@/features/app/thanks/layouts/thanks-layout";
-import { Location } from "@/features/app/thanks/location/components/location";
+import { Search } from "@/features/app/thanks/search/components/search";
 import { path } from "@/utils/path";
 
-export const LocationRoute = () => {
+export const SearchRoute = () => {
   const tabs = [
     {
       label: "Map",
@@ -13,12 +13,9 @@ export const LocationRoute = () => {
   ];
   return (
     <>
-      <Head title={"Location"} />
-      <ThanksLayout
-        label="Location"
-        linkTabsProps={{ tabs, value: tabs[0].to }}
-      >
-        <Location />
+      <Head title={"Search"} />
+      <ThanksLayout label="Search" linkTabsProps={{ tabs, value: tabs[1].to }}>
+        <Search />
       </ThanksLayout>
     </>
   );
