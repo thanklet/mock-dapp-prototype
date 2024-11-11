@@ -8,7 +8,7 @@ import { path } from "@/utils/path";
 import { Box, InputAdornment, Stack } from "@mui/material";
 import type { FormEvent } from "react";
 import { ThanksCard } from "../../../components/thanks-card";
-import { WALLET_MAP, WALLET_OPTIONS } from "../../constants";
+import { WalletEnum, walletOptions } from "../../constants";
 
 export const Transfer = () => {
   const { user: authorizedUser } = useUser();
@@ -18,14 +18,14 @@ export const Transfer = () => {
 
   const tabs = [
     {
-      label: WALLET_OPTIONS.find(
-        (option) => option.value === WALLET_MAP.APP_WALLET,
+      label: walletOptions.find(
+        (option) => option.value === WalletEnum.APP_WALLET,
       )?.label as string,
       to: path.get().app.wallet.appWallet.transfer,
     },
     {
-      label: WALLET_OPTIONS.find(
-        (option) => option.value === WALLET_MAP.CRYPTO_WALLET,
+      label: walletOptions.find(
+        (option) => option.value === WalletEnum.CRYPTO_WALLET,
       )?.label as string,
       to: path.get().app.wallet.cryptWallet.transfer,
     },
@@ -72,7 +72,7 @@ export const Transfer = () => {
         >
           <div>
             <div className="font-semibold mb-1">
-              {`${WALLET_OPTIONS.find((option) => option.value === WALLET_MAP.APP_WALLET)?.label} > ${WALLET_OPTIONS.find((option) => option.value === WALLET_MAP.CRYPTO_WALLET)?.label}`}
+              {`${walletOptions.find((option) => option.value === WalletEnum.APP_WALLET)?.label} > ${walletOptions.find((option) => option.value === WalletEnum.CRYPTO_WALLET)?.label}`}
             </div>
             <TextField
               className="w-full"
