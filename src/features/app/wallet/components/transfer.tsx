@@ -4,25 +4,11 @@ import { TextField } from "@/components/ui/form/text-field";
 import { useGetUser } from "@/features/profile/api";
 import { path } from "@/utils/path";
 import { Stack } from "@mui/material";
-import { type FormEvent, useState } from "react";
+import type { FormEvent } from "react";
 import { ThanksCard } from "../../components/thanks-card";
 import { WALLET_MAP, WALLET_OPTIONS } from "../constants";
 
 export const Transfer = () => {
-  const [selectedWallet] = useState<
-    (typeof WALLET_MAP)[keyof typeof WALLET_MAP]
-  >(WALLET_MAP.APP_WALLET);
-  const selectedWalletLabel = WALLET_OPTIONS.find(
-    (wallet) => wallet.value === selectedWallet,
-  )?.label;
-  const otherWalletLabel = WALLET_OPTIONS.find(
-    (wallet) =>
-      wallet.value ===
-      (selectedWallet === WALLET_MAP.APP_WALLET
-        ? WALLET_MAP.APP_WALLET
-        : WALLET_MAP.CRYPTO_WALLET),
-  )?.label;
-
   const { user: authorizedUser } = useUser();
   const { data } = useGetUser({ documentId: authorizedUser.uid });
   const user = data.data();
@@ -63,9 +49,8 @@ export const Transfer = () => {
 
         <form onSubmit={handleFormSubmit} className="flex flex-col gap-y-8">
           <div>
-            {/* TODO: 選択中の wallet に応じて、表示を切り替る。 */}
             <div className="font-semibold mb-1">
-              {`${selectedWalletLabel} > ${otherWalletLabel}`}
+              {`${WALLET_OPTIONS.find((option) => option.value === WALLET_MAP.APP_WALLET)?.label} > ${WALLET_OPTIONS.find((option) => option.value === WALLET_MAP.CRYPTO_WALLET)?.label}`}
             </div>
             <TextField className="w-full" placeholder="100" />
           </div>
