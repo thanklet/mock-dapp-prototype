@@ -6,21 +6,21 @@ import { path } from "@/utils/path";
 import { Stack } from "@mui/material";
 import { type FormEvent, useState } from "react";
 import { ThanksCard } from "../../components/thanks-card";
-import { WalletEnum, walletOptions } from "../constants";
+import { WALLET_MAP, WALLET_OPTIONS } from "../constants";
 
 export const Transfer = () => {
   const [selectedWallet] = useState<
-    (typeof WalletEnum)[keyof typeof WalletEnum]
-  >(WalletEnum.APP_WALLET);
-  const selectedWalletLabel = walletOptions.find(
+    (typeof WALLET_MAP)[keyof typeof WALLET_MAP]
+  >(WALLET_MAP.APP_WALLET);
+  const selectedWalletLabel = WALLET_OPTIONS.find(
     (wallet) => wallet.value === selectedWallet,
   )?.label;
-  const otherWalletLabel = walletOptions.find(
+  const otherWalletLabel = WALLET_OPTIONS.find(
     (wallet) =>
       wallet.value ===
-      (selectedWallet === WalletEnum.APP_WALLET
-        ? WalletEnum.APP_WALLET
-        : WalletEnum.CRYPTO_WALLET),
+      (selectedWallet === WALLET_MAP.APP_WALLET
+        ? WALLET_MAP.APP_WALLET
+        : WALLET_MAP.CRYPTO_WALLET),
   )?.label;
 
   const { user: authorizedUser } = useUser();

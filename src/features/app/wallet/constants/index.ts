@@ -1,14 +1,14 @@
-const WalletEnum = {
+const WALLET_MAP = {
   APP_WALLET: 1,
   CRYPTO_WALLET: 2,
 } as const;
 
-const walletOptions = [
-  { value: WalletEnum.APP_WALLET, label: "app wallet" },
+const WALLET_OPTIONS = [
+  { value: WALLET_MAP.APP_WALLET, label: "app wallet" },
   {
-    value: WalletEnum.CRYPTO_WALLET,
+    value: WALLET_MAP.CRYPTO_WALLET,
     label: "crypt wallet",
   },
 ] as const;
 
-export { WalletEnum, walletOptions };
+export { WALLET_MAP, WALLET_OPTIONS };
