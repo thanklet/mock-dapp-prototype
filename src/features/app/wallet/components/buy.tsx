@@ -54,7 +54,6 @@ export const Buy = () => {
         <LinkButton
           // TODO: リンク先をStripeの購入ページに変更する
           to="#"
-          type="button"
           variant="contained"
           sx={{
             display: "flex",
