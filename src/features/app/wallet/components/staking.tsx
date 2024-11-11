@@ -1,10 +1,11 @@
 import { useUser } from "@/app/providers/user-provider";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/form/checkbox";
+import { FormControlLabel } from "@/components/ui/form/form-control-label";
 import { TextField } from "@/components/ui/form/text-field";
 import { useGetUser } from "@/features/profile/api";
 import { path } from "@/utils/path";
-import { FormControlLabel, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import type { FormEvent } from "react";
 import { ThanksCard } from "../../components/thanks-card";
 
