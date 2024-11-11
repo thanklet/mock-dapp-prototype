@@ -22,8 +22,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     ref,
   ) {
     return (
-      <FormControl error={error} disabled={disabled}>
-        <FormLabel>
+      <FormControl error={error} disabled={disabled} className="w-full">
+        <FormLabel className="w-full flex flex-col">
           <span className="text-[13px]">{label}</span>
           <OutlinedInput
             ref={ref}
