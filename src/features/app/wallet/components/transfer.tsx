@@ -28,7 +28,7 @@ export const Transfer = () => {
   const user = data.data();
   const thanks = user?.thanks ?? 0;
 
-  const handleFormSubmit = (e: FormEvent<HTMLButtonElement>) => {
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     // NOTE: モックなので何もしない
     e.preventDefault();
   };
@@ -61,7 +61,7 @@ export const Transfer = () => {
 
         {/* TODO: タブリンクを表示する */}
 
-        <form className="flex flex-col gap-y-8">
+        <form onSubmit={handleFormSubmit} className="flex flex-col gap-y-8">
           <div>
             {/* TODO: 選択中の wallet に応じて、表示を切り替る。 */}
             <div className="font-semibold mb-1">
@@ -73,7 +73,6 @@ export const Transfer = () => {
             <Button
               type="submit"
               variant="contained"
-              onSubmit={handleFormSubmit}
               sx={{
                 display: "flex",
                 flexDirection: "column",

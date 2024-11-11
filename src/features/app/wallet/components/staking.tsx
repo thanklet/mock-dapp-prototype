@@ -14,7 +14,7 @@ export const Staking = () => {
   const user = data.data();
   const thanks = user?.thanks ?? 0;
 
-  const handleFormSubmit = (e: FormEvent<HTMLButtonElement>) => {
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     // NOTE: モックなので何もしない
     e.preventDefault();
   };
@@ -42,7 +42,7 @@ export const Staking = () => {
           ]}
         />
 
-        <form>
+        <form onSubmit={handleFormSubmit}>
           <TextField label="Spend" placeholder="100" />
           <dl className="text-[hsla(0,0%,0%,0.48)] mt-2 mb-4 flex gap-x-2">
             <dt className="after:content-[':']">amount</dt>
@@ -80,7 +80,6 @@ export const Staking = () => {
             <Button
               type="submit"
               variant="contained"
-              onAbort={handleFormSubmit}
               sx={{
                 display: "flex",
                 flexDirection: "column",
