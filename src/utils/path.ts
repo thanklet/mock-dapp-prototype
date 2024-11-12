@@ -24,19 +24,14 @@ class Path {
           staking: "/app/wallet/app-wallet/staking",
           buy: "/app/wallet/app-wallet/buy",
         },
-        cryptWallet: {
-          transfer: "/app/wallet/crypt-wallet/transfer",
-          swap: "/app/wallet/crypt-wallet/swap",
-          exchange: "/app/wallet/crypt-wallet/exchange",
-        },
-      },
-      cryptoWallet: {
-        transfer: "/app/crypto-wallet/transfer",
-        swap: "/app/crypto-wallet/swap",
-        exchange: {
-          digitalGift: "/app/crypto-wallet/exchange/digital-gift",
-          token: "/app/crypto-wallet/exchange/token",
-          complete: "/app/crypto-wallet/exchange/complete",
+        cryptoWallet: {
+          transfer: "/app/wallet/crypto-wallet/transfer",
+          swap: "/app/wallet/crypto-wallet/swap",
+          exchange: {
+            digitalGift: "/app/wallet/crypto-wallet/exchange/digital-gift",
+            token: "/app/wallet/crypto-wallet/exchange/token",
+            complete: "/app/wallet/crypto-wallet/exchange/complete",
+          },
         },
       },
     },

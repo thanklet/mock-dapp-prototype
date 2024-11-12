@@ -7,7 +7,7 @@ const walletOptions = [
   { value: WalletEnum.APP_WALLET, label: "app wallet" },
   {
     value: WalletEnum.CRYPTO_WALLET,
-    label: "crypt wallet",
+    label: "crypto wallet",
   },
 ] as const;
 

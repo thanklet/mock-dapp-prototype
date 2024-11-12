@@ -3,13 +3,13 @@ import { Button } from "@/components/ui/button";
 import { TextField } from "@/components/ui/form/text-field";
 import { TextFieldPulldown } from "@/components/ui/form/text-field-pulldown";
 import { LinkTabs } from "@/components/ui/link-tabs";
+import { ThanksCard } from "@/features/app/components/thanks-card";
 import { useGetUser } from "@/features/profile/api";
 import { path } from "@/utils/path";
 import { Box, Stack } from "@mui/material";
 import type { FormEvent } from "react";
-import { ThanksCard } from "../../../components/thanks-card";
-import { TOKEN_OPTIONS } from "../../constants";
 import { CardHeader } from "../card-header";
+import { TOKEN_OPTIONS } from "../constants";
 
 export const Token = () => {
   const { user: authorizedUser } = useUser();
@@ -37,15 +37,15 @@ export const Token = () => {
           linkButtons={[
             {
               label: "Transfer",
-              to: path.get().app.cryptoWallet.transfer,
+              to: path.get().app.wallet.cryptoWallet.transfer,
             },
             {
               label: "Swap",
-              to: path.get().app.cryptoWallet.swap,
+              to: path.get().app.wallet.cryptoWallet.swap,
             },
             {
               label: "Exchange",
-              to: path.get().app.cryptoWallet.exchange.digitalGift,
+              to: path.get().app.wallet.cryptoWallet.exchange.digitalGift,
               isCurrentPage: true,
             },
           ]}
@@ -57,14 +57,14 @@ export const Token = () => {
             tabs={[
               {
                 label: "Digital Gift",
-                to: path.get().app.cryptoWallet.exchange.digitalGift,
+                to: path.get().app.wallet.cryptoWallet.exchange.digitalGift,
               },
               {
                 label: "Token",
-                to: path.get().app.cryptoWallet.exchange.token,
+                to: path.get().app.wallet.cryptoWallet.exchange.token,
               },
             ]}
-            value={path.get().app.cryptoWallet.exchange.token}
+            value={path.get().app.wallet.cryptoWallet.exchange.token}
           />
         </Box>
 
