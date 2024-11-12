@@ -1,4 +1,4 @@
-import amazon from "@/assets/amazon.png";
+import amazon from "@/assets/amazon.svg";
 import apple from "@/assets/apple.svg";
 import google from "@/assets/google.svg";
 import paypal from "@/assets/paypal.svg";

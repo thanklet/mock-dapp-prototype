@@ -1,4 +1,4 @@
-import amazon from "@/assets/amazon.png";
+import amazon from "@/assets/amazon.svg";
 import copy from "@/assets/copy.svg";
 import { Typography } from "@/components/ui/typography";
 import { Box, Stack } from "@mui/material";
@@ -10,7 +10,7 @@ export const Complete = () => {
   };
   return (
     <div className="flex flex-col gap-y-8 max-w-[500px] w-full">
-      <Stack alignItems="center" gap={1}>
+      <Stack alignItems="center" gap={2}>
         <Typography variant="h4">Amazon 25000 LPY</Typography>
         <Box>
           <img src={amazon} alt="amazon" />
