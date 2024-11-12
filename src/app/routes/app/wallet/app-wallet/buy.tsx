@@ -1,11 +1,11 @@
 import { WalletLayout } from "@/features/app/layouts/wallet-layout";
-import { Transfer } from "@/features/app/wallet/components/transfer";
+import { Buy } from "@/features/app/wallet/app-wallet/components/buy";
 
-export const TransferRoute = () => {
+export const BuyRoute = () => {
   return (
     <div className="flex flex-col gap-y-5 items-center pt-[30px] px-5">
-      <WalletLayout label="Transfer">
-        <Transfer />
+      <WalletLayout label="Buy">
+        <Buy />
       </WalletLayout>
     </div>
   );

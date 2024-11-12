@@ -1,11 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/form/checkbox";
+import { FormControlLabel } from "@/components/ui/form/form-control-label";
 import { PasswordField } from "@/components/ui/form/password-field";
 import { TextField } from "@/components/ui/form/text-field";
 import { Link } from "@/components/ui/link";
 import { isFirebaseAuthError } from "@/models/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormControlLabel } from "@mui/material";
 import { AuthErrorCodes } from "firebase/auth";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";

@@ -1,12 +1,14 @@
 import { useUser } from "@/app/providers/user-provider";
+import tokenLogoUrl from "@/assets/token-logo.svg";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/form/checkbox";
+import { FormControlLabel } from "@/components/ui/form/form-control-label";
 import { TextField } from "@/components/ui/form/text-field";
 import { useGetUser } from "@/features/profile/api";
 import { path } from "@/utils/path";
-import { FormControlLabel, Stack } from "@mui/material";
+import { InputAdornment, Stack } from "@mui/material";
 import type { FormEvent } from "react";
-import { ThanksCard } from "../../components/thanks-card";
+import { ThanksCard } from "../../../components/thanks-card";
 
 export const Staking = () => {
   const { user: authorizedUser } = useUser();
@@ -14,7 +16,7 @@ export const Staking = () => {
   const user = data.data();
   const thanks = user?.thanks ?? 0;
 
-  const handleFormSubmit = (e: FormEvent<HTMLButtonElement>) => {
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     // NOTE: モックなので何もしない
     e.preventDefault();
   };
@@ -26,24 +28,33 @@ export const Staking = () => {
       display={"flex"}
       flexDirection={"column"}
       alignItems={"center"}
+      maxWidth={"500px"}
     >
-      <div className="flex flex-col gap-y-16 w-fit">
+      <div className="flex flex-col gap-y-16 w-full">
         <ThanksCard
           backgroundColor="green"
           thanks={thanks}
           linkButtons={[
-            { label: "Transfer", to: path.get().app.wallet.transfer },
+            { label: "Transfer", to: path.get().app.wallet.appWallet.transfer },
             {
               label: "Staking",
-              to: path.get().app.wallet.staking,
+              to: path.get().app.wallet.appWallet.staking,
               isCurrentPage: true,
             },
-            { label: "Buy", to: path.get().app.wallet.buy },
+            { label: "Buy", to: path.get().app.wallet.appWallet.buy },
           ]}
         />
 
-        <form>
-          <TextField label="Spend" placeholder="100" />
+        <form onSubmit={handleFormSubmit}>
+          <TextField
+            label="Spend"
+            placeholder="100"
+            endAdornment={
+              <InputAdornment position="end">
+                <img src={tokenLogoUrl} alt="" height={24} width={24} />
+              </InputAdornment>
+            }
+          />
           <dl className="text-[hsla(0,0%,0%,0.48)] mt-2 mb-4 flex gap-x-2">
             <dt className="after:content-[':']">amount</dt>
             <dd>{thanks}thx</dd>
@@ -80,7 +91,6 @@ export const Staking = () => {
             <Button
               type="submit"
               variant="contained"
-              onAbort={handleFormSubmit}
               sx={{
                 display: "flex",
                 flexDirection: "column",

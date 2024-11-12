@@ -1,11 +1,11 @@
 import { WalletLayout } from "@/features/app/layouts/wallet-layout";
-import { Buy } from "@/features/app/wallet/components/buy";
+import { Staking } from "@/features/app/wallet/app-wallet/components/staking";
 
-export const BuyRoute = () => {
+export const StakingRoute = () => {
   return (
     <div className="flex flex-col gap-y-5 items-center pt-[30px] px-5">
-      <WalletLayout label="Buy">
-        <Buy />
+      <WalletLayout label="Staking">
+        <Staking />
       </WalletLayout>
     </div>
   );
