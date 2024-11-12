@@ -1,5 +1,5 @@
-import { WalletLayout } from "@/features/app/layouts/wallet-layout";
 import { DigitalGift } from "@/features/app/wallet/crypto-wallet/components/exchange/digital-gift";
+import { WalletLayout } from "@/features/app/wallet/layouts/wallet-layout";
 
 export const DigitalGiftRoute = () => {
   return (

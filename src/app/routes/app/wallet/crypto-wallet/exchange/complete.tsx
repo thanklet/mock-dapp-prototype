@@ -1,5 +1,5 @@
-import { WalletLayout } from "@/features/app/layouts/wallet-layout";
 import { Complete } from "@/features/app/wallet/crypto-wallet/components/exchange/complete";
+import { WalletLayout } from "@/features/app/wallet/layouts/wallet-layout";
 
 export const CompleteRoute = () => {
   return (

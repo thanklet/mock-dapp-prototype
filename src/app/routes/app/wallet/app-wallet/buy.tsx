@@ -1,5 +1,5 @@
-import { WalletLayout } from "@/features/app/layouts/wallet-layout";
 import { Buy } from "@/features/app/wallet/app-wallet/components/buy";
+import { WalletLayout } from "@/features/app/wallet/layouts/wallet-layout";
 
 export const BuyRoute = () => {
   return (

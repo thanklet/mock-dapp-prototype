@@ -1,5 +1,5 @@
-import { WalletLayout } from "@/features/app/layouts/wallet-layout";
 import { Token } from "@/features/app/wallet/crypto-wallet/components/exchange/token";
+import { WalletLayout } from "@/features/app/wallet/layouts/wallet-layout";
 
 export const TokenRoute = () => {
   return (

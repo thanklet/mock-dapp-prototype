@@ -1,5 +1,5 @@
-import { WalletLayout } from "@/features/app/layouts/wallet-layout";
 import { Transfer } from "@/features/app/wallet/crypto-wallet/components/transfer";
+import { WalletLayout } from "@/features/app/wallet/layouts/wallet-layout";
 
 export const TransferRoute = () => {
   return (
