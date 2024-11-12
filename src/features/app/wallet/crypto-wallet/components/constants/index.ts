@@ -3,7 +3,7 @@ import apple from "@/assets/apple.svg";
 import google from "@/assets/google.svg";
 import paypal from "@/assets/paypal.svg";
 
-const REGION_OPTIONS = [
+const regionOptions = [
   { children: "Japan(JP)", value: "JP" },
   { children: "United States(US)", value: "US" },
   { children: "United Kingdom(UK)", value: "UK" },
@@ -12,7 +12,7 @@ const REGION_OPTIONS = [
   { children: "Singapore(SG)", value: "SG" },
 ];
 
-const VALUE_OPTIONS = [
+const valueOptions = [
   { children: "EUR", value: "EUR" },
   { children: "USD", value: "USD" },
   { children: "GBP", value: "GBP" },
@@ -23,13 +23,13 @@ const VALUE_OPTIONS = [
   { children: "KRW", value: "KRW" },
 ];
 
-const DIGITAL_GIFT_OPTIONS = [
+const digitalGiftOptions = [
   { value: "amazon", image: amazon },
   { value: "paypal", image: paypal },
   { value: "apple", image: apple },
   { value: "google", image: google },
 ];
 
-const TOKEN_OPTIONS = [{ children: "THX", value: "THX" }];
+const tokenOptions = [{ children: "THX", value: "THX" }];
 
-export { REGION_OPTIONS, VALUE_OPTIONS, DIGITAL_GIFT_OPTIONS, TOKEN_OPTIONS };
+export { regionOptions, valueOptions, digitalGiftOptions, tokenOptions };

@@ -11,11 +11,7 @@ import { path } from "@/utils/path";
 import { Box, Stack } from "@mui/material";
 import type { FormEvent } from "react";
 import { CardHeader } from "../card-header";
-import {
-  DIGITAL_GIFT_OPTIONS,
-  REGION_OPTIONS,
-  VALUE_OPTIONS,
-} from "../constants";
+import { digitalGiftOptions, regionOptions, valueOptions } from "../constants";
 
 export const DigitalGift = () => {
   const { user: authorizedUser } = useUser();
@@ -75,11 +71,11 @@ export const DigitalGift = () => {
         </Box>
 
         <form onSubmit={handleFormSubmit} className="flex flex-col gap-y-4">
-          <ImageRadioGroup items={DIGITAL_GIFT_OPTIONS} />
-          <Pulldown label="Select region" items={REGION_OPTIONS} />
+          <ImageRadioGroup items={digitalGiftOptions} />
+          <Pulldown label="Select region" items={regionOptions} />
           <TextFieldPulldown
             label="Select value"
-            pulldownProps={{ items: VALUE_OPTIONS }}
+            pulldownProps={{ items: valueOptions }}
           />
           <TextField
             label="Estimated price"

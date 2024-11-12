@@ -9,7 +9,7 @@ import { path } from "@/utils/path";
 import { Box, Stack } from "@mui/material";
 import type { FormEvent } from "react";
 import { CardHeader } from "../card-header";
-import { TOKEN_OPTIONS } from "../constants";
+import { tokenOptions } from "../constants";
 
 export const Token = () => {
   const { user: authorizedUser } = useUser();
@@ -71,7 +71,7 @@ export const Token = () => {
         <form onSubmit={handleFormSubmit} className="flex flex-col gap-y-4">
           <TextFieldPulldown
             label="Token"
-            pulldownProps={{ items: TOKEN_OPTIONS }}
+            pulldownProps={{ items: tokenOptions }}
           />
           <TextField label="Wallet address" />
           <div className="flex justify-center">
