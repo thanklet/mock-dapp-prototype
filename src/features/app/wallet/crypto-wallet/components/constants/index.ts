@@ -4,12 +4,12 @@ import google from "@/assets/google.svg";
 import paypal from "@/assets/paypal.svg";
 
 const regionOptions = [
-  { children: "Japan(JP)", value: "JP" },
-  { children: "United States(US)", value: "US" },
-  { children: "United Kingdom(UK)", value: "UK" },
-  { children: "Canada(CA)", value: "CA" },
-  { children: "Australia(AU)", value: "AU" },
-  { children: "Singapore(SG)", value: "SG" },
+  { children: "Japan (JP)", value: "JP" },
+  { children: "United States (US)", value: "US" },
+  { children: "United Kingdom (UK)", value: "UK" },
+  { children: "Canada (CA)", value: "CA" },
+  { children: "Australia (AU)", value: "AU" },
+  { children: "Singapore (SG)", value: "SG" },
 ];
 
 const valueOptions = [
