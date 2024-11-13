@@ -11,7 +11,11 @@ import { path } from "@/utils/path";
 import { Box, Stack } from "@mui/material";
 import type { FormEvent } from "react";
 import { CardHeader } from "../card-header";
-import { digitalGiftOptions, regionOptions, valueOptions } from "../constants";
+import {
+  currencyOptions,
+  digitalGiftOptions,
+  regionOptions,
+} from "../constants";
 
 export const DigitalGift = () => {
   const { user: authorizedUser } = useUser();
@@ -75,7 +79,7 @@ export const DigitalGift = () => {
           <Pulldown label="Select region" items={regionOptions} />
           <TextFieldPulldown
             label="Select value"
-            pulldownProps={{ items: valueOptions }}
+            pulldownProps={{ items: currencyOptions }}
           />
           <TextField
             label="Estimated price"

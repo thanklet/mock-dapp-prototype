@@ -12,7 +12,7 @@ const regionOptions = [
   { children: "Singapore (SG)", value: "SG" },
 ];
 
-const valueOptions = [
+const currencyOptions = [
   { children: "EUR", value: "EUR" },
   { children: "USD", value: "USD" },
   { children: "GBP", value: "GBP" },
@@ -32,4 +32,4 @@ const digitalGiftOptions = [
 
 const tokenOptions = [{ children: "THX", value: "THX" }];
 
-export { regionOptions, valueOptions, digitalGiftOptions, tokenOptions };
+export { regionOptions, currencyOptions, digitalGiftOptions, tokenOptions };
