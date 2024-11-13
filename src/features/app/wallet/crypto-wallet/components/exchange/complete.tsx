@@ -11,7 +11,7 @@ export const Complete = () => {
   return (
     <div className="flex flex-col gap-y-8 max-w-[500px] w-full">
       <Stack alignItems="center" gap={2}>
-        <Typography variant="h4">Amazon 25000 LPY</Typography>
+        <Typography variant="h4">Amazon 25.000 JPY</Typography>
         <Box>
           <img src={amazon} alt="amazon" />
         </Box>
