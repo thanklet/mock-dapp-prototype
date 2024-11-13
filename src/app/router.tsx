@@ -106,15 +106,42 @@ const router = createBrowserRouter([
                 ],
               },
               {
-                path: "crypt-wallet",
+                path: "crypto-wallet",
                 children: [
                   {
                     path: "transfer",
                     lazy: async () => {
                       const { TransferRoute } = await import(
-                        "./routes/app/wallet/crypt-wallet/transfer"
+                        "./routes/app/wallet/crypto-wallet/transfer"
                       );
                       return { Component: TransferRoute };
+                    },
+                  },
+                  {
+                    path: "exchange/digital-gift",
+                    lazy: async () => {
+                      const { DigitalGiftRoute } = await import(
+                        "./routes/app/wallet/crypto-wallet/exchange/digital-gift"
+                      );
+                      return { Component: DigitalGiftRoute };
+                    },
+                  },
+                  {
+                    path: "exchange/token",
+                    lazy: async () => {
+                      const { TokenRoute } = await import(
+                        "./routes/app/wallet/crypto-wallet/exchange/token"
+                      );
+                      return { Component: TokenRoute };
+                    },
+                  },
+                  {
+                    path: "exchange/complete",
+                    lazy: async () => {
+                      const { CompleteRoute } = await import(
+                        "./routes/app/wallet/crypto-wallet/exchange/complete"
+                      );
+                      return { Component: CompleteRoute };
                     },
                   },
                 ],

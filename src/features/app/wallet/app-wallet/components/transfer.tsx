@@ -27,7 +27,7 @@ export const Transfer = () => {
       label: walletOptions.find(
         (option) => option.value === WalletEnum.CRYPTO_WALLET,
       )?.label as string,
-      to: path.get().app.wallet.cryptWallet.transfer,
+      to: path.get().app.wallet.cryptoWallet.transfer,
     },
   ].filter((tab): tab is { label: string; to: string } => !!tab.label);
 
