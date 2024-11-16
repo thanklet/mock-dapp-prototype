@@ -30,6 +30,9 @@ const digitalGiftOptions = [
   { value: "google", image: google },
 ];
 
-const tokenOptions = [{ children: "THX", value: "THX" }];
+const tokenOptions = [
+  { children: "THX", value: "THX" },
+  { children: "SOL", value: "SOL" },
+];
 
 export { regionOptions, currencyOptions, digitalGiftOptions, tokenOptions };
