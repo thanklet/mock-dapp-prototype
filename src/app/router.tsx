@@ -118,6 +118,15 @@ const router = createBrowserRouter([
                     },
                   },
                   {
+                    path: "swap",
+                    lazy: async () => {
+                      const { SwapRoute } = await import(
+                        "./routes/app/wallet/crypto-wallet/swap"
+                      );
+                      return { Component: SwapRoute };
+                    },
+                  },
+                  {
                     path: "exchange/digital-gift",
                     lazy: async () => {
                       const { DigitalGiftRoute } = await import(

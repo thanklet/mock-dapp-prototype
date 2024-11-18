@@ -1,17 +1,17 @@
 import { useUser } from "@/app/providers/user-provider";
-import tokenLogoUrl from "@/assets/token-logo.svg";
 import { Button } from "@/components/ui/button";
-import { TextField } from "@/components/ui/form/text-field";
+import { TextFieldPulldown } from "@/components/ui/form/text-field-pulldown";
 import { LinkTabs } from "@/components/ui/link-tabs";
 import { useGetUser } from "@/features/profile/api";
 import { path } from "@/utils/path";
-import { Box, InputAdornment, Stack } from "@mui/material";
+import { Box, Stack } from "@mui/material";
 import type { FormEvent } from "react";
 import { ThanksCard } from "../../../components/thanks-card";
 import { WalletEnum, walletOptions } from "../../constants";
 import { CardHeader } from "./card-header";
+import { tokenOptions } from "./constants";
 
-export const Transfer = () => {
+export const Swap = () => {
   const { user: authorizedUser } = useUser();
   const { data } = useGetUser({ documentId: authorizedUser.uid });
   const user = data.data();
@@ -28,7 +28,7 @@ export const Transfer = () => {
       label: walletOptions.find(
         (option) => option.value === WalletEnum.CRYPTO_WALLET,
       )?.label as string,
-      to: path.get().app.wallet.cryptoWallet.transfer,
+      to: path.get().app.wallet.cryptoWallet.swap,
     },
   ].filter((tab): tab is { label: string; to: string } => !!tab.label);
 
@@ -53,11 +53,11 @@ export const Transfer = () => {
             {
               label: "Transfer",
               to: path.get().app.wallet.cryptoWallet.transfer,
-              isCurrentPage: true,
             },
             {
               label: "Swap",
               to: path.get().app.wallet.cryptoWallet.swap,
+              isCurrentPage: true,
             },
             {
               label: "Exchange",
@@ -75,20 +75,14 @@ export const Transfer = () => {
           onSubmit={handleFormSubmit}
           className="flex flex-col gap-y-8 px-4"
         >
-          <div>
-            <div className="font-semibold mb-1">
-              {`${walletOptions.find((option) => option.value === WalletEnum.CRYPTO_WALLET)?.label} > ${walletOptions.find((option) => option.value === WalletEnum.APP_WALLET)?.label}`}
-            </div>
-            <TextField
-              className="w-full"
-              placeholder="100"
-              endAdornment={
-                <InputAdornment position="end">
-                  <img src={tokenLogoUrl} alt="" height={24} width={24} />
-                </InputAdornment>
-              }
-            />
-          </div>
+          <TextFieldPulldown
+            label="crypto wallet"
+            pulldownProps={{ items: tokenOptions }}
+          />
+          <TextFieldPulldown
+            label="crypto wallet"
+            pulldownProps={{ items: tokenOptions }}
+          />
           <div className="flex justify-center">
             <Button
               type="submit"
@@ -102,7 +96,7 @@ export const Transfer = () => {
                 borderRadius: "12px",
               }}
             >
-              Transfer
+              Swap
             </Button>
           </div>
         </form>
