@@ -5,6 +5,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import type { ReactNode } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "./auth-provider";
+import { StripeElementsProvider } from "./stripe-elements-provider";
 
 type AppProviderProps = {
   children: ReactNode;
@@ -45,7 +46,9 @@ export const AppProvider = ({ children }: AppProviderProps) => {
     <ThemeProvider theme={theme}>
       <HelmetProvider>
         <QueryClientProvider client={queryClient}>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <StripeElementsProvider>{children}</StripeElementsProvider>
+          </AuthProvider>
           <ReactQueryDevtools
             initialIsOpen={false}
             buttonPosition="bottom-left"
