@@ -3,6 +3,7 @@ import { RedirectProvider } from "./providers/redirect-provider";
 import { AdminRoot } from "./routes/admin/root";
 import { AppRoot } from "./routes/app/root";
 import { AuthRoot } from "./routes/auth/root";
+import { PaymentRoot } from "./routes/payment/root";
 import { ProfileRoot } from "./routes/profile/root";
 
 const router = createBrowserRouter([
@@ -204,6 +205,21 @@ const router = createBrowserRouter([
                 "./routes/auth/sign-up/sign-up"
               );
               return { Component: SignUpRoute };
+            },
+          },
+        ],
+      },
+      {
+        path: "/payment",
+        element: <PaymentRoot />,
+        children: [
+          {
+            path: "checkout",
+            lazy: async () => {
+              const { CheckoutRoute } = await import(
+                "./routes/payment/checkout/checkout"
+              );
+              return { Component: CheckoutRoute };
             },
           },
         ],
