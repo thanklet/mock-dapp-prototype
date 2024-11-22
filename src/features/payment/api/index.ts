@@ -4,6 +4,10 @@ import type { Stripe, StripeElements } from "@stripe/stripe-js";
 import { useMutation } from "@tanstack/react-query";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
+if (!import.meta.env.VITE_STRIPE_SECRET) {
+  throw new Error("Missing VITE_STRIPE_SECRET");
+}
+
 const addThanks = async ({
   documentId,
   user,
@@ -29,7 +33,7 @@ const postStripeIntent = async (): Promise<StripeIntent> => {
     {
       method: "POST",
       headers: {
-        Authorization: "Bearer sk_test_09l3shTSTKHYCzzZZsiLl2vA",
+        Authorization: `Bearer ${import.meta.env.VITE_STRIPE_SECRET}`,
       },
     },
   );

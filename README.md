@@ -16,6 +16,14 @@ brew install lefthook
 bun install
 ```
 
+## 環境変数
+
+`.env.template` には開発で使うの値が記載されている。
+
+```
+cp .env.template .env
+```
+
 ## ローカル開発環境を起動
 ```bash
 bun run dev

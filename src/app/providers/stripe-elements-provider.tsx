@@ -2,7 +2,13 @@ import { usePostStripeIntent } from "@/features/payment/api";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
-const stripePromise = loadStripe("pk_test_46zswMCbz39W2KAqKj43vDRu");
+if (!import.meta.env.VITE_STRIPE_PUBLISHABLE_API_KEY) {
+  throw new Error("Missing VITE_STRIPE_PUBLISHABLE_API_KEY");
+}
+
+const stripePromise = loadStripe(
+  import.meta.env.VITE_STRIPE_PUBLISHABLE_API_KEY,
+);
 
 type Props = React.PropsWithChildren;
 
