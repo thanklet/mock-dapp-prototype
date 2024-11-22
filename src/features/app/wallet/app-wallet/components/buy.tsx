@@ -34,7 +34,6 @@ export const Buy = () => {
           },
         ]}
       />
-
       <Box
         sx={{
           display: "flex",
@@ -43,8 +42,7 @@ export const Buy = () => {
         }}
       >
         <LinkButton
-          // TODO: リンク先をStripeの購入ページに変更する
-          to="#"
+          to="/payment/checkout?thanks=10"
           variant="contained"
           sx={{
             display: "flex",
@@ -56,8 +54,7 @@ export const Buy = () => {
           <span>（100円）</span>
         </LinkButton>
         <LinkButton
-          // TODO: リンク先をStripeの購入ページに変更する
-          to="#"
+          to="/payment/checkout?thanks=100"
           variant="contained"
           sx={{
             display: "flex",
