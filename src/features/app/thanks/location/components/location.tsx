@@ -115,7 +115,12 @@ export const Location = () => {
           boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
         }}
       >
-        <Stack direction="row" flexWrap="wrap" gap={"24px"}>
+        <Stack
+          direction="row"
+          flexWrap="wrap"
+          gap={"24px"}
+          justifyContent={"space-evenly"}
+        >
           {users.map((x) => (
             <Link
               to={path.get().app.thanks.send(x.id)}
