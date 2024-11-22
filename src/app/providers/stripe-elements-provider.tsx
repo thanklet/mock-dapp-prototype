@@ -13,7 +13,13 @@ const stripePromise = loadStripe(
 type Props = React.PropsWithChildren;
 
 export const StripeElementsProvider = ({ children }: Props) => {
-  const { data: stripeIntent, isStale } = usePostStripeIntent();
+  // NOTE: client secretを生成するために必須なので、ダミーのamountとcurrencyを指定してている。
+  //       本来は決済が開始処理の時点でclient secretを生成するため、Providerのpropsとして渡しているのが誤りと思われる。
+  //       しかし、Providerにclient secretを渡さないと、PaymentElementを使用できないため、このような実装にしている。
+  const { data: stripeIntent, isStale } = usePostStripeIntent({
+    amount: 1000,
+    currency: "usd",
+  });
 
   // NOTE: Stripe Intentが更新された場合に画面を更新するためのワークアラウンド
   if (isStale) {

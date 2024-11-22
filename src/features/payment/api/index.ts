@@ -1,6 +1,10 @@
 import { queryClient } from "@/lib/query";
 import { type User, updateUser } from "@/models/users";
-import type { Stripe, StripeElements } from "@stripe/stripe-js";
+import type {
+  Stripe,
+  StripeCheckoutCurrencyOption,
+  StripeElements,
+} from "@stripe/stripe-js";
 import { useMutation } from "@tanstack/react-query";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -27,9 +31,15 @@ type StripeIntent = {
   client_secret: string;
 };
 
-const postStripeIntent = async (): Promise<StripeIntent> => {
+const postStripeIntent = async ({
+  amount,
+  currency,
+}: Pick<
+  StripeCheckoutCurrencyOption,
+  "amount" | "currency"
+>): Promise<StripeIntent> => {
   const res = await fetch(
-    "https://api.stripe.com/v1/payment_intents?amount=1099&currency=usd",
+    `https://api.stripe.com/v1/payment_intents?amount=${amount}&currency=${currency}`,
     {
       method: "POST",
       headers: {
@@ -42,10 +52,12 @@ const postStripeIntent = async (): Promise<StripeIntent> => {
   return data;
 };
 
-export const usePostStripeIntent = () => {
+export const usePostStripeIntent = (
+  params: Parameters<typeof postStripeIntent>[0],
+) => {
   return useSuspenseQuery({
     queryKey: ["stripe-api-key"],
-    queryFn: postStripeIntent,
+    queryFn: () => postStripeIntent(params),
   });
 };
 
