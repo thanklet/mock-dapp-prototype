@@ -68,7 +68,6 @@ export const useAddThanks = () => {
         queryClient.invalidateQueries({
           queryKey: ["users", { documentId: params.documentId }],
         });
-        console.log("invalidate stripe api key");
         queryClient.invalidateQueries({
           queryKey: ["stripe-api-key"],
         });
