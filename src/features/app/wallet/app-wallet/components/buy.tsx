@@ -63,7 +63,7 @@ export const Buy = () => {
           }}
         >
           <span>100THX</span>
-          <span>（1000円）</span>
+          <span>（1,000円）</span>
         </LinkButton>
       </Box>
     </Stack>

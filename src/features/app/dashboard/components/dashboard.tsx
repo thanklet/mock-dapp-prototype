@@ -43,7 +43,15 @@ export const Dashboard = () => {
   );
 
   return (
-    <Stack spacing={"30px"} width={"100%"}>
+    <Stack
+      spacing={"30px"}
+      width={"100%"}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
+    >
       <ThanksCard
         backgroundColor="purple"
         header={

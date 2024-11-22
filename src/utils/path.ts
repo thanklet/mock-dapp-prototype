@@ -41,7 +41,6 @@ class Path {
       qr: "/profile/qr",
     },
     auth: {
-      top: "/auth",
       login: "/auth/login",
       signUp: "/auth/sign-up",
     },

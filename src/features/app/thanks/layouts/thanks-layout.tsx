@@ -24,6 +24,7 @@ export const ThanksLayout = ({
         p={"10px"}
         sx={{
           boxShadow: "0px 0px 10px 0px rgba(0, 0, 0, 0.1)",
+          paddingTop: "30px",
         }}
       >
         <Stack direction="row" alignItems="center">

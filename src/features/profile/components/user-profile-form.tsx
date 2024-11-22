@@ -1,6 +1,7 @@
 import { useUser } from "@/app/providers/user-provider";
 import staff1Url from "@/assets/dummy/1.png";
 import { TextField } from "@/components/ui/form/text-field";
+import { queryClient } from "@/lib/query";
 import type { User } from "@/models/users";
 import type { DocRequestParams } from "@/types/api";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -50,6 +51,9 @@ const Component = ({ user, documentId }: Props) => {
       },
       {
         onSuccess: () => {
+          queryClient.invalidateQueries({
+            queryKey: ["users", { documentId }],
+          });
           alert("Your profile has been updated");
         },
         onError: (error) => {

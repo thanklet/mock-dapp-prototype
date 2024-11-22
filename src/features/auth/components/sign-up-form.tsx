@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/form/checkbox";
-import { FormControlLabel } from "@/components/ui/form/form-control-label";
 import { PasswordField } from "@/components/ui/form/password-field";
 import { TextField } from "@/components/ui/form/text-field";
 import { Link } from "@/components/ui/link";
@@ -53,6 +52,7 @@ export const SignUpForm = () => {
     <form
       className="flex flex-col gap-y-3 max-w-[375px] w-full"
       onSubmit={handleSubmit(handleFormSubmit)}
+      noValidate
     >
       <TextField
         required
@@ -81,14 +81,12 @@ export const SignUpForm = () => {
         {...register("password")}
       />
 
-      <FormControlLabel
-        control={<Checkbox required {...register("termsAndConditions")} />}
-        label={
-          <span>
-            I agree to <Link to={"#"}>privacy policy & terms</Link>
-          </span>
-        }
-      />
+      <div>
+        <Checkbox required {...register("termsAndConditions")} />
+        <span>
+          I agree to <Link to={"#"}>privacy policy & terms</Link>
+        </span>
+      </div>
 
       <Button
         type="submit"
