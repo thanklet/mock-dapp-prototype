@@ -11,10 +11,7 @@ import type {
 import { forwardRef } from "react";
 
 export type TextFieldProps = OutlinedInputProps &
-  Pick<
-    BaseTextFieldProps,
-    "disabled" | "error" | "label" | "helperText" | "hiddenLabel"
-  >;
+  Pick<BaseTextFieldProps, "disabled" | "error" | "label" | "helperText">;
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   function TextFieldInput(
@@ -35,7 +32,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
                 boxShadow: "none",
                 backgroundColor: "white",
                 caretColor: "black",
-                "-webkit-text-fill-color": "black",
+                WebkitTextFillColor: "black",
               },
               "& .MuiOutlineInput-input:webkit-text-fill-color": {},
               "& .MuiOutlinedInput-input": { padding: "7px 14px" },

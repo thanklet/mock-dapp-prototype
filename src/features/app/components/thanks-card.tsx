@@ -81,7 +81,7 @@ export const ThanksCard = ({
       >
         {linkButtons.map(({ label, to, isCurrentPage }) => (
           <LinkButton
-            key="Thanks"
+            key={label}
             to={to}
             variant="outlined"
             sx={{

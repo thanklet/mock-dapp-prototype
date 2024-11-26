@@ -16,10 +16,7 @@ import type {
 import { forwardRef } from "react";
 
 export type TextFieldPulldownProps = OutlinedInputProps &
-  Pick<
-    BaseTextFieldProps,
-    "disabled" | "error" | "label" | "helperText" | "hiddenLabel"
-  > & {
+  Pick<BaseTextFieldProps, "disabled" | "error" | "label" | "helperText"> & {
     pulldownProps: TextFieldProps & {
       items: MenuItemProps[];
     };
@@ -44,6 +41,7 @@ export const TextFieldPulldown = forwardRef<
           endAdornment={
             <InputAdornment position="end">
               <TextField
+                defaultValue={""}
                 select
                 {...restPulldownProps}
                 sx={{
@@ -73,9 +71,11 @@ export const TextFieldPulldown = forwardRef<
               boxShadow: "none",
               backgroundColor: "white",
               caretColor: "black",
-              "-webkit-text-fill-color": "black",
+              WebkitTextFillColor: "black",
             },
-            "& .MuiOutlineInput-input:webkit-text-fill-color": {},
+            "& .MuiOutlineInput-input": {
+              WebkitTextFillColor: "black",
+            },
             "& .MuiOutlinedInput-input": { padding: "7px 14px" },
           }}
         />

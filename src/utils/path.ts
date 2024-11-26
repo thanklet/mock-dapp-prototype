@@ -10,8 +10,6 @@ class Path {
     },
     app: {
       dashboard: "/app/dashboard",
-      staking: "/app/staking",
-      swap: "/app/swap",
       thanks: {
         location: "/app/thanks/location",
         search: "/app/thanks/search",
