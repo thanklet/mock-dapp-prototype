@@ -11,10 +11,7 @@ import type {
 import { forwardRef } from "react";
 
 export type TextFieldProps = OutlinedInputProps &
-  Pick<
-    BaseTextFieldProps,
-    "disabled" | "error" | "label" | "helperText" | "hiddenLabel"
-  >;
+  Pick<BaseTextFieldProps, "disabled" | "error" | "label" | "helperText">;
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   function TextFieldInput(

@@ -16,10 +16,7 @@ import type {
 import { forwardRef } from "react";
 
 export type TextFieldPulldownProps = OutlinedInputProps &
-  Pick<
-    BaseTextFieldProps,
-    "disabled" | "error" | "label" | "helperText" | "hiddenLabel"
-  > & {
+  Pick<BaseTextFieldProps, "disabled" | "error" | "label" | "helperText"> & {
     pulldownProps: TextFieldProps & {
       items: MenuItemProps[];
     };

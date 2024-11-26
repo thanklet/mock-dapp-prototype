@@ -142,7 +142,7 @@ export const TransactionTable = () => {
           }}
         >
           <Box>
-            <TextField hiddenLabel placeholder="Search Review" />
+            <TextField placeholder="Search Review" />
           </Box>
           <Box
             sx={{
