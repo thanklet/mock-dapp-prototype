@@ -42,7 +42,7 @@ export const Buy = () => {
         }}
       >
         <LinkButton
-          to="/payment/checkout?thanks=10"
+          to="/payment/checkout?amount=100"
           variant="contained"
           sx={{
             display: "flex",
@@ -54,7 +54,7 @@ export const Buy = () => {
           <span>（100円）</span>
         </LinkButton>
         <LinkButton
-          to="/payment/checkout?thanks=100"
+          to="/payment/checkout?amount=1000"
           variant="contained"
           sx={{
             display: "flex",
