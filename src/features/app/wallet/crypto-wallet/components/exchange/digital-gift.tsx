@@ -76,14 +76,20 @@ export const DigitalGift = () => {
 
         <form onSubmit={handleFormSubmit} className="flex flex-col gap-y-4">
           <ImageRadioGroup items={digitalGiftOptions} />
-          <Pulldown label="Select region" items={regionOptions} />
+          <Pulldown
+            label="Select region"
+            items={regionOptions}
+            defaultValue={""}
+          />
           <TextFieldPulldown
             label="Select value"
             pulldownProps={{ items: currencyOptions }}
+            defaultValue={""}
           />
           <TextField
             label="Estimated price"
             placeholder="SOL 0.00000000"
+            defaultValue={""}
             disabled
           />
           <div className="flex justify-center">

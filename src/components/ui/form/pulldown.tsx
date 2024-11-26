@@ -24,7 +24,7 @@ export const Pulldown = forwardRef<HTMLDivElement, PulldownProps>(
                 boxShadow: "none",
                 backgroundColor: "white",
                 caretColor: "black",
-                "-webkit-text-fill-color": "black",
+                WebkitTextFillColor: "black",
               },
               "& .MuiOutlineInput-input:webkit-text-fill-color": {},
               "& .MuiOutlinedInput-input": { padding: "7px 14px" },
