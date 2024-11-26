@@ -56,7 +56,7 @@ export const usePostStripeIntent = (
   params: Parameters<typeof postStripeIntent>[0],
 ) => {
   return useSuspenseQuery({
-    queryKey: ["stripe-api-key"],
+    queryKey: [],
     queryFn: () => postStripeIntent(params),
   });
 };
@@ -67,9 +67,6 @@ export const useAddThanks = () => {
       addThanks(params).then(() => {
         queryClient.invalidateQueries({
           queryKey: ["users", { documentId: params.documentId }],
-        });
-        queryClient.invalidateQueries({
-          queryKey: ["stripe-api-key"],
         });
       }),
   });

@@ -1,5 +1,6 @@
 import { useUser } from "@/app/providers/user-provider";
 import { Button } from "@/components/ui/button";
+import { StripeElementsProvider } from "@/features/payment/providers/stripe-elements-provider";
 import { useGetUser } from "@/features/profile/api";
 import type { User } from "@/models/users";
 import { path } from "@/utils/path";
@@ -14,18 +15,22 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAddThanks, usePayment } from "../api";
 
 export const CheckoutForm = () => {
+  const [searchParams] = useSearchParams();
+  const amount = Number(searchParams.get("amount"));
+
+  return (
+    <StripeElementsProvider amount={amount} currency="jpy">
+      <_CheckoutForm amount={amount} />
+    </StripeElementsProvider>
+  );
+};
+
+const _CheckoutForm = ({ amount }: { amount: number }) => {
   const { user: authorizedUser } = useUser();
   const { data } = useGetUser({ documentId: authorizedUser.uid });
   const user = data.data();
 
-  const [searchParams] = useSearchParams();
-  const thanksAmount = Number(searchParams.get("thanks"));
   const stripe = useStripe();
-  stripe?.elements({
-    mode: "payment",
-    amount: thanksAmount,
-    currency: "jpy",
-  });
   const elements = useElements();
 
   if (!(user && stripe && elements)) {
@@ -37,7 +42,7 @@ export const CheckoutForm = () => {
       user={{ ...user, uid: authorizedUser.uid }}
       stripe={stripe}
       elements={elements}
-      thanksAmount={thanksAmount}
+      amount={amount}
     />
   );
 };
@@ -46,14 +51,14 @@ const Component = ({
   user,
   stripe,
   elements,
-  thanksAmount,
+  amount,
 }: {
   user: User & {
     uid: string;
   };
   stripe: Stripe;
   elements: StripeElements;
-  thanksAmount: number;
+  amount: number;
 }) => {
   const [shouldShowForm, setShouldShowForm] = useState(false);
   const navigate = useNavigate();
@@ -65,11 +70,12 @@ const Component = ({
 
     confirmPayment(undefined, {
       onSuccess: () => {
+        const thanks = amount / 10;
         addThanks(
           {
             documentId: user.uid,
             user,
-            thanks: thanksAmount,
+            thanks,
           },
           {
             onSuccess: () => {
