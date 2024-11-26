@@ -146,7 +146,11 @@ export const UserListTable = () => {
 
   return (
     <>
-      <Card>
+      <Card
+        sx={{
+          overflowX: "auto",
+        }}
+      >
         <Box
           sx={{
             display: "flex",
@@ -157,7 +161,12 @@ export const UserListTable = () => {
             borderColor: "divider",
           }}
         >
-          <Box>
+          <Box
+            sx={{
+              flexShrink: 0,
+              marginRight: "16px",
+            }}
+          >
             <TextField placeholder="Search Review" />
           </Box>
           <Box
