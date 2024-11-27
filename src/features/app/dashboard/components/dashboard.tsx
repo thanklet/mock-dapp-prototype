@@ -1,4 +1,5 @@
 import { useUser } from "@/app/providers/user-provider";
+import iconHeartCheck from "@/assets/heart-check.svg";
 import { Link } from "@/components/ui/link";
 import { LinkButton } from "@/components/ui/link-button";
 import { Typography } from "@/components/ui/typography";
@@ -8,7 +9,6 @@ import type { TransactionHistory } from "@/models/transactionHistories";
 import { path } from "@/utils/path";
 import { CallMade, CallReceived } from "@mui/icons-material";
 import { Avatar, Box, List, ListItem, Stack } from "@mui/material";
-import { IconHeartCheck } from "@tabler/icons-react";
 import dayjs from "dayjs";
 import { ThanksCard } from "../../components/thanks-card";
 
@@ -192,7 +192,7 @@ const LatestReceive = ({ thanks, emoji }: TransactionHistory) => {
         gap={"10px"}
       >
         <Box component={"span"} color={"success.main"}>
-          <IconHeartCheck />
+          <img src={iconHeartCheck} alt="" width={36} height={36} />
         </Box>
         You have received a Thank You!
       </Typography>
