@@ -4,12 +4,13 @@ import { Link } from "@/components/ui/link";
 import { LinkButton } from "@/components/ui/link-button";
 import { Typography } from "@/components/ui/typography";
 import { useGetDashboard } from "@/features/app/dashboard/api";
-import { useGetUser } from "@/features/profile/api";
+import { useGetUser, useGetUsersByIds } from "@/features/profile/api";
 import type { TransactionHistory } from "@/models/transactionHistories";
 import { path } from "@/utils/path";
 import { CallMade, CallReceived } from "@mui/icons-material";
 import { Avatar, Box, List, ListItem, Stack } from "@mui/material";
 import dayjs from "dayjs";
+import { useCallback } from "react";
 import { ThanksCard } from "../../components/thanks-card";
 
 const getEmoji = (fileName: string): string => {
@@ -26,6 +27,15 @@ export const Dashboard = () => {
   const [userData, transactionHistories] = useGetDashboard({
     documentId: userId,
   });
+
+  const { data: usersInTransactionHistories } = useGetUsersByIds({
+    userIds: transactionHistories.data.docs.map((transactionHistory) => ({
+      documentId:
+        transactionHistory.data().send_user_id === userId
+          ? transactionHistory.data().receive_user_id
+          : transactionHistory.data().send_user_id,
+    })),
+  });
   // NOTE: モックなのでユーザー存在しない場合の処理は省略
   // user.data.exists()
 
@@ -37,9 +47,24 @@ export const Dashboard = () => {
     type: x.data().send_user_id === userId ? "send" : "receive",
     thanks: x.data().thanks,
     emoji: x.data().emoji,
+    userId:
+      x.data().send_user_id === userId
+        ? x.data().receive_user_id
+        : x.data().send_user_id,
   }));
   const latestReceiveHistory = transactionHistories.data.docs.find(
     (x) => x.data().receive_user_id === userId,
+  );
+
+  const getUsernameInTransactionHistory = useCallback(
+    (userId: string) => {
+      return usersInTransactionHistories
+        .find((user) => {
+          return user.id === userId;
+        })
+        ?.data()?.name;
+    },
+    [usersInTransactionHistories],
   );
 
   return (
@@ -100,6 +125,7 @@ export const Dashboard = () => {
             px={"20px"}
             fontWeight={"bold"}
             fontSize={"16px"}
+            width={"100%"}
           >
             Transaction
           </Typography>
@@ -114,6 +140,7 @@ export const Dashboard = () => {
                   padding: "15px 30px",
                   display: "flex",
                   gap: "20px",
+                  maxWidth: "500px",
                 }}
               >
                 <Stack width={"100px"} spacing={"5px"}>
@@ -133,45 +160,80 @@ export const Dashboard = () => {
                     {x.date}
                   </Typography>
                 </Stack>
-                <Box>
-                  {
-                    {
-                      receive: (
-                        <CallReceived
-                          sx={{ color: "success.main", fontSize: "50px" }}
-                        />
-                      ),
-                      send: (
-                        <CallMade
-                          sx={{ color: "error.main", fontSize: "50px" }}
-                        />
-                      ),
-                    }[x.type]
-                  }
-                  <Typography
-                    variant="body1"
-                    fontSize={"16px"}
-                    fontWeight={"bold"}
-                  >
-                    {x.type}
-                  </Typography>
-                </Box>
-                <Typography
-                  variant="body1"
-                  ml={"auto"}
-                  fontSize={"18px"}
-                  color="text.secondary"
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                    flexGrow: 1,
+                    alignItems: "start",
+                  }}
                 >
+                  {getUsernameInTransactionHistory(x.userId) && (
+                    <Box
+                      sx={{
+                        display: "inline-flex",
+                        gap: "8px",
+                      }}
+                    >
+                      <Typography>{`${x.type === "send" ? "To" : "From"}:`}</Typography>
+                      <Typography
+                        sx={{ wordBreak: "break-word" }}
+                        className="line-clamp-1"
+                      >
+                        {getUsernameInTransactionHistory(x.userId)}
+                      </Typography>
+                    </Box>
+                  )}
                   <Box
-                    component={"span"}
-                    mr={"5px"}
-                    fontSize={"30px"}
-                    fontWeight={"bold"}
+                    sx={{
+                      display: "flex",
+                      gap: "20px",
+                      width: "100%",
+                      alignItems: "center",
+                    }}
                   >
-                    {x.thanks}
+                    <Box>
+                      {
+                        {
+                          receive: (
+                            <CallReceived
+                              sx={{ color: "success.main", fontSize: "50px" }}
+                            />
+                          ),
+                          send: (
+                            <CallMade
+                              sx={{ color: "error.main", fontSize: "50px" }}
+                            />
+                          ),
+                        }[x.type]
+                      }
+                      <Typography
+                        variant="body1"
+                        fontSize={"16px"}
+                        fontWeight={"bold"}
+                      >
+                        {x.type}
+                      </Typography>
+                    </Box>
+                    <Typography
+                      variant="body1"
+                      ml={"auto"}
+                      fontSize={"18px"}
+                      color="text.secondary"
+                    >
+                      <Box
+                        component={"span"}
+                        mr={"5px"}
+                        fontSize={"30px"}
+                        fontWeight={"bold"}
+                      >
+                        {x.thanks}
+                      </Box>
+                      THX
+                    </Typography>
                   </Box>
-                  THX
-                </Typography>
+                </Box>
               </ListItem>
             ))}
           </List>
