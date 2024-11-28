@@ -34,6 +34,9 @@ const signUp = async ({
   password,
   username,
 }: Omit<SignUpSchema, "termsAndConditions">) => {
+  // NOTE: Cloud Firestoreの挙動として、同じURLを使うとキャッシュされた同じ画像が返ってくる。
+  //       アバターが全員同じになると見栄えが悪いので、ランダムなIDを含むURLで画像を取得する。
+  const imageId = Math.floor(Math.random() * 1000);
   try {
     const credential = await createUserWithEmailAndPassword(
       auth,
@@ -44,7 +47,7 @@ const signUp = async ({
     createUser({
       documentId: credential.user.uid,
       user: {
-        image_path: "https://picsum.photos/200/300",
+        image_path: `https://picsum.photos/id/${imageId}/200/300`,
         name: username,
         thanks: 0,
         email: credential.user.email || email,
