@@ -6,6 +6,7 @@ import { path } from "@/utils/path";
 import { Wrapper } from "@googlemaps/react-wrapper";
 import { Box, Stack } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useGetUsers } from "../api";
 
 const GOOGLE_MAP_API_KEY = import.meta.env.VITE_GOOGLE_MAP_API_KEY as string;
@@ -36,6 +37,7 @@ const createRandomPosition = () => {
 };
 
 export const Location = () => {
+  const navigate = useNavigate();
   const { user } = useUser();
   const userId = user.uid;
   const [mapElement, setMapElement] = useState<HTMLDivElement | null>(null);
@@ -70,6 +72,7 @@ export const Location = () => {
         const markers = users.map((user) => ({
           position: createRandomPosition(),
           src: user.image_path,
+          userId: user.id,
         }));
 
         for (const marker of markers) {
@@ -78,6 +81,9 @@ export const Location = () => {
           markerElement.style.width = "50px";
           markerElement.style.height = "50px";
           markerElement.style.borderRadius = "50%";
+          markerElement.onclick = () => {
+            navigate(path.get().app.thanks.send(marker.userId));
+          };
           new window.google.maps.marker.AdvancedMarkerElement({
             position: marker.position,
             map: googleMap,
@@ -87,7 +93,7 @@ export const Location = () => {
       }
     };
     initMap();
-  }, [mapElement, map, users]);
+  }, [mapElement, map, users, navigate]);
 
   return (
     <Box sx={{ position: "relative" }}>
