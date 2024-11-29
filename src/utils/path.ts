@@ -42,6 +42,9 @@ class Path {
       login: "/auth/login",
       signUp: "/auth/sign-up",
     },
+    payment: {
+      checkout: "/payment/checkout",
+    },
   });
 
   compares(a: string, b: string) {
