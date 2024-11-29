@@ -228,7 +228,7 @@ export const Send = () => {
                           fontWeight={"bold"}
                           mr={"5px"}
                         >
-                          {sendUserThanks}
+                          {sliderValue}
                         </Box>
                         THX
                       </Typography>

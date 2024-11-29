@@ -10,6 +10,22 @@ export const useGetUser = (params: DocRequestParams) => {
   });
 };
 
+export const useGetUsersByIds = ({
+  userIds,
+}: { userIds: DocRequestParams[] }) => {
+  return useSuspenseQuery({
+    queryKey: ["users", userIds],
+    queryFn: async () => {
+      const ids = userIds.map((userId) => userId.documentId);
+      const users = await Promise.all(
+        ids.map((id) => getUser({ documentId: id })),
+      );
+
+      return users;
+    },
+  });
+};
+
 export const usePostUser = () => {
   return useMutation({
     mutationFn: (params: DocRequestParams & { user: User }) =>
