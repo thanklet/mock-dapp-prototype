@@ -5,8 +5,8 @@ import { Send } from "@/features/app/thanks/send/components/send";
 export const SendRoute = () => {
   return (
     <>
-      <Head title={"送信"} />
-      <ThanksLayout label="送信">
+      <Head title={"Send"} />
+      <ThanksLayout label="Send">
         <Send />
       </ThanksLayout>
     </>
