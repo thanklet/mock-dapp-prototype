@@ -79,7 +79,7 @@ const Component = ({
           },
           {
             onSuccess: () => {
-              navigate(path.get().app.wallet.appWallet.buy);
+              navigate(path.get().app.dashboard);
             },
           },
         );

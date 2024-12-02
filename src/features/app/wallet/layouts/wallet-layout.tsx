@@ -1,3 +1,4 @@
+import { path } from "@/utils/path";
 import { ArrowBackIos } from "@mui/icons-material";
 import { Stack } from "@mui/material";
 import { Typography } from "@mui/material";
@@ -21,7 +22,10 @@ export const WalletLayout = ({ label, children }: WalletLayoutProps) => {
           width: "100%",
         }}
       >
-        <button onClick={() => navigate(-1)} type="button">
+        <button
+          onClick={() => navigate(path.get().app.dashboard)}
+          type="button"
+        >
           <ArrowBackIos sx={{ fontSize: "16px" }} />
         </button>
         <Typography
