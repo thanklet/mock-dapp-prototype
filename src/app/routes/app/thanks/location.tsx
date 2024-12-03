@@ -17,6 +17,7 @@ export const LocationRoute = () => {
       <ThanksLayout
         label="Location"
         linkTabsProps={{ tabs, value: tabs[0].to }}
+        backPath="dashboard"
       >
         <Location />
       </ThanksLayout>

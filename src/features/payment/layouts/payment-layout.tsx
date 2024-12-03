@@ -1,4 +1,3 @@
-import { path } from "@/utils/path";
 import { ArrowBackIos } from "@mui/icons-material";
 import { Box, Stack } from "@mui/material";
 import type { ReactNode } from "react";
@@ -29,10 +28,7 @@ export const PaymentLayout = ({ children }: PaymentLayoutProps) => {
           width: "100%",
         }}
       >
-        <button
-          onClick={() => navigate(path.get().app.dashboard)}
-          type="button"
-        >
+        <button onClick={() => navigate(-1)} type="button">
           <ArrowBackIos sx={{ fontSize: "16px" }} />
         </button>
       </Stack>
