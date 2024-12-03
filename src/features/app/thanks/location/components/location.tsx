@@ -81,7 +81,7 @@ export const Location = () => {
           markerElement.style.width = "50px";
           markerElement.style.height = "50px";
           markerElement.style.borderRadius = "50%";
-          markerElement.onclick = () => {
+          markerElement.onclick = markerElement.ontouchend = () => {
             navigate(path.get().app.thanks.send(marker.userId));
           };
           new window.google.maps.marker.AdvancedMarkerElement({
