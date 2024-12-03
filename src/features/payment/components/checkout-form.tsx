@@ -10,9 +10,12 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import type { Stripe, StripeElements } from "@stripe/stripe-js";
+import { toast } from "material-react-toastify";
 import { type FormEvent, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAddThanks, usePayment } from "../api";
+
+import "material-react-toastify/dist/ReactToastify.css";
 
 export const CheckoutForm = () => {
   const [searchParams] = useSearchParams();
@@ -80,43 +83,46 @@ const Component = ({
           {
             onSuccess: () => {
               navigate(path.get().app.dashboard);
+              toast.success("Payment successful", { position: "top-center" });
             },
           },
         );
       },
       onError: () => {
-        window.alert("Failed to pay");
+        toast.error("Failed to pay", { position: "top-center" });
       },
     });
   };
 
   return (
-    <form
-      id="payment-form"
-      onSubmit={handleSubmit}
-      className={`flex flex-col items-center w-full gap-y-4 ${shouldShowForm ? "block" : "hidden"}`}
-    >
-      <PaymentElement
-        id="payment-element"
-        options={{
-          layout: "accordion",
-        }}
-        onReady={() => {
-          setShouldShowForm((prev) => !prev);
-        }}
-        className="min-h-[320px] w-full max-w-[500px]"
-      />
-      <Button
-        type="submit"
-        variant="contained"
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          lineHeight: "20px",
-        }}
+    <>
+      <form
+        id="payment-form"
+        onSubmit={handleSubmit}
+        className={`flex flex-col items-center w-full gap-y-4 ${shouldShowForm ? "block" : "hidden"}`}
       >
-        Pay
-      </Button>
-    </form>
+        <PaymentElement
+          id="payment-element"
+          options={{
+            layout: "accordion",
+          }}
+          onReady={() => {
+            setShouldShowForm((prev) => !prev);
+          }}
+          className="min-h-[320px] w-full max-w-[500px]"
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            lineHeight: "20px",
+          }}
+        >
+          Pay
+        </Button>
+      </form>
+    </>
   );
 };
