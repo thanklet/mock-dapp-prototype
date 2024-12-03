@@ -14,7 +14,11 @@ export const SearchRoute = () => {
   return (
     <>
       <Head title={"Search"} />
-      <ThanksLayout label="Search" linkTabsProps={{ tabs, value: tabs[1].to }}>
+      <ThanksLayout
+        label="Search"
+        linkTabsProps={{ tabs, value: tabs[1].to }}
+        backPath="dashboard"
+      >
         <Search />
       </ThanksLayout>
     </>

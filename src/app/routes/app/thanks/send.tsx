@@ -6,7 +6,7 @@ export const SendRoute = () => {
   return (
     <>
       <Head title={"Send"} />
-      <ThanksLayout label="Send">
+      <ThanksLayout label="Send" backPath="back">
         <Send />
       </ThanksLayout>
     </>

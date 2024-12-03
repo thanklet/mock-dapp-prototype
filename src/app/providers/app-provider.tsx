@@ -2,6 +2,7 @@ import { queryClient } from "@/lib/query";
 import { ThemeProvider, createTheme } from "@mui/material";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { ToastContainer } from "material-react-toastify";
 import type { ReactNode } from "react";
 import { HelmetProvider } from "react-helmet-async";
 import { AuthProvider } from "./auth-provider";
@@ -44,6 +45,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
   return (
     <ThemeProvider theme={theme}>
       <HelmetProvider>
+        <ToastContainer />
         <QueryClientProvider client={queryClient}>
           <AuthProvider>{children}</AuthProvider>
           <ReactQueryDevtools
